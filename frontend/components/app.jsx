@@ -10,6 +10,6 @@ import {
 
 export const App = () => {
   return (
-    <div>Hello. World?</div>
+    <div>Feel free to click anywhere on the page</div>
   );
 };
