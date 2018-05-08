@@ -5,7 +5,7 @@ export const fetchUser = id => {
   });
 };
 
-export const postUser = user => {
+export const signup = user => {
   return $.ajax({
     method: 'POST',
     url: 'api/users',
@@ -13,10 +13,17 @@ export const postUser = user => {
   });
 };
 
-export const postSession = user => {
+export const login = user => {
   return $.ajax({
     method: 'POST',
     url: 'api/session',
     data: { user }
+  });
+};
+
+export const logout = () => {
+  return $.ajax({
+    method: 'DELETE',
+    url: 'api/session'
   });
 };
