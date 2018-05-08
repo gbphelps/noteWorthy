@@ -5,5 +5,5 @@ import rootReducer from '../reducers/root';
 
 
 export const configureStore = (preloadedState = {}) => {
-  return createStore(rootReducer, preloadedState, applyMiddleware(thunk));
+  return createStore(rootReducer, preloadedState, applyMiddleware(thunk, logger));
 };
