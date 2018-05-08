@@ -29,8 +29,8 @@ class User < ApplicationRecord
     self.session_token ||= token
   end
 
-  def self.find_by_credentials(identifier,password)
-    user = User.find_by(username: identifier) || User.find_by(email: identifier)
+  def self.find_by_credentials(email,username,password)
+    user = User.find_by(email: email) || User.find_by(username: username)
     return user if user && user.is_password?(password)
   end
 end
