@@ -6,9 +6,8 @@ import { configureStore } from './store/store';
 document.addEventListener('DOMContentLoaded',()=>{
   const root = document.getElementById('root');
   const store = configureStore();
+  ///////////////////////////////
+  window.dispatch = store.dispatch;
+  ///////////////////////////////
   ReactDOM.render(<Root store = {store} />, root);
 });
-
-
-import * as Api from './utils/session';
-window.Api = Api;
