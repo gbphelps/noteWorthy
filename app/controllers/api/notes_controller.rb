@@ -1,4 +1,8 @@
 class Api::NotesController < ApplicationController
+
+  def index
+  end
+
   def create
     @note = Note.new(note_params)
     if @note.save
