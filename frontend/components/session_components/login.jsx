@@ -16,7 +16,12 @@ export default class SessionForm extends React.Component {
   }
 
   update(field){
-    return e => this.setState({[field]: e.target.value});
+    return e => {
+      this.setState({[field]: e.target.value});
+      if (field=='identifier'){
+        this.setState({passwordField: false})
+      };
+    };
   }
 
   handleSubmit(e){
@@ -55,7 +60,7 @@ export default class SessionForm extends React.Component {
         <img className='icon-elephant' src='assets/elephant.png'/>
         <h1>Sign In</h1>
 
-        <form onSubmit={this.handleSubmit} className='sign-in'>
+        <form className='sign-in'>
 
           <button onClick={this.demoLogin}>Demo User</button>
 
@@ -79,7 +84,14 @@ export default class SessionForm extends React.Component {
                 onChange={this.update('password')}/>
             </div>
           </div>
-          <button className='accent' onClick={this.lookup}>Log In</button>
+          <button className='accent' onClick={
+              this.state.passwordField ?
+              this.handleSubmit :
+              this.lookup}>
+              {this.state.passwordField ?
+                'Log In' :
+                'Continue'}
+          </button>
           {this.listErrors()}
         </form>
         <h5>Don't have an accout?</h5>

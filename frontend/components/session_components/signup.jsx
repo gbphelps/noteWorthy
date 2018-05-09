@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 export default class SessionForm extends React.Component {
   constructor(props){
     super(props);
@@ -53,6 +53,8 @@ export default class SessionForm extends React.Component {
           <button className='accent'>Sign Up</button>
           {this.listErrors()}
         </form>
+        <h5>Already have an account?</h5>
+        <h2><Link to='/login'>Sign In</Link></h2>
       </div>
     );
   }
