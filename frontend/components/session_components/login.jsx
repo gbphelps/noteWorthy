@@ -8,6 +8,7 @@ export default class SessionForm extends React.Component {
       password:''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
   }
 
   update(field){
@@ -24,6 +25,11 @@ export default class SessionForm extends React.Component {
     return this.props.errors.map((error,i) => <li key={i}>{error}</li>);
   }
 
+  demoLogin(e){
+    e.preventDefault();
+    this.props.action({identifier:'grant',password:'password'});
+  }
+
   render(){
     return(
       <div>
@@ -32,7 +38,7 @@ export default class SessionForm extends React.Component {
 
         <form onSubmit={this.handleSubmit} className='sign-in'>
 
-          <button>Demo User</button>
+          <button onClick={this.demoLogin}>Demo User</button>
 
           <div className='divider'>
             <div className='line'></div>
