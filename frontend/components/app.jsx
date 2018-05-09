@@ -17,16 +17,15 @@ import {
 export const App = () => {
   return (
     <div>
-      <div>Feel free to click anywhere on the page</div>
-        <Greeting/>
-        <AuthRoute
-          component = {Signup}
-          path = '/signup'
-          exact = {true} />
-        <AuthRoute
-          component = {Login}
-          path = '/login'
-          exact = {true} />
+      <Greeting/>
+      <AuthRoute
+        component = {Signup}
+        path = '/signup'
+        exact = {true} />
+      <AuthRoute
+        component = {Login}
+        path = '/login'
+        exact = {true} />
     </div>
   );
 };

@@ -26,7 +26,17 @@ export default class SessionForm extends React.Component {
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className='sign-in'>
+
+        <button class='button'>Demo User</button>
+
+
+        <div class='divider'>
+          <div class='line'></div>
+          or
+          <div class='line'></div>
+        </div>
+
         Email or Username
         <input
           type='text'
@@ -37,7 +47,7 @@ export default class SessionForm extends React.Component {
           type='password'
           value={this.state.password}
           onChange={this.update('password')}/>
-        <button>Log In</button>
+        <button class='button accent'>Log In</button>
         {this.listErrors()}
       </form>
     );

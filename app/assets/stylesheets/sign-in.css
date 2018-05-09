@@ -1,0 +1,100 @@
+body {
+  background:#f3f3f3;
+  border-top: 4px solid #2dbe60;
+  font-family: 'Source Sans Pro';
+  font-weight: 200;
+  color: #bbb;
+  font-size:16px;
+}
+
+.sign-in{
+  border: 1px solid #dedede;
+  border-radius: 2px;
+  background: white;
+  width: 320px;
+  padding:35px;
+  margin: 0 auto 20px auto;
+  position:relative;
+}
+
+.icon-elephant{
+  margin: 20px auto;
+  display: block;
+}
+
+h1{
+  font-family: 'Scope One';
+  font-size: 26pt;
+  text-align:center;
+  margin: 20px;
+  color: #6a6a6a;
+}
+
+.line{
+  width: 145px;
+  height: 1px;
+  border-top: 1px solid #dedede;
+  display: inline-block;
+  margin: 4px 2px;
+}
+
+button, input{
+  width:320px;
+  height:43px;
+  line-height:43px;
+  border:1px solid #dedede;
+  border-radius: 7px;
+  font-size: 12pt;
+  color: #bbb;
+  padding-left:10px;
+  box-sizing:border-box;
+  margin-top:10px;
+  transition: .2s;
+}
+
+.divider{
+  margin:50px 0 30px 0;
+}
+
+.accent{
+  background: #2dbe60;
+  height: 47px;
+  color:white;
+  border:none;
+  border-color: #1b9848;
+}
+
+.accent:hover{
+  background: #1fae52;
+}
+
+::placeholder{
+  color:#bbb;
+}
+
+a {
+  color: #2dbe60;
+  text-decoration:none;
+  transition: .2s;
+}
+
+
+a:hover{
+  color: #1fae52;
+}
+
+
+h2 {
+  font-size: 20px;
+  padding: 10px;
+}
+
+h5 {
+  font-size: 14px;
+  color: #999;
+}
+
+
+h2, h5 {
+  text-align:center;
+}
