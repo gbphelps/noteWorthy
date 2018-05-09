@@ -5,7 +5,15 @@ import { configureStore } from './store/store';
 
 document.addEventListener('DOMContentLoaded',()=>{
   const root = document.getElementById('root');
-  const store = configureStore();
+  let store;
+  if (window.currentUser) {
+    const preloadedState = {
+      session: currentUser
+    };
+    store = configureStore(preloadedState);
+  }else{
+    store = configureStore();
+  }
   ///////////////////////////////
   window.dispatch = store.dispatch;
   ///////////////////////////////
