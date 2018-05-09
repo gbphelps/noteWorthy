@@ -54,5 +54,6 @@ export const signup = user => dispatch => {
 
 export const lookup = identifier => dispatch => {
   return Api.lookup(identifier)
+    .then(() => dispatch(clearErrors()))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)));
 }
