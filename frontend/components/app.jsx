@@ -2,7 +2,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import Login from './session_components/login_form_container';
 import Signup from './session_components/signup_form_container';
-import Greeting from './greeting'
 import { AuthRoute } from '../utils/login_route';
 import { ProtectedRoute } from '../utils/protected_route';
 import NavBar from './main/navbar';
@@ -21,10 +20,6 @@ export const App = () => {
   return (
     <div className='app'>
       <Route path='/' exact component={NavBar}/>
-      <ProtectedRoute
-        component = {Greeting}
-        path = '/'
-        exact = {true}/>
       <AuthRoute
         component = {Signup}
         path = '/signup'
