@@ -22,3 +22,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 import { logout } from './actions/session';
 window.logout = logout;
+
+import * as Api from './utils/session';
+window.Api = Api;

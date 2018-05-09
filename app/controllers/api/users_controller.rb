@@ -17,6 +17,17 @@ class Api::UsersController < ApplicationController
   def destroy
   end
 
+  def lookup
+    identifier = params[:identifier]
+    #debugger
+    @user = User.find_by(email: identifier) || User.find_by(username: identifier)
+    if @user
+      render :show
+    else
+      render json: ['Incorrect username or email'], status: 404
+    end
+  end
+
   private
 
   def user_params

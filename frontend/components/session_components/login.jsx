@@ -52,11 +52,13 @@ export default class SessionForm extends React.Component {
             placeholder='Email or Username'
             value={this.state.identifier}
             onChange={this.update('identifier')}/>
-          <input
-            type='password'
-            placeholder='Password'
-            value={this.state.password}
-            onChange={this.update('password')}/>
+          <div className=''>
+            <input
+              type='password'
+              placeholder='Password'
+              value={this.state.password}
+              onChange={this.update('password')}/>
+          </div>
           <button className='accent'>Log In</button>
           {this.listErrors()}
         </form>

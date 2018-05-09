@@ -26,7 +26,6 @@ export const receiveErrors = errors => {
 };
 
 
-
 export const login = user => dispatch => {
   return Api.login(user)
     .then(user => dispatch(receiveUser(user)))
@@ -45,3 +44,9 @@ export const signup = user => dispatch => {
     .then(user=> dispatch(receiveUser(user)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)));
 };
+
+export const lookup = identifier => dispatch => {
+  return Api.lookup(identifier)
+    .then(user => dispatch(receive(user)))
+    .fail(errors => dispatch(receiveErrors(errors.responseJSON)));
+}

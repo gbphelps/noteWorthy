@@ -1,7 +1,8 @@
-export const fetchUser = id => {
+export const lookup = identifier => {
   return $.ajax({
     method: 'GET',
-    url: `api/users/${id}`
+    url: `api/users/lookup`,
+    data: { identifier }
   });
 };
 

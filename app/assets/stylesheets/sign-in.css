@@ -99,3 +99,17 @@ h5 {
 h2, h5 {
   text-align:center;
 }
+
+.hidden{
+  opacity: 0;
+}
+
+.grow{
+  height:0px;
+  background:red;
+  transition: 1s;
+}
+
+.grown{
+  height: 30px
+}
