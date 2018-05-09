@@ -19,7 +19,10 @@ export const App = () => {
 
   return (
     <div className='app'>
-      <Route path='/' exact component={NavBar}/>
+      <ProtectedRoute
+        path='/'
+        exact={true}
+        component={NavBar}/>
       <AuthRoute
         component = {Signup}
         path = '/signup'
