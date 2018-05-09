@@ -20,8 +20,5 @@ document.addEventListener('DOMContentLoaded',()=>{
   ReactDOM.render(<Root store = {store} />, root);
 });
 
-import { logout } from './actions/session';
-window.logout = logout;
-
-import * as Api from './utils/session';
-window.Api = Api;
+import * as Api from './actions/notes'
+window.Api = Api
