@@ -288,9 +288,10 @@ body{
   height:70px;
   position:absolute;
   bottom:0px;
-  background:#ececec;
   border-top:1px solid #ececec;
   cursor: pointer;
+  text-align:center;
+  line-height:90px;
 }
 
 .user-popup{
@@ -302,6 +303,7 @@ body{
   width: 350px;
   height: 395px;
   box-shadow: 5px 5px 5px #ececec;
+  padding: 10px;
 }
 
 .hidden{
@@ -311,4 +313,14 @@ body{
 @keyframes slideIn {
   from {left:0px;}
   to {left:75px;}
+}
+
+.fa-cog{
+  color:#bbb;
+  font-size:40px;
+  transition: .2s;
+}
+
+.fa-cog:hover{
+  color: #2dbe60;
 }

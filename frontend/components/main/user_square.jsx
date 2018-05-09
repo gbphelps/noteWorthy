@@ -23,8 +23,14 @@ export default class UserSquare extends React.Component {
   render(){
     return(
       <div className='user-square' onClick={this.toggle}>
+        <i className="fas fa-cog"></i>
         <div className={'user-popup ' + this.status()}>
-          <button onClick={this.props.logout}>Log Out</button>
+          <button
+            className='accent'
+            style={{margin:'auto',display:'block'}}
+            onClick={this.props.logout}>
+            Log Out
+          </button>
         </div>
       </div>
     );

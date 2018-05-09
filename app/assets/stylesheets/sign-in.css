@@ -5,6 +5,7 @@ body {
   font-weight: 200;
   color: #bbb;
   font-size:16px;
+  box-sizing:border-box;
 }
 
 .sign-in{
@@ -115,8 +116,8 @@ h2, h5 {
 }
 
 .grow{
-  height:0px;
   transition: 1s;
+  height: 0;
 }
 
 .grown{
