@@ -6,6 +6,6 @@ export const sessionErrors = (state = [], action) => {
       console.log('Entered');
       return action.errors;
     default:
-      return state;
+      return [];
   }
 };

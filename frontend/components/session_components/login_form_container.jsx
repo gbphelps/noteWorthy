@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SessionForm from './session_form';
+import Login from './login';
 import { login } from '../../actions/session';
 
 const mapState = state => {
   return {
     errors: state.errors.sessionErrors,
-    formType: 'Log In'
   };
 };
 
@@ -16,4 +15,4 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default connect(mapState,mapDispatch)(SessionForm);
+export default connect(mapState,mapDispatch)(Login);

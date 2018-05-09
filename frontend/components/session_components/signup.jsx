@@ -28,19 +28,22 @@ export default class SessionForm extends React.Component {
   render(){
     return(
       <form onSubmit={this.handleSubmit}>
+        Email
         <input
           type='text'
           value={this.state.email}
           onChange={this.update('email')}/>
+        Username
         <input
           type='text'
           value={this.state.username}
           onChange={this.update('username')}/>
+        Password
         <input
           type='password'
           value={this.state.password}
           onChange={this.update('password')}/>
-        <button>{this.props.formType}</button>
+        <button>Sign Up</button>
         {this.listErrors()}
       </form>
     );
