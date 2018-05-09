@@ -5,12 +5,14 @@ export default class SessionForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      identifier:'',
-      password:''
+      identifier: '',
+      password: '',
+      passwordField: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
     this.lookup = this.lookup.bind(this);
+    this.growPassword = this.growPassword.bind(this);
   }
 
   update(field){
@@ -34,8 +36,12 @@ export default class SessionForm extends React.Component {
 
   lookup(e){
     e.preventDefault();
-    console.log(this.props);
-    this.props.lookup(this.state.identifier);
+    this.props.lookup(this.state.identifier).then(this.growPassword);
+  }
+
+  growPassword(){
+    console.log('Hello!');
+    this.setState({passwordField: true});
   }
 
   componentWillUnmount(){
@@ -64,12 +70,14 @@ export default class SessionForm extends React.Component {
             placeholder='Email or Username'
             value={this.state.identifier}
             onChange={this.update('identifier')}/>
-          <div className=''>
-            <input
-              type='password'
-              placeholder='Password'
-              value={this.state.password}
-              onChange={this.update('password')}/>
+          <div className={this.state.passwordField ? 'grown' : 'grow'}>
+            <div className=''>
+              <input
+                type='password'
+                placeholder='Password'
+                value={this.state.password}
+                onChange={this.update('password')}/>
+            </div>
           </div>
           <button className='accent' onClick={this.lookup}>Log In</button>
           {this.listErrors()}
