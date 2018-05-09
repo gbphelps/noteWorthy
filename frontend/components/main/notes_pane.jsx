@@ -1,12 +1,20 @@
-import React from 'react'
+import React from 'react';
+import values from 'lodash/values';
+import { connect } from 'react-redux';
+import { fetchNotes } from '../../actions/notes'
 
-export default class NotesPane extends React.Component {
+class NotesPane extends React.Component {
   constructor(props){
     super(props);
     this.state = {};
   }
 
+  componentDidMount(){
+    this.props.fetchNotes();
+  }
+
   render(){
+    console.log(this.props.notes);
     return(
       <div className="pane-notes">
           <nav className="pane-header">
@@ -58,3 +66,19 @@ export default class NotesPane extends React.Component {
     );
   }
 }
+
+const mapState = state => {
+  return {
+    notes: values(state.entities.notes)
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    fetchNotes: () => dispatch(fetchNotes())
+  }
+};
+
+
+
+export default connect(mapState,mapDispatch)(NotesPane)
