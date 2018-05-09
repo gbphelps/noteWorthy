@@ -6,64 +6,35 @@ export default class NavBar extends React.Component {
     this.state = {};
   }
 
+
+  popup(text,icon){
+    return(
+      <div className={icon}>
+        <div className='popup'>
+          <img className='popup-arrow' src={popupTail}/>
+          <div className='popup-body'>{text}</div>
+        </div>
+      </div>
+    );
+  }
+
   render(){
     return(
       <div className='left-nav'>
         <img className='icon-elephant' src={elephantSmall}/>
+
         <nav className='upper-nav'>
-
-          <div className='icon plus'>
-            <div className='popup'>
-              <img className='popup-arrow' src={popupTail}/>
-              <div className='popup-body'>New note</div>
-            </div>
-          </div>
-
-          <div className='icon mtgnote'>
-            <div className='popup'>
-              <img className='popup-arrow' src={popupTail}/>
-              <div className='popup-body'>New meeting note</div>
-            </div>
-          </div>
-
-          <div className='icon search'>
-            <div className='popup'>
-              <img className='popup-arrow' src={popupTail}/>
-              <div className='popup-body'>Search</div>
-            </div>
-          </div>
-
+          {this.popup('New Note','icon plus')}
+          {this.popup('New Meeting Note', 'icon mtgnote')}
+          {this.popup('Search', 'icon search')}
         </nav>
 
         <nav className='lower-nav'>
 
-          <div className='icon star'>
-            <div className='popup'>
-              <img className='popup-arrow' src={popupTail}/>
-              <div className='popup-body'>Shortcuts</div>
-            </div>
-          </div>
-
-          <div className='icon note'>
-            <div className='popup'>
-              <img className='popup-arrow' src={popupTail}/>
-              <div className='popup-body'>Notes</div>
-            </div>
-          </div>
-
-          <div className='icon notebook'>
-            <div className='popup'>
-              <img className='popup-arrow' src={popupTail}/>
-              <div className='popup-body'>Notebooks</div>
-            </div>
-          </div>
-
-          <div className='icon tag'>
-            <div className='popup'>
-              <img className='popup-arrow' src={popupTail}/>
-              <div className='popup-body'>Tags</div>
-            </div>
-          </div>
+          {this.popup('Shortcuts', 'icon star')}
+          {this.popup('Notes', 'icon note')}
+          {this.popup('Notebooks', 'icon notebook')}
+          {this.popup('Tags', 'icon tag')}
 
         </nav>
       </div>

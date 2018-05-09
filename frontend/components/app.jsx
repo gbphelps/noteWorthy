@@ -21,7 +21,10 @@ export const App = () => {
   return (
     <div className='app'>
       <Route path='/' exact component={NavBar}/>
-
+      <ProtectedRoute
+        component = {Greeting}
+        path = '/'
+        exact = {true}/>
       <AuthRoute
         component = {Signup}
         path = '/signup'
@@ -33,8 +36,3 @@ export const App = () => {
     </div>
   );
 };
-
-// <ProtectedRoute
-//   component = {Greeting}
-//   path = '/'
-//   exact = {true}/>
