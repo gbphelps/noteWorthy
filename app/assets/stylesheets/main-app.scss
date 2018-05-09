@@ -291,7 +291,8 @@ body{
   border-top:1px solid #ececec;
   cursor: pointer;
   text-align:center;
-  line-height:90px;
+  line-height:70px;
+  background: #f8f8f8
 }
 
 .user-popup{
@@ -317,10 +318,11 @@ body{
 
 .fa-cog{
   color:#bbb;
-  font-size:40px;
+  font-size:25px;
   transition: .2s;
 }
 
 .fa-cog:hover{
   color: #2dbe60;
+  display: inline-block;
 }

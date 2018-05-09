@@ -60,9 +60,10 @@ export default class SessionForm extends React.Component {
         <img className='icon-elephant' src={elephantLarge}/>
         <h1>Sign In</h1>
 
-        <form className='sign-in'>
+        <form
+          className='sign-in'>
 
-          <button onClick={this.demoLogin}>Demo User</button>
+          <div className='button' onClick={this.demoLogin}>Demo User</div>
 
           <div className='divider'>
             <div className='line'></div>
