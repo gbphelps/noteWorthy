@@ -1,39 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-
-
-
-
-class UserSquare extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      active: false
-    };
-    this.toggle = this.toggle.bind(this)
-  }
-
-  status(){
-    return (this.state.active ? '' : 'hidden')
-  }
-
-  toggle(){
-    const active = this.state.active;
-    this.setState({active: !active});
-  }
-
-
-  render(){
-    return(
-      <div className='user-square' onClick={this.toggle}>
-        <div className={'user-popup ' + this.status()}/>
-      </div>
-    );
-  }
-}
-
-
+import UserSquare from './user_square';
+import { logout } from '../../actions/session'
 
 class NavBar extends React.Component {
   constructor(props){
@@ -70,7 +38,7 @@ class NavBar extends React.Component {
           {this.popup('Tags', 'tag')}
         </nav>
 
-        <UserSquare/>
+        <UserSquare logout={ this.props.logout }/>
 
       </div>
     );
@@ -83,4 +51,12 @@ const mapState = state => {
   };
 };
 
-export default connect(mapState)(NavBar)
+const mapDispatch = dispatch => {
+  return {
+    logout: () => dispatch(logout())
+  };
+};
+
+
+
+export default connect(mapState,mapDispatch)(NavBar)
