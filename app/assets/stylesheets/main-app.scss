@@ -12,7 +12,6 @@
   background:#f8f8f8;
   border-right: 1px solid #ececec;
   float:left;
-  padding-right:2px;
 }
 
 
@@ -282,4 +281,34 @@ body{
   border:1px solid #ececec;
   box-shadow: 5px 5px 5px #ececec;
   display:none;
+}
+
+.user-square{
+  width:70px;
+  height:70px;
+  position:absolute;
+  bottom:0px;
+  background:#ececec;
+  border-top:1px solid #ececec;
+  cursor: pointer;
+}
+
+.user-popup{
+  position:absolute;
+  bottom:5px;
+  left:65px;
+  background:white;
+  border: 1px solid #ececec;
+  width: 350px;
+  height: 395px;
+  box-shadow: 5px 5px 5px #ececec;
+}
+
+.hidden{
+  display:none;
+}
+
+@keyframes slideIn {
+  from {left:0px;}
+  to {left:75px;}
 }
