@@ -3,6 +3,16 @@ import values from 'lodash/values';
 import { connect } from 'react-redux';
 import { fetchNotes } from '../../actions/notes'
 
+
+
+
+const noteBody = note => {
+  return(
+    <div className="note-body">
+    </div>
+  );
+};
+
 class NotesPane extends React.Component {
   constructor(props){
     super(props);
