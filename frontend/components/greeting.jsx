@@ -25,7 +25,7 @@ class Greeting extends React.Component {
   }
 
   render(){
-    return (this.props.user.id ? this.loggedIn() : this.loggedOut());
+    return (this.props.user.id ? this.loggedIn() : null);
   }
 }
 
