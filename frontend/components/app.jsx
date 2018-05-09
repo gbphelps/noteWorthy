@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import Login from './session_components/login_form_container';
 import Signup from './session_components/signup_form_container';
+import { AuthRoute } from '../utils/route_util';
 import Greeting from './greeting';
 
 import {
@@ -18,8 +19,14 @@ export const App = () => {
     <div>
       <div>Feel free to click anywhere on the page</div>
         <Greeting/>
-        <Route path='/signup' component={Signup}/>
-        <Route path='/login' component={Login}/>
+        <AuthRoute
+          component = {Signup}
+          path = '/signup'
+          exact = {true} />
+        <AuthRoute
+          component = {Login}
+          path = '/login'
+          exact = {true} />
     </div>
   );
 };
