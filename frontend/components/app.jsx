@@ -3,7 +3,8 @@ import { Provider } from 'react-redux';
 import Login from './session_components/login_form_container';
 import Signup from './session_components/signup_form_container';
 import Greeting from './greeting'
-import { AuthRoute } from '../utils/route_util';
+import { AuthRoute } from '../utils/login_route';
+import { ProtectedRoute } from '../utils/protected_route'
 
 import {
   Route,
@@ -15,9 +16,13 @@ import {
 
 
 export const App = () => {
+
   return (
     <div>
-      <Greeting/>
+      <ProtectedRoute
+        component = {Greeting}
+        path = '/'
+        exact = {true}/>
       <AuthRoute
         component = {Signup}
         path = '/signup'
