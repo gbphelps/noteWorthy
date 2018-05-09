@@ -36,7 +36,7 @@ export default class SessionForm extends React.Component {
 
   demoLogin(e){
     e.preventDefault();
-    this.props.action({identifier:'grant',password:'password'});
+    this.props.action({identifier:'Guest',password:'password'});
   }
 
   lookup(e){
