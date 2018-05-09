@@ -25,6 +25,13 @@ export const receiveErrors = errors => {
   };
 };
 
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
+  };
+};
+
 
 export const login = user => dispatch => {
   return Api.login(user)
@@ -47,6 +54,6 @@ export const signup = user => dispatch => {
 
 export const lookup = identifier => dispatch => {
   return Api.lookup(identifier)
-    .then(user => dispatch(receive(user)))
+    .then(user => dispatch(receiveUser(user)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)));
 }

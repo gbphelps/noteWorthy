@@ -10,6 +10,7 @@ export default class SessionForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
+    this.lookup = this.lookup.bind(this);
   }
 
   update(field){
@@ -30,6 +31,17 @@ export default class SessionForm extends React.Component {
     e.preventDefault();
     this.props.action({identifier:'grant',password:'password'});
   }
+
+  lookup(e){
+    e.preventDefault();
+    console.log(this.props);
+    this.props.lookup(this.state.identifier);
+  }
+
+  componentWillUnmount(){
+    this.props.clearErrors();
+  }
+
 
   render(){
     return(
@@ -59,7 +71,7 @@ export default class SessionForm extends React.Component {
               value={this.state.password}
               onChange={this.update('password')}/>
           </div>
-          <button className='accent'>Log In</button>
+          <button className='accent' onClick={this.lookup}>Log In</button>
           {this.listErrors()}
         </form>
         <h5>Don't have an accout?</h5>

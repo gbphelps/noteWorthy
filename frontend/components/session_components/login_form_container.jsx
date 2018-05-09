@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Login from './login';
-import { login } from '../../actions/session';
+import { login, lookup, clearErrors } from '../../actions/session';
 
 const mapState = state => {
   return {
@@ -11,7 +11,9 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    action: user => dispatch(login(user))
+    action: user => dispatch(login(user)),
+    lookup: identifier => dispatch(lookup(identifier)),
+    clearErrors: () => dispatch(clearErrors())
   };
 };
 

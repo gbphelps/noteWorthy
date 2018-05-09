@@ -52,6 +52,16 @@ button, input{
   transition: .2s;
 }
 
+input:focus{
+  outline: none;
+  border: 1px solid #2dbe60
+}
+
+button:focus {
+  outline: none;
+}
+
+
 .divider{
   margin:50px 0 30px 0;
 }
