@@ -4,7 +4,8 @@ import Login from './session_components/login_form_container';
 import Signup from './session_components/signup_form_container';
 import Greeting from './greeting'
 import { AuthRoute } from '../utils/login_route';
-import { ProtectedRoute } from '../utils/protected_route'
+import { ProtectedRoute } from '../utils/protected_route';
+import NavBar from './main/navbar';
 
 import {
   Route,
@@ -18,11 +19,9 @@ import {
 export const App = () => {
 
   return (
-    <div>
-      <ProtectedRoute
-        component = {Greeting}
-        path = '/'
-        exact = {true}/>
+    <div className='app'>
+      <Route path='/' exact component={NavBar}/>
+
       <AuthRoute
         component = {Signup}
         path = '/signup'
@@ -34,3 +33,8 @@ export const App = () => {
     </div>
   );
 };
+
+// <ProtectedRoute
+//   component = {Greeting}
+//   path = '/'
+//   exact = {true}/>

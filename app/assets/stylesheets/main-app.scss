@@ -1,0 +1,285 @@
+#root{
+  height:100%;
+}
+
+.app{
+  height: 100%;
+}
+
+.left-nav{
+  width: 70px;
+  height: 100%;
+  background:#f8f8f8;
+  border-right: 1px solid #ececec;
+  float:left;
+  padding-right:2px;
+}
+
+
+div{
+display:block;
+}
+
+
+/* for pixel perfect NOTES header -- need to refactor */
+h1{
+  position:relative;
+  top: 1px;
+  left: -.5px;
+}
+
+.pointer{
+margin-left:2px;
+margin-right:-1px;
+margin-bottom:1px;
+}
+
+.reminder-icon{
+  margin-left:5px;
+  position:relative;
+  top: 2px;
+}
+
+.pane-notes{
+  width:350px;
+  height:100%;
+  border-right:1px solid #ececec;
+  background:#f8f8f8;
+  float:left;
+  display:flex;
+  flex-direction:column;
+}
+
+
+.note-body:hover{
+  background: #2dbe60;
+}
+
+.pane-header{
+  width:100%;
+  height:108px;
+  background:white;
+  border-bottom: 1px solid #ececec;
+  font-size:21px;
+  color: #878787;
+  text-transform:uppercase;
+  font-family: 'Raleway';
+  padding: 25px;
+  box-sizing: border-box;
+  letter-spacing: 2.5px;
+}
+
+.pane-subhead{
+  text-transform:none;
+  letter-spacing: 1px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Raleway';
+  position:relative;
+  top: 28px;
+  letter-spacing:1px;
+}
+
+
+.reminders{
+  font-family: 'Raleway';
+  text-transform: uppercase;
+  letter-spacing:1.5px;
+  font-weight:400;
+  color: #878787;
+  font-size:14px;
+  padding:14px 22px 10px 28px;
+  border-top:2px solid #ececec;
+  border-bottom:3px solid #ececec;
+  box-sizing:border-box;
+  background:white;
+}
+
+.options{
+font-size: 14px;
+}
+
+.options:hover > .options-popup{
+  display:block;
+}
+
+.pane-content{
+  height:100%;
+  overflow-y:scroll;
+  display:block;
+}
+
+.note-body{
+  width:100%;
+  height:120px;
+  background:white;
+  border-bottom:1px solid #ececec;
+  transition: .3s;
+}
+
+.content-main{}
+
+.content-header{}
+
+
+body{
+  margin:0;
+  padding: 0;
+  height:100%;
+  width:100%;
+  position:absolute;
+}
+
+.icon-elephant{
+  display:block;
+  margin:auto;
+  padding-top:12px;
+}
+
+.lower-nav{
+  margin-top: 60px;
+}
+
+.upper-nav{
+  margin-top:36px;
+}
+
+.icon {
+  display:block;
+  margin:auto;
+  width:36px;
+  height:36px;
+  margin-bottom:12px;
+  transition: .3s;
+  position:relative;
+}
+
+.mtgnote{
+  background-image: image-url('inactive_icons/mtgnote.png')
+}
+.mtgnote:hover{
+  background-image: image-url('hover_icons/mtgnote.png')
+}
+
+.plus{
+  background-image: image-url('inactive_icons/plus.png')
+}
+.plus:hover{
+  background-image: image-url('hover_icons/plus.png')
+}
+
+.search{
+  background-image: image-url('inactive_icons/search.png')
+}
+.search:hover{
+  background-image: image-url('hover_icons/search.png')
+}
+
+
+
+.star{
+  background-image: image-url('inactive_icons/star.png')
+}
+.star:hover{
+  background-image: image-url('hover_icons/star.png')
+}
+
+.note{
+  background-image: image-url('inactive_icons/note.png')
+}
+.note:hover{
+  background-image: image-url('hover_icons/note.png')
+}
+
+.notebook{
+  background-image: image-url('inactive_icons/notebook.png')
+}
+.notebook:hover{
+  background-image: image-url('hover_icons/notebook.png')
+}
+
+.tag{
+  background-image: image-url('inactive_icons/tag.png')
+}
+.tag:hover{
+  background-image: image-url('hover_icons/tag.png')
+}
+
+
+.popup{
+  position:absolute;
+  left:45px;
+  top:7px;
+  display: none;
+}
+
+.icon:hover > .popup{
+  display: block;
+}
+
+.popup-arrow{
+}
+
+.popup-body{
+  position:absolute;
+  top:0px;
+  left:4px;
+  white-space:nowrap;
+  background:#606060;
+  color:#d9d9d9;
+  font-family: 'Lato';
+  text-transform:uppercase;
+  font-size:12px;
+  padding:4px 8px;
+  border-radius: 2px;
+}
+
+.right-pointer{
+  display:inline;
+  margin-right: 8px;
+  margin-bottom: 1px;
+}
+
+.reminders-header{
+  display:flex;
+  justify-content:space-between;
+  font-weight:700;
+}
+
+.reminders-counter{
+  font-family:'Raleway';
+  font-weight:300;
+  position:relative;
+  bottom:4px;
+  text-align:right;
+}
+
+.reminders-counter:hover > .reminders-popup{
+  display:block;
+}
+
+.reminders-popup{
+  background:white;
+  height:215px;
+  width:330px;
+  position:fixed;
+  top:135px;
+  left:370px;
+  border:1px solid #ececec;
+  box-shadow: 5px 5px 5px #ececec;
+  display:none;
+}
+
+.options-popup{
+  height:375px;
+  width:270px;
+  position:fixed;
+  background:white;
+  z-index:2;
+  left:330px;
+  top:90px;
+  border:1px solid #ececec;
+  box-shadow: 5px 5px 5px #ececec;
+  display:none;
+}
