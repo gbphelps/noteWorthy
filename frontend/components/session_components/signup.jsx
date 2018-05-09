@@ -28,23 +28,24 @@ export default class SessionForm extends React.Component {
   render(){
     return(
       <div>
+        <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit} className='sign-in'>
-          Email
           <input
             type='text'
             value={this.state.email}
+            placeholder='Email'
             onChange={this.update('email')}/>
-          Username
           <input
             type='text'
+            placeholder='Username'
             value={this.state.username}
             onChange={this.update('username')}/>
-          Password
           <input
             type='password'
+            placeholder='Password'
             value={this.state.password}
             onChange={this.update('password')}/>
-          <button>Sign Up</button>
+          <button className='accent'>Sign Up</button>
           {this.listErrors()}
         </form>
       </div>

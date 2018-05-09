@@ -26,30 +26,34 @@ export default class SessionForm extends React.Component {
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit} className='sign-in'>
+      <div>
+        <img className='elephant-icon'/>
+        <h1>Sign In</h1>
 
-        <button class='button'>Demo User</button>
+        <form onSubmit={this.handleSubmit} className='sign-in'>
 
+          <button>Demo User</button>
 
-        <div class='divider'>
-          <div class='line'></div>
-          or
-          <div class='line'></div>
-        </div>
+          <div className='divider'>
+            <div className='line'></div>
+            or
+            <div className='line'></div>
+          </div>
 
-        Email or Username
-        <input
-          type='text'
-          value={this.state.identifier}
-          onChange={this.update('identifier')}/>
-        Password
-        <input
-          type='password'
-          value={this.state.password}
-          onChange={this.update('password')}/>
-        <button class='button accent'>Log In</button>
-        {this.listErrors()}
-      </form>
+          <input
+            type='text'
+            placeholder='Email or Username'
+            value={this.state.identifier}
+            onChange={this.update('identifier')}/>
+          <input
+            type='password'
+            placeholder='Password'
+            value={this.state.password}
+            onChange={this.update('password')}/>
+          <button className='accent'>Log In</button>
+          {this.listErrors()}
+        </form>
+      </div>
     );
   }
 }
