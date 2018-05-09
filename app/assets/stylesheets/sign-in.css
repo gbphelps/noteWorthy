@@ -6,6 +6,7 @@ body {
   color: #bbb;
   font-size:16px;
   box-sizing:border-box;
+  overflow:hidden;
 }
 
 .sign-in{
@@ -20,6 +21,7 @@ body {
 
 .icon-elephant{
   display: block;
+  margin:20px auto;
 }
 
 h1{
