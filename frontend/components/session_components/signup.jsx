@@ -28,6 +28,7 @@ export default class SessionForm extends React.Component {
   render(){
     return(
       <div>
+        <img className='icon-elephant' src='assets/elephant.png'/>
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit} className='sign-in'>
           <input

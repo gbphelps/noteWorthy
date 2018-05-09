@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 export default class SessionForm extends React.Component {
   constructor(props){
@@ -33,7 +34,7 @@ export default class SessionForm extends React.Component {
   render(){
     return(
       <div>
-        <img className='elephant-icon'/>
+        <img className='icon-elephant' src='assets/elephant.png'/>
         <h1>Sign In</h1>
 
         <form onSubmit={this.handleSubmit} className='sign-in'>
@@ -59,6 +60,8 @@ export default class SessionForm extends React.Component {
           <button className='accent'>Log In</button>
           {this.listErrors()}
         </form>
+        <h5>Don't have an accout?</h5>
+        <h2><Link to='/signup'>Create Account</Link></h2>
       </div>
     );
   }
