@@ -1,6 +1,7 @@
 class Api::NotesController < ApplicationController
 
   def index
+    @notes = Note.all
   end
 
   def create

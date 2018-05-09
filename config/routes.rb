@@ -10,9 +10,9 @@ Rails.application.routes.draw do
         get 'lookup'
       end
     end
-    
+
     resource :session, only: [:create, :destroy]
-    resources :notes, only: [:create, :update, :destroy]
+    resources :notes, only: [:index, :create, :update, :destroy]
   end
 
 end
