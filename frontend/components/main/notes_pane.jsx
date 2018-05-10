@@ -1,20 +1,22 @@
 import React from 'react';
 import values from 'lodash/values';
 import { connect } from 'react-redux';
-import { fetchNotes } from '../../actions/notes';
+import { fetchNotes, deleteNote } from '../../actions/notes';
 import { formatTime } from '../../utils/format_time';
 
 
 
 
-const NoteBody = ({ note }) => {
+const NoteBody = ({ note, deleteNote }) => {
   const type = typeof note.updated_at;
   return(
     <div className="note-wrapper">
       <div className='note-body'>
       <div className='note-header'>
         <div className='title'>{note.title}</div>
-        <NoteOptions note = {note}/>
+        <NoteOptions
+          note = {note}
+          deleteNote = {deleteNote}/>
       </div>
       <div className='date'>{formatTime(note.updated_at)}</div>
       <div className='body'>{note.body}</div>
@@ -23,13 +25,16 @@ const NoteBody = ({ note }) => {
   );
 };
 
-const NoteOptions = ({ note }) => {
+const NoteOptions = ({ note, deleteNote }) => {
+
  return(
    <div className='note-options'>
      <div className='note-icon note-share'></div>
      <div className='note-icon note-reminder'></div>
      <div className='note-icon note-star'></div>
-     <div className='note-icon note-trash'></div>
+     <div className='note-icon note-trash'
+          onClick={() => deleteNote(note.id)}>
+     </div>
    </div>
  );
 };
@@ -52,7 +57,12 @@ class NotesPane extends React.Component {
   notesList(){
     const list = [];
     this.props.notes.forEach((note,i) =>
-      list.unshift(<NoteBody key={i} note={note}/>));
+      list.unshift(
+        <NoteBody
+          key={i}
+          note={note}
+          deleteNote={this.props.deleteNote}/>
+      ));
     return list;
   }
 
@@ -96,7 +106,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchNotes: () => dispatch(fetchNotes())
+    fetchNotes: () => dispatch(fetchNotes()),
+    deleteNote: id => dispatch(deleteNote(id)),
   }
 };
 
