@@ -5,7 +5,8 @@ import Signup from './session_components/signup_form_container';
 import { AuthRoute } from '../utils/login_route';
 import { ProtectedRoute } from '../utils/protected_route';
 import NavBar from './main/navbar';
-import NotesPane from './main/notes_pane'
+import NotesPane from './main/notes_pane';
+import TextEditor from './text_editor/text_editor'
 
 import {
   Route,
@@ -28,6 +29,10 @@ export const App = () => {
         path='/'
         exact={true}
         component={NotesPane}/>
+        <ProtectedRoute
+          path='/'
+          exact={true}
+          component={TextEditor}/>
       <AuthRoute
         component = {Signup}
         path = '/signup'

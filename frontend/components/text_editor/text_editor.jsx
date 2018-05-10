@@ -21,7 +21,7 @@ class TextEditor extends React.Component{
 
 const mapState = (state, ownProps) => {
   return {
-    note: state.notes[ownProps.match.params.noteId] || {title:'',body:''}
+    // note: state.notes[ownProps.match.params.noteId] || {title:'',body:''}
   };
 };
 
