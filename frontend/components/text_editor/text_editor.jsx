@@ -26,14 +26,16 @@ export default class TextEditor extends React.Component{
   render(){
     return(
       <div className='text-editor-pane'>
+
         <div className='text-editor-header'>
         <button onClick={this.handleSubmit}>Submit</button>
         </div>
+
         <div className='text-editor-content'>
           <form className='text-editor-field' onSubmit={this.handleSubmit}>
             <input
-              className='editor-note-title'
               type='text'
+              className='editor-note-title'
               value={this.state.title}
               onChange={this.update('title')}/>
             <textarea
@@ -42,6 +44,7 @@ export default class TextEditor extends React.Component{
               value={this.state.body}/>
           </form>
         </div>
+
       </div>
     );
   }

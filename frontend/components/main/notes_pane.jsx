@@ -8,12 +8,16 @@ import { formatTime } from '../../utils/format_time';
 
 
 const NoteBody = ({ note, deleteNote }) => {
-  const type = typeof note.updated_at;
+
+  const crop = note.title.length > 15 ?
+      note.title.slice(0,15) :
+      note.title;
+
   return(
     <div className="note-wrapper">
       <div className='note-body'>
       <div className='note-header'>
-        <div className='title'>{note.title}</div>
+        <div className='title'>{crop}</div>
         <NoteOptions
           note = {note}
           deleteNote = {deleteNote}/>
