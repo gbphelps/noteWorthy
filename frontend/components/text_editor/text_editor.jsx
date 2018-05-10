@@ -1,21 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { createNote } from '../../actions/notes'
 
-class TextEditor extends React.Component{
+export default class TextEditor extends React.Component{
   constructor(props){
     super(props);
-    this.state={
-      title:'',
-      body:''
-    }
+    this.state=props.note;
     this.handleSubmit=this.handleSubmit.bind(this);
+    console.log(props.note);
   }
 
   componentDidMount(){
-    // this.props.fetchNote(this.props.match.params.noteId)
+    this.props.onMount();
   }
-
 
   update(field){
     return e => {
@@ -27,7 +22,6 @@ class TextEditor extends React.Component{
     e.preventDefault();
     this.props.action(this.state);
   }
-
 
   render(){
     return(
@@ -43,18 +37,3 @@ class TextEditor extends React.Component{
     );
   }
 }
-
-const mapState = (state, ownProps) => {
-  return {
-    // note: state.notes[ownProps.match.params.noteId] || {title:'',body:''}
-  };
-};
-
-const mapDispatch = dispatch => {
-  return {
-    // fetchNote: id => dispatch(fetchNote(id))
-    action: note => dispatch(createNote(note))
-  };
-};
-
-export default connect(mapState,mapDispatch)(TextEditor);

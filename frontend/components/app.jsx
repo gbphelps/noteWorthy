@@ -6,7 +6,7 @@ import { AuthRoute } from '../utils/login_route';
 import { ProtectedRoute } from '../utils/protected_route';
 import NavBar from './main/navbar';
 import NotesPane from './main/notes_pane';
-import TextEditor from './text_editor/text_editor'
+import CreateNote from './text_editor/create_note'
 
 import {
   Route,
@@ -32,7 +32,7 @@ export const App = () => {
         <ProtectedRoute
           path='/'
           exact={true}
-          component={TextEditor}/>
+          component={CreateNote}/>
       <AuthRoute
         component = {Signup}
         path = '/signup'
