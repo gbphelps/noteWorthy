@@ -15,3 +15,32 @@
   width: 100%;
   background: blue;
 };
+
+form{
+  background:green;
+  height:100%;
+}
+
+.editor-note-title{
+  display:block;
+  width:100%;
+  margin:0;
+  border-radius:0;
+  border:none;
+  background: pink;
+}
+
+.editor-note-title:focus{
+  border:none;
+}
+
+
+.editor-note-body{
+  width:100%;
+  resize:none;
+  border: none;
+}
+
+.editor-note-body:focus{
+  outline: none;
+}
