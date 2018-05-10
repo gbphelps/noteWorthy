@@ -10,6 +10,7 @@ const NoteBody = ({ note }) => {
   return(
     <div className="note-body">
       <div className='title'>{note.title}</div>
+      <div className='title'>{note.updated_at}</div>
       <div className='body'>{note.body}</div>
     </div>
   );
