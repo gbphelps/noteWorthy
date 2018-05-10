@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { createNote } from '../../actions/notes';
 
 const mapState = state => {
-  console.log('mapping');
   return {
     note: {title:'', body:''}
   };

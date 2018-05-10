@@ -89,14 +89,19 @@ button:focus {
   font-family: 'Lato';
 }
 
-a {
+.link {
   color: #2dbe60;
   text-decoration:none;
   transition: .2s;
 }
 
+a {
+  text-decoration:none;
+  color:inherit;
+}
 
-a:hover{
+
+.link:hover{
   color: #1fae52;
 }
 

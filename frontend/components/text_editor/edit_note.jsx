@@ -1,10 +1,11 @@
 import React from 'react';
 import TextEditor from './text_editor';
 import { connect } from 'react-redux';
-import { updateNote } from '../../actions/notes';
+import { updateNote, fetchNote } from '../../actions/notes';
 
 
 const mapState = (state, ownProps) => {
+    console.log(state.entities.notes[ownProps.match.params.noteId]);
   return {
     note: state.entities.notes[ownProps.match.params.noteId]
   };

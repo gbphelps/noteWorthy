@@ -61,7 +61,7 @@
   margin-bottom: 5px;
 }
 
-.note-body:hover div {
+.note-body:hover div, .note-body:hover > p {
   color:white;
 }
 

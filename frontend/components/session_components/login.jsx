@@ -95,7 +95,7 @@ export default class SessionForm extends React.Component {
           {this.listErrors()}
         </form>
         <h5>Don't have an accout?</h5>
-        <h2><Link to='/signup'>Create Account</Link></h2>
+        <h2><Link to='/signup' className='link'>Create Account</Link></h2>
       </div>
     );
   }

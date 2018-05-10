@@ -3,13 +3,21 @@ import React from 'react';
 export default class TextEditor extends React.Component{
   constructor(props){
     super(props);
-    this.state=props.note;
+    this.state={title:'',body:''}
     this.handleSubmit=this.handleSubmit.bind(this);
-    console.log(props.note);
   }
 
   componentDidMount(){
-    this.props.onMount();
+    this.props.onMount(this.props.match.params.noteId);
+  }
+
+  componentWillReceiveProps(nextProps){
+    // debugger
+    if (nextProps.note.id !== +this.props.match.params.noteId){
+      this.props.onMount(this.props.match.params.noteId);
+    } else {
+      this.setState(nextProps.note)
+    }
   }
 
   update(field){

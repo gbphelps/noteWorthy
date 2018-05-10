@@ -3,6 +3,7 @@ import values from 'lodash/values';
 import { connect } from 'react-redux';
 import { fetchNotes, deleteNote } from '../../actions/notes';
 import { formatTime } from '../../utils/format_time';
+import { Link } from 'react-router-dom'
 
 
 
@@ -14,18 +15,20 @@ const NoteBody = ({ note, deleteNote }) => {
       note.title;
 
   return(
-    <div className="note-wrapper">
-      <div className='note-body'>
-        <div className='note-header'>
-          <div className='title'>{crop}</div>
-          <NoteOptions
-            note = {note}
-            deleteNote = {deleteNote}/>
+    <Link to={`/home/${note.id}`}>
+      <div className="note-wrapper">
+        <div className='note-body'>
+          <div className='note-header'>
+            <div className='title'>{crop}</div>
+            <NoteOptions
+              note = {note}
+              deleteNote = {deleteNote}/>
+          </div>
+          <div className='date'>{formatTime(note.updated_at)}</div>
+          <p className='body-of-note'>{note.body}</p>
         </div>
-        <div className='date'>{formatTime(note.updated_at)}</div>
-        <p className='body-of-note'>{note.body}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

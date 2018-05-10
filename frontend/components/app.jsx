@@ -6,7 +6,8 @@ import { AuthRoute } from '../utils/login_route';
 import { ProtectedRoute } from '../utils/protected_route';
 import NavBar from './main/navbar';
 import NotesPane from './main/notes_pane';
-import CreateNote from './text_editor/create_note'
+import CreateNote from './text_editor/create_note';
+import UpdateNote from './text_editor/edit_note';
 
 import {
   Route,
@@ -23,17 +24,21 @@ export const App = () => {
     <div className='app'>
       <div className='main'>
       <ProtectedRoute
-        path='/'
-        exact={true}
+        path='/home'
+        exact={false}
         component={NavBar}/>
       <ProtectedRoute
-        path='/'
-        exact={true}
+        path='/home'
+        exact={false}
         component={NotesPane}/>
       <ProtectedRoute
-        path='/'
+        path='/home'
         exact={true}
         component={CreateNote}/>
+        <ProtectedRoute
+          path='/home/:noteId'
+          exact={true}
+          component={UpdateNote}/>
     </div>
       <AuthRoute
         component = {Signup}
