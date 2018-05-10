@@ -6,9 +6,11 @@ import { fetchNotes } from '../../actions/notes'
 
 
 
-const noteBody = note => {
+const NoteBody = ({ note }) => {
   return(
     <div className="note-body">
+      <div className='title'>{note.title}</div>
+      <div className='body'>{note.body}</div>
     </div>
   );
 };
@@ -21,6 +23,11 @@ class NotesPane extends React.Component {
 
   componentDidMount(){
     this.props.fetchNotes();
+  }
+
+  notesList(){
+    return this.props.notes.map((note,i) =>
+      <NoteBody key={i} note={note}/>)
   }
 
   render(){
@@ -45,32 +52,7 @@ class NotesPane extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className="note-body">
-              </div>
-
-              <div className="note-body">
-              </div>
-
-              <div className="note-body">
-              </div>
-
-              <div className="note-body">
-              </div>
-
-              <div className="note-body">
-              </div>
-
-              <div className="note-body">
-              </div>
-
-              <div className="note-body">
-              </div>
-
-              <div className="note-body">
-              </div>
-
-              <div className="note-body">
-              </div>
+            {this.notesList()}
           </div>
       </div>
     );
