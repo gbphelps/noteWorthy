@@ -12,17 +12,25 @@ export const fetchNote = id => {
   });
 };
 
-export const postNote = note => {
+export const createNote = note => {
   return $.ajax({
     method: 'POST',
-    url 'api/notes'
+    url: 'api/notes',
+    data: { note }
   });
 };
 
-export const editNote = note => {
+export const updateNote = note => {
   return $.ajax({
     method: 'PATCH',
     url: `api/notes/${note.id}`,
     data: { note }
+  });
+};
+
+export const deleteNote = id => {
+  return $.ajax({
+    method: 'DELETE',
+    url: `api/notes/${id}`
   });
 };

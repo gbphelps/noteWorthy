@@ -16,7 +16,35 @@ export const receiveNote = note => {
   };
 };
 
+export const REMOVE_NOTE = 'REMOVE_NOTE';
+export const removeNote = id => {
+  return {
+    type: REMOVE_NOTE,
+    id
+  };
+};
+
 export const fetchNotes = () => dispatch => {
   return Api.fetchNotes()
     .then(notes => dispatch(receiveNotes(notes)))
+};
+
+export const fetchNote = id => dispatch => {
+  return Api.fetchNote(id)
+    .then(note => dispatch(receiveNote(note)))
+}
+
+export const updateNote = note => dispatch => {
+  return Api.updateNote(note)
+    .then(note => dispatch(receiveNote(note)))
+};
+
+export const createNote = note => dispatch => {
+  return Api.createNote(note)
+    .then(note => dispatch(receiveNote(note)))
+};
+
+export const deleteNote = id => dispatch => {
+  return Api.deleteNote(id)
+    .then(() => dispatch(removeNote(note)))
 };
