@@ -31,7 +31,6 @@ class NotesPane extends React.Component {
   }
 
   render(){
-    console.log(this.props.notes);
     return(
       <div className="pane-notes">
           <nav className="pane-header">

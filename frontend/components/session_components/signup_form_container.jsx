@@ -4,7 +4,6 @@ import Signup from './signup';
 import { signup, clearErrors } from '../../actions/session';
 
 const mapState = state => {
-  console.log(state.errors.sessionErrors);
   return {
     errors: state.errors.sessionErrors,
   };

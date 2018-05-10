@@ -7,7 +7,6 @@ export default class UserSquare extends React.Component {
       active: false
     };
     this.toggle = this.toggle.bind(this)
-    console.log(props);
   }
 
   status(){

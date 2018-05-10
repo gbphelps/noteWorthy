@@ -45,7 +45,6 @@ export default class SessionForm extends React.Component {
   }
 
   growPassword(){
-    console.log('Hello!');
     this.setState({passwordField: true});
   }
 
