@@ -27,8 +27,14 @@ class NotesPane extends React.Component {
   }
 
   notesList(){
-    return this.props.notes.map((note,i) =>
-      <NoteBody key={i} note={note}/>)
+    const list = [];
+    this.props.notes.forEach((note,i) =>
+      list.unshift(<NoteBody key={i} note={note}/>));
+    return list;
+  }
+
+  numNotes(){
+    return this.props.notes.length;
   }
 
   render(){
@@ -37,7 +43,7 @@ class NotesPane extends React.Component {
           <nav className="pane-header">
             <div>Notes</div>
             <div className='pane-subhead'>
-              <div>7 notes</div>
+              <div>{this.numNotes()} notes</div>
               <div className='options'>Options<img className='tiny pointer' src={downSmall}></img>
                 <div className="options-popup"></div>
               </div>
