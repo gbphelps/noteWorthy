@@ -20,6 +20,8 @@
   border: #2dbe60;
 }
 
+
+
 .reminders{
   font-family: 'Lato';
   text-transform: uppercase;
@@ -168,4 +170,32 @@ font-size: 14px;
 .note-header{
   display: flex;
   justify-content: space-between;
+}
+
+
+.note-icon{
+  height: 24px;
+  width: 24px;
+  float:left;
+  margin-left:10px;
+}
+
+.note-options{
+  display: none;
+}
+
+.note-wrapper:hover .note-options{
+  display: block;
+}
+
+.note-trash{
+  background-image: image-url('note_assets/green_bg/inactive/trash.png');
+}
+
+.note-star{
+  background-image: image-url('note_assets/green_bg/inactive/star.png');
+}
+
+.note-reminder{
+  background-image: image-url('note_assets/green_bg/inactive/clock.png');
 }

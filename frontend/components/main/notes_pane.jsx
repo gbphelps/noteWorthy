@@ -14,7 +14,7 @@ const NoteBody = ({ note }) => {
       <div className='note-body'>
       <div className='note-header'>
         <div className='title'>{note.title}</div>
-        <div className='note-options'>hello world</div>
+        <NoteOptions note = {note}/>
       </div>
       <div className='date'>{formatTime(note.updated_at)}</div>
       <div className='body'>{note.body}</div>
@@ -22,6 +22,22 @@ const NoteBody = ({ note }) => {
     </div>
   );
 };
+
+const NoteOptions = ({ note }) => {
+ return(
+   <div className='note-options'>
+     <div className='note-icon note-share'></div>
+     <div className='note-icon note-reminder'></div>
+     <div className='note-icon note-star'></div>
+     <div className='note-icon note-trash'></div>
+   </div>
+ );
+};
+
+
+
+
+
 
 class NotesPane extends React.Component {
   constructor(props){
