@@ -12,7 +12,10 @@ const NoteBody = ({ note }) => {
   return(
     <div className="note-wrapper">
       <div className='note-body'>
-      <div className='title'>{note.title}</div>
+      <div className='note-header'>
+        <div className='title'>{note.title}</div>
+        <div className='note-options'>hello world</div>
+      </div>
       <div className='date'>{formatTime(note.updated_at)}</div>
       <div className='body'>{note.body}</div>
       </div>

@@ -164,3 +164,8 @@ font-size: 14px;
 .options:hover > .options-popup{
   display:block;
 }
+
+.note-header{
+  display: flex;
+  justify-content: space-between;
+}
