@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 
 
 
+
 const NoteBody = ({ note, deleteNote }) => {
 
   const crop = note.title.length > 15 ?
@@ -32,24 +33,20 @@ const NoteBody = ({ note, deleteNote }) => {
   );
 };
 
-const NoteOptions = ({ note, deleteNote }) => {
-
+const NoteOptions = (props) => {
+  console.log(props);
  return(
    <div className='note-options'>
      <div className='note-icon note-share'></div>
      <div className='note-icon note-reminder'></div>
      <div className='note-icon note-star'></div>
      <div className='note-icon note-trash'
-          onClick={() => deleteNote(note.id)}>
+          onClick={() =>
+            props.deleteNote(props.note.id)}>
      </div>
    </div>
  );
 };
-
-
-
-
-
 
 class NotesPane extends React.Component {
   constructor(props){
