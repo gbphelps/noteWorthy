@@ -38,7 +38,6 @@
 
 .title{
   font-family: 'Scope One';
-  margin-bottom: 3px;
   font-size:20px;
   font-weight: 100;
   color: #878787;
@@ -169,7 +168,10 @@ font-size: 14px;
 
 .note-header{
   display: flex;
+  align-items: flex-end;
+  height:24px;
   justify-content: space-between;
+  padding-bottom:3px;
 }
 
 
@@ -198,4 +200,24 @@ font-size: 14px;
 
 .note-reminder{
   background-image: image-url('note_assets/green_bg/inactive/clock.png');
+}
+
+.note-share{
+  background-image: image-url('note_assets/green_bg/inactive/chat.png');
+}
+
+.note-trash:hover{
+  background-image: image-url('note_assets/green_bg/hover/trash.png');
+}
+
+.note-star:hover{
+  background-image: image-url('note_assets/green_bg/hover/star.png');
+}
+
+.note-reminder:hover{
+  background-image: image-url('note_assets/green_bg/hover/clock.png');
+}
+
+.note-share:hover{
+  background-image: image-url('note_assets/green_bg/hover/chat.png');
 }
