@@ -19,9 +19,3 @@ document.addEventListener('DOMContentLoaded',()=>{
   ///////////////////////////////
   ReactDOM.render(<Root store = {store} />, root);
 });
-
-import * as a from './actions/notes'
-window.a = a;
-
-import * as x from './utils/notes'
-window.x = x;
