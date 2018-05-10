@@ -10,10 +10,12 @@ import { formatTime } from '../../utils/format_time';
 const NoteBody = ({ note }) => {
   const type = typeof note.updated_at;
   return(
-    <div className="note-body">
+    <div className="note-wrapper">
+      <div className='note-body'>
       <div className='title'>{note.title}</div>
       <div className='date'>{formatTime(note.updated_at)}</div>
       <div className='body'>{note.body}</div>
+      </div>
     </div>
   );
 };
@@ -60,7 +62,7 @@ class NotesPane extends React.Component {
                   </div>
                 </div>
               </div>
-            {this.notesList()}
+              {this.notesList()}
           </div>
       </div>
     );
