@@ -9,7 +9,7 @@ const notesReducer = (state = {}, action) => {
       return merge({},state,{[action.note.id]: action.note});
     case REMOVE_NOTE:
       const prev = merge({},state);
-      delete prev[action.noteId];
+      delete prev[action.id];
       return prev;
     default:
       return state;

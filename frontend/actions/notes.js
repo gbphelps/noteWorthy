@@ -46,5 +46,5 @@ export const createNote = note => dispatch => {
 
 export const deleteNote = id => dispatch => {
   return Api.deleteNote(id)
-    .then(() => dispatch(removeNote(note)))
+    .then(() => dispatch(removeNote(id)))
 };

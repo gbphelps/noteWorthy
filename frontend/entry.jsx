@@ -20,5 +20,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   ReactDOM.render(<Root store = {store} />, root);
 });
 
-import * as Api from './actions/notes'
-window.Api = Api
+import * as a from './actions/notes'
+window.a = a;
+
+import * as x from './utils/notes'
+window.x = x;
