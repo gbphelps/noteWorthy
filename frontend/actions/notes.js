@@ -8,6 +8,14 @@ export const receiveNotes = notes => {
   };
 };
 
+export const RECEIVE_NOTE = 'RECEIVE_NOTE';
+export const receiveNote = note => {
+  return {
+    type: RECEIVE_NOTE,
+    note
+  };
+};
+
 export const fetchNotes = () => dispatch => {
   return Api.fetchNotes()
     .then(notes => dispatch(receiveNotes(notes)))
