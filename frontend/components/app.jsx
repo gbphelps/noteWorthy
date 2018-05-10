@@ -21,6 +21,7 @@ export const App = () => {
 
   return (
     <div className='app'>
+      <div className='main'>
       <ProtectedRoute
         path='/'
         exact={true}
@@ -29,10 +30,11 @@ export const App = () => {
         path='/'
         exact={true}
         component={NotesPane}/>
-        <ProtectedRoute
-          path='/'
-          exact={true}
-          component={CreateNote}/>
+      <ProtectedRoute
+        path='/'
+        exact={true}
+        component={CreateNote}/>
+    </div>
       <AuthRoute
         component = {Signup}
         path = '/signup'

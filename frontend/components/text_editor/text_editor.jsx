@@ -25,15 +25,20 @@ export default class TextEditor extends React.Component{
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
-        <input type='text'
-          value={this.state.title}
-          onChange={this.update('title')}/>
-        <textarea
-          onChange={this.update('body')}
-          value={this.state.body}/>
-        <button>Submit</button>
-      </form>
+      <div className='text-editor-pane'>
+        <div className='text-editor-header'/>
+        <div className='text-editor-content'>
+          <form onSubmit={this.handleSubmit}>
+            <input type='text'
+              value={this.state.title}
+              onChange={this.update('title')}/>
+            <textarea
+              onChange={this.update('body')}
+              value={this.state.body}/>
+            <button>Submit</button>
+          </form>
+        </div>
+      </div>
     );
   }
 }
