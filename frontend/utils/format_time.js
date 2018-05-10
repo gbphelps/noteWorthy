@@ -26,5 +26,5 @@ export const formatTime = timestamp => {
   const format_minute = parseInt(minute);
   const format_second = parseInt(second);
 
-  return `${format_month} ${format_day}, ${format_hour}:${minute}`;
+  return `${format_month} ${format_day}`;
 };

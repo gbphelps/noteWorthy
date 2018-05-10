@@ -1,9 +1,29 @@
+.reminders{
+  font-family: 'Lato';
+  text-transform: uppercase;
+  letter-spacing:1.5px;
+  font-weight:400;
+  color: #878787;
+  font-size:14px;
+  padding:14px 22px 10px 28px;
+  border-top:2px solid #ececec;
+  border-bottom:3px solid #ececec;
+  box-sizing:border-box;
+  background:white;
+}
+
+
+
 .title{
-  font-family: 'Scope One'
+  font-family: 'Scope One';
+  margin-bottom: 3px;
+  font-size:20px;
+  font-weight: 100;
+  color: #878787;
 }
 
 .note-body{
-  padding: 5px;
+  padding: 14px 22px;
   box-sizing:border-box;
   width:100%;
   height:120px;
@@ -12,7 +32,18 @@
   transition: .3s;
 }
 
-.note-body:hover{
+.date{
+  font-family: 'Lato';
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.note-body:hover {
   background: #2dbe60;
+}
+
+.note-body:hover > div {
   color:white;
 }
