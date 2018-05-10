@@ -44,7 +44,6 @@ export default class TextEditor extends React.Component{
               value={this.state.body}/>
           </form>
         </div>
-
       </div>
     );
   }

@@ -16,14 +16,14 @@ const NoteBody = ({ note, deleteNote }) => {
   return(
     <div className="note-wrapper">
       <div className='note-body'>
-      <div className='note-header'>
-        <div className='title'>{crop}</div>
-        <NoteOptions
-          note = {note}
-          deleteNote = {deleteNote}/>
-      </div>
-      <div className='date'>{formatTime(note.updated_at)}</div>
-      <div className='body'>{note.body}</div>
+        <div className='note-header'>
+          <div className='title'>{crop}</div>
+          <NoteOptions
+            note = {note}
+            deleteNote = {deleteNote}/>
+        </div>
+        <div className='date'>{formatTime(note.updated_at)}</div>
+        <p className='body-of-note'>{note.body}</p>
       </div>
     </div>
   );
