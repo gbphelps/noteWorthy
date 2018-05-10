@@ -1,0 +1,153 @@
+.left-nav{
+  width: 70px;
+  height: 100%;
+  background:#f8f8f8;
+  border-right: 1px solid #ececec;
+  float:left;
+}
+
+.icon-elephant{
+  display:block;
+  margin:auto;
+  padding-top:12px;
+}
+
+.lower-nav{
+  margin-top: 60px;
+}
+
+.upper-nav{
+  margin-top:36px;
+}
+
+.icon {
+  display:block;
+  margin:auto;
+  width:36px;
+  height:36px;
+  margin-bottom:12px;
+  transition: .3s;
+  position:relative;
+}
+
+.mtgnote{
+  background-image: image-url('inactive_icons/mtgnote.png')
+}
+.mtgnote:hover{
+  background-image: image-url('hover_icons/mtgnote.png')
+}
+
+.plus{
+  background-image: image-url('inactive_icons/plus.png')
+}
+.plus:hover{
+  background-image: image-url('hover_icons/plus.png')
+}
+
+.search{
+  background-image: image-url('inactive_icons/search.png')
+}
+.search:hover{
+  background-image: image-url('hover_icons/search.png')
+}
+
+
+
+.star{
+  background-image: image-url('inactive_icons/star.png')
+}
+.star:hover{
+  background-image: image-url('hover_icons/star.png')
+}
+
+.note{
+  background-image: image-url('inactive_icons/note.png')
+}
+.note:hover{
+  background-image: image-url('hover_icons/note.png')
+}
+
+.notebook{
+  background-image: image-url('inactive_icons/notebook.png')
+}
+.notebook:hover{
+  background-image: image-url('hover_icons/notebook.png')
+}
+
+.tag{
+  background-image: image-url('inactive_icons/tag.png')
+}
+.tag:hover{
+  background-image: image-url('hover_icons/tag.png')
+}
+
+
+.popup{
+  position:absolute;
+  left:45px;
+  top:7px;
+  display: none;
+}
+
+.icon:hover > .popup{
+  display: block;
+}
+
+.popup-arrow{
+}
+
+.popup-body{
+  position:absolute;
+  top:0px;
+  left:4px;
+  white-space:nowrap;
+  background:#606060;
+  color:#d9d9d9;
+  font-family: 'Lato';
+  text-transform:uppercase;
+  font-size:12px;
+  padding:4px 8px;
+  border-radius: 2px;
+}
+
+.right-pointer{
+  display:inline;
+  margin-right: 8px;
+  margin-bottom: 1px;
+}
+
+.user-square{
+  width:70px;
+  height:70px;
+  position:absolute;
+  bottom:0px;
+  border-top:1px solid #ececec;
+  cursor: pointer;
+  text-align:center;
+  line-height:70px;
+  background: #f8f8f8
+}
+
+.user-popup{
+  position:absolute;
+  bottom:10px;
+  left:65px;
+  background:white;
+  border: 1px solid #ececec;
+  width: 350px;
+  height: 395px;
+  box-shadow: 5px 5px 5px #ececec;
+  padding: 10px;
+  z-index:2;
+}
+
+.fa-cog{
+  color:#bbb;
+  font-size:25px;
+  transition: .2s;
+}
+
+.fa-cog:hover{
+  color: #2dbe60;
+  display: inline-block;
+}
