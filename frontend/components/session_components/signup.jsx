@@ -31,7 +31,7 @@ export default class SessionForm extends React.Component {
 
   render(){
     return(
-      <div>
+      <div className='session-container'>
         <img className='icon-elephant' src={elephantLarge}/>
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit} className='sign-in'>

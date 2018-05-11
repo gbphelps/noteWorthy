@@ -12,7 +12,6 @@ export default class TextEditor extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    // debugger
     if (nextProps.note.id !== +this.props.match.params.noteId){
       this.props.onMount(this.props.match.params.noteId);
     } else {

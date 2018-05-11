@@ -39,8 +39,8 @@ const NoteBody = (props) => {
 
 
 
-const NoteOptions = (props) => {
-  console.log(props);
+let NoteOptions = (props) => {
+console.log(props);
  return(
    <div className='note-options'>
      <div className='note-icon note-share'></div>
@@ -48,12 +48,21 @@ const NoteOptions = (props) => {
      <div className='note-icon note-star'></div>
      <div className='note-icon note-trash'
           onClick={(e) => {
-            props.deleteNote(props.note.id);
+            let page = (/\/\w+\/(\w+)/).exec(props.location.pathname);
+            if (page){page = +page[1];}
+            const callback =
+              props.note.id === page ?
+                () => props.history.push('/home') :
+                () => {};
+            props.deleteNote(props.note.id).then(callback());
           }}>
      </div>
    </div>
  );
 };
+
+NoteOptions = withRouter(NoteOptions)
+
 
 class NotesPane extends React.Component {
   constructor(props){
