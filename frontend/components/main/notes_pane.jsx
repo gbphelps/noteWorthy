@@ -3,35 +3,41 @@ import values from 'lodash/values';
 import { connect } from 'react-redux';
 import { fetchNotes, deleteNote } from '../../actions/notes';
 import { formatTime } from '../../utils/format_time';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 
 
 
 
-const NoteBody = ({ note, deleteNote }) => {
+const NoteBody = (props) => {
 
-  const crop = note.title.length > 15 ?
-      note.title.slice(0,15) :
-      note.title;
+  const crop = props.note.title.length > 15 ?
+      props.note.title.slice(0,15) :
+      props.note.title;
 
   return(
-    <Link to={`/home/${note.id}`}>
+    <div className='note-hover-event'>
+    <Link to={`/home/${props.note.id}`}>
       <div className="note-wrapper">
         <div className='note-body'>
           <div className='note-header'>
             <div className='title'>{crop}</div>
-            <NoteOptions
-              note = {note}
-              deleteNote = {deleteNote}/>
           </div>
-          <div className='date'>{formatTime(note.updated_at)}</div>
-          <p className='body-of-note'>{note.body}</p>
+          <div className='date'>{formatTime(props.note.updated_at)}</div>
+          <p className='body-of-note'>{props.note.body}</p>
         </div>
       </div>
     </Link>
+    <NoteOptions
+      note = {props.note}
+      deleteNote = {props.deleteNote}/>
+  </div>
   );
 };
+
+
+
+
 
 const NoteOptions = (props) => {
   console.log(props);
@@ -42,7 +48,6 @@ const NoteOptions = (props) => {
      <div className='note-icon note-star'></div>
      <div className='note-icon note-trash'
           onClick={(e) => {
-            e.stopPropagation();
             props.deleteNote(props.note.id);
           }}>
      </div>

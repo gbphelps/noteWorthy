@@ -5,22 +5,11 @@
 }
 
 .note-wrapper{
-  width:100%;
-  background:white;
   padding: 0 22px;
-  transition: .3s;
   box-sizing:border-box;
+  position:absolute;
+  height:100%;
 }
-
-.note-wrapper:hover{
-  background: #2dbe60;
-}
-
-.note-wrapper:hover > div{
-  border: #2dbe60;
-}
-
-
 
 .reminders{
   font-family: 'Lato';
@@ -46,10 +35,8 @@
 .note-body{
   padding: 14px 0;
   margin: auto;
-  width:100%;
-  transition: .3s;
   border-bottom:1px solid #ececec;
-  height:120px;
+  height: 100%;
   box-sizing:border-box;
 }
 
@@ -60,11 +47,6 @@
   letter-spacing: 1px;
   margin-bottom: 5px;
 }
-
-.note-body:hover div, .note-body:hover > p {
-  color:white;
-}
-
 
 .reminders-header{
   display:flex;
@@ -184,15 +166,51 @@ font-size: 14px;
   width: 24px;
   float:left;
   margin-left:10px;
+  cursor:pointer;
 }
 
 .note-options{
   display: none;
+  position:absolute;
+  right:10px;
+  top:10px;
 }
 
-.note-wrapper:hover .note-options{
+.note-hover-event:hover .note-options{
   display: block;
 }
+
+.note-hover-event{
+  height:120px;
+  width:100%;
+  background:white;
+  position:relative;
+  transition:.3s;
+}
+
+.note-hover-event:hover {
+  background: #2dbe60;
+}
+
+.note-hover-event:hover div {
+  color:white;
+  border:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .note-trash{
   background-image: image-url('note_assets/green_bg/inactive/trash.png');
