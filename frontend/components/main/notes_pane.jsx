@@ -40,22 +40,13 @@ const NoteBody = (props) => {
 
 
 let NoteOptions = (props) => {
-console.log(props);
  return(
    <div className='note-options'>
      <div className='note-icon note-share'></div>
      <div className='note-icon note-reminder'></div>
      <div className='note-icon note-star'></div>
      <div className='note-icon note-trash'
-          onClick={(e) => {
-            let page = (/\/\w+\/(\w+)/).exec(props.location.pathname);
-            if (page){page = +page[1];}
-            const callback =
-              props.note.id === page ?
-                () => props.history.push('/home') :
-                () => {};
-            props.deleteNote(props.note.id).then(callback());
-          }}>
+          onClick={(e) => {props.deleteNote(props.note.id)}}>
      </div>
    </div>
  );

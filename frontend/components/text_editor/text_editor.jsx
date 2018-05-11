@@ -8,10 +8,12 @@ export default class TextEditor extends React.Component{
   }
 
   componentDidMount(){
+    if (!this.props.note) this.props.history.push('/home');
     this.props.onMount(this.props.match.params.noteId);
   }
 
   componentWillReceiveProps(nextProps){
+    if (!nextProps.note) this.props.history.push('/home');
     if (nextProps.note.id !== +this.props.match.params.noteId){
       this.props.onMount(this.props.match.params.noteId);
     } else {
