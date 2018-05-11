@@ -33,7 +33,7 @@ export const App = () => {
         exact = {true} />
       <AuthRoute
         component = {Login}
-        path = '/login'
+        path = '/'
         exact = {true} />
     </div>
   );
