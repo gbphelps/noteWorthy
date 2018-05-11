@@ -83,6 +83,10 @@ class NotesPane extends React.Component {
     this.props.fetchNotes();
   }
 
+  newNote(id){
+    return this.state.newest === id ? 'newest' : '';
+  }
+
   notesList(){
     const list = [];
     this.props.notes.forEach(note =>
@@ -90,7 +94,8 @@ class NotesPane extends React.Component {
         <NoteBody
           key={note.id}
           note={note}
-          deleteNote={this.props.deleteNote}/>
+          deleteNote={this.props.deleteNote}
+          newest={this.newNote(note.id)}/>
       ));
     return list;
   }
