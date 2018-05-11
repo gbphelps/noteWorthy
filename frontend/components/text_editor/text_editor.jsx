@@ -10,9 +10,9 @@ export default class TextEditor extends React.Component{
 
   componentDidMount(){
     if (!this.props.note) this.props.history.push('/home');
-    if (this.props.formType === 'Edit'){
-      this.listen = setInterval(()=>this.props.action(this.state),5000);
-    };
+    // if (this.props.formType === 'Edit'){
+    //   this.listen = setInterval(()=>this.props.action(this.state),5000);
+    // };
     this.props.onMount(this.props.match.params.noteId);
   }
 
