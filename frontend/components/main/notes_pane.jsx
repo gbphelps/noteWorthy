@@ -64,7 +64,7 @@ let NoteOptions = (props) => {
      <div className='note-icon note-trash'
           onClick={(e) => {
             props.collapse();
-            setTimeout(() => props.deleteNote(props.note.id),1000)}}>    
+            setTimeout(() => props.deleteNote(props.note.id),1000)}}>
      </div>
    </div>
  );
@@ -85,10 +85,10 @@ class NotesPane extends React.Component {
 
   notesList(){
     const list = [];
-    this.props.notes.forEach((note,i) =>
+    this.props.notes.forEach(note =>
       list.unshift(
         <NoteBody
-          key={i}
+          key={note.id}
           note={note}
           deleteNote={this.props.deleteNote}/>
       ));
