@@ -6,7 +6,7 @@ import { createNote } from '../../actions/notes';
 const mapState = state => {
   return {
     note: {title:'', body:''},
-    formType: 'Create'
+    formType: 'Create Note'
   };
 };
 

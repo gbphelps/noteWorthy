@@ -42,7 +42,14 @@ export default class TextEditor extends React.Component{
       <div className='text-editor-pane'>
 
         <div className='text-editor-header'>
-        <button onClick={this.handleSubmit}>Submit</button>
+
+        <div
+          className='button accent'
+          onClick={this.handleSubmit}
+          style={{width:'150px',marginLeft:'10px',position:'absolute',right:'10px'}}>
+            {this.props.formType}
+          </div>
+
         </div>
 
         <div className='text-editor-content'>
