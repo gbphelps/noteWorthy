@@ -1,23 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import UserSquare from './user_square';
-import { logout } from '../../actions/session'
+import { logout } from '../../actions/session';
+import { Link, withRouter } from 'react-router-dom'
 
-class NavBar extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {};
-  }
 
-  popup(text,icon){
-    return(
+let LinkedIcon = ({text, icon, path}) => {
+  return (
+    <Link to={path}>
       <div className={icon + ' icon'}>
         <div className='popup'>
           <img className='popup-arrow' src={popupTail}/>
           <div className='popup-body'>{text}</div>
         </div>
       </div>
-    );
+    </Link>
+  );
+}
+
+LinkedIcon = withRouter(LinkedIcon);
+
+
+
+
+class NavBar extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {};
   }
 
   render(){
@@ -26,16 +35,37 @@ class NavBar extends React.Component {
         <img className='icon-elephant' src={elephantSmall}/>
 
         <nav className='upper-nav'>
-          {this.popup('New Note','plus')}
-          {this.popup('New Meeting Note', 'mtgnote')}
-          {this.popup('Search', 'search')}
+          <LinkedIcon
+            text='New Note'
+            icon='plus'
+            path='/'/>
+          <LinkedIcon
+            text='New Meeting Note'
+            icon='mtgnote'
+            path='/'/>
+          <LinkedIcon
+            text='Search'
+            icon='search'
+            path='/'/>
         </nav>
 
         <nav className='lower-nav'>
-          {this.popup('Shortcuts', 'star')}
-          {this.popup('Notes', 'note')}
-          {this.popup('Notebooks', 'notebook')}
-          {this.popup('Tags', 'tag')}
+          <LinkedIcon
+            text='Shortcuts'
+            icon='star'
+            path='/'/>
+          <LinkedIcon
+            text='Notes'
+            icon='note'
+            path='/'/>
+          <LinkedIcon
+            text='Notebooks'
+            icon='notebook'
+            path='/'/>
+          <LinkedIcon
+            text='Tags'
+            icon='tag'
+            path='/'/>
         </nav>
 
         <UserSquare logout={ this.props.logout }/>
