@@ -46,7 +46,12 @@ export default class TextEditor extends React.Component{
         <div
           className='button accent'
           onClick={this.handleSubmit}
-          style={{width:'150px',marginLeft:'10px',position:'absolute',right:'10px'}}>
+          style={{
+            width:'120px',
+            marginLeft:'10px',
+            position:'absolute',
+            right:'10px',
+            padding:'0px'}}>
             {this.props.formType}
           </div>
 
