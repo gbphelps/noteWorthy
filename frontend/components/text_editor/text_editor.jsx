@@ -33,7 +33,8 @@ export default class TextEditor extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
-    this.props.action(this.state).then(note => this.props.history.push(`/home/${note.id}`));
+    this.props.action(this.state)
+      .then(action => this.props.history.push(`/home/${action.note.id}`));
   }
 
   render(){
