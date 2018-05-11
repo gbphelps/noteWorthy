@@ -7,7 +7,8 @@ import * as Api from '../../utils/notes'
 
 const mapState = (state, ownProps) => {
   return {
-    note: state.entities.notes[ownProps.match.params.noteId]
+    note: state.entities.notes[ownProps.match.params.noteId],
+    formType: 'Edit'
   };
 };
 

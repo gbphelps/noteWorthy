@@ -5,10 +5,14 @@ export default class TextEditor extends React.Component{
     super(props);
     this.state={title:'',body:''}
     this.handleSubmit=this.handleSubmit.bind(this);
+    this.listen = null;
   }
 
   componentDidMount(){
     if (!this.props.note) this.props.history.push('/home');
+    if (this.props.formType === 'Edit'){
+      this.listen = setInterval(()=>this.props.action(this.state),5000);
+    };
     this.props.onMount(this.props.match.params.noteId);
   }
 
@@ -23,13 +27,13 @@ export default class TextEditor extends React.Component{
 
   update(field){
     return e => {
-      this.setState({[field]: e.target.value})
+      this.setState({[field]: e.target.value});
     };
   }
 
   handleSubmit(e){
     e.preventDefault();
-    this.props.action(this.state);
+    this.props.action(this.state).then(note => this.props.history.push(`/home/${note.id}`));
   }
 
   render(){
