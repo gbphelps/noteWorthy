@@ -41,8 +41,10 @@ const NoteOptions = (props) => {
      <div className='note-icon note-reminder'></div>
      <div className='note-icon note-star'></div>
      <div className='note-icon note-trash'
-          onClick={() =>
-            props.deleteNote(props.note.id)}>
+          onClick={(e) => {
+            e.stopPropagation();
+            props.deleteNote(props.note.id);
+          }}>
      </div>
    </div>
  );

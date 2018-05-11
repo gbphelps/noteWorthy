@@ -8,6 +8,7 @@ import NavBar from './main/navbar';
 import NotesPane from './main/notes_pane';
 import CreateNote from './text_editor/create_note';
 import UpdateNote from './text_editor/edit_note';
+import { Main } from './main/mainpage'
 
 import {
   Route,
@@ -22,24 +23,10 @@ export const App = () => {
 
   return (
     <div className='app'>
-      <div className='main'>
       <ProtectedRoute
-        path='/home'
-        exact={false}
-        component={NavBar}/>
-      <ProtectedRoute
-        path='/home'
-        exact={false}
-        component={NotesPane}/>
-      <ProtectedRoute
-        path='/home'
-        exact={true}
-        component={CreateNote}/>
-        <ProtectedRoute
-          path='/home/:noteId'
-          exact={true}
-          component={UpdateNote}/>
-    </div>
+        path = '/home'
+        exact = {false}
+        component = {Main}/>
       <AuthRoute
         component = {Signup}
         path = '/signup'
