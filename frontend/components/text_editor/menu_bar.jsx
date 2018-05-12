@@ -13,10 +13,15 @@ class MenuBar extends React.Component {
     this.props.fetchNotebooks();
   }
 
+  selected(id){
+    return this.props.notebookId === id ?
+      'selected' : '';
+  }
+
   notebooksList(){
     return this.props.notebooks.map(notebook => (
       <li
-        className='notebook-li'
+        className={`notebook-li ${this.selected(notebook.id)}`}
         key={notebook.id}
         onClick={() => this.props.setNotebook(notebook.id)}>
         {notebook.name}

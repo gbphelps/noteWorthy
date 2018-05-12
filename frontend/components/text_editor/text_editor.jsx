@@ -65,7 +65,9 @@ export default class TextEditor extends React.Component{
               {this.props.formType}
             </div>
 
-            <MenuBar setNotebook={this.setNotebook}/>
+            <MenuBar
+              setNotebook={this.setNotebook}
+              notebookId={this.state.notebook_id}/>
 
         </div>
 

@@ -24,7 +24,6 @@
 };
 
 form{
-  background:green;
   width:100%;
   height:100%;
   display:flex;
@@ -94,5 +93,11 @@ textarea:focus{
 
 .notebook-li{
   padding-bottom:3px;
-  font-family:'Scope One'
+  font-family:'Scope One';
+  cursor: pointer;
+}
+
+.selected{
+  background: #2dbe60;
+  color:white;
 }
