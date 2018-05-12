@@ -36,8 +36,7 @@ export const clearErrors = () => {
 export const login = user => dispatch => {
   return Api.login(user)
     .then(user => dispatch(receiveUser(user)))
-    .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
-  ;
+    .fail(errors => dispatch(receiveErrors(errors.responseJSON)));
 };
 
 export const logout = () => dispatch => {

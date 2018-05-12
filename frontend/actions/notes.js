@@ -29,10 +29,13 @@ export const fetchNotes = () => dispatch => {
     .then(notes => dispatch(receiveNotes(notes)))
 };
 
+
+///NOT SURE YOU'RE USING - CONSIDER DELETING
 export const fetchNote = id => dispatch => {
   return Api.fetchNote(id)
     .then(note => dispatch(receiveNote(note)))
 }
+////////////////////////////////////////////
 
 export const updateNote = note => dispatch => {
   return Api.updateNote(note)
