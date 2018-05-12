@@ -51,6 +51,7 @@ class MenuBar extends React.Component {
         <div className='notebook-popup'>
           <form onSubmit={this.handleSubmit}>
             <input
+              className='new-notebook-input'
               placeholder='New Notebook'
               value={this.state.name}
               onChange={(e)=>this.setState({name: e.target.value})}/>
