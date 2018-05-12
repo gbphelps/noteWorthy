@@ -13,9 +13,6 @@ class User < ApplicationRecord
     through: :notebooks,
     source: :notes
 
-
-
-
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
