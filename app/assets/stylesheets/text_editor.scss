@@ -85,6 +85,8 @@ textarea:focus{
 .note-menu-bar{
   position:absolute;
   bottom: 0px;
+  cursor:pointer;
+  padding:10px;
 }
 
 .note-menu-bar:hover > .notebook-popup{
@@ -92,9 +94,9 @@ textarea:focus{
 }
 
 .notebook-li{
-  padding-bottom:3px;
+  padding:7px 12px;
+  border-radius: 3px;
   font-family:'Scope One';
-  cursor: pointer;
 }
 
 .selected{

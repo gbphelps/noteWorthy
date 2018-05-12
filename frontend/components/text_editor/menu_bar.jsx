@@ -32,7 +32,7 @@ class MenuBar extends React.Component {
 
   render(){
     return(
-      <div className='note-menu-bar'>MENUBAR
+      <div className='note-menu-bar'>Select Notebook >
         <div className='notebook-popup'>
           <ul>
             {this.notebooksList()}
