@@ -51,7 +51,6 @@
 .reminders-header{
   display:flex;
   justify-content:space-between;
-  font-weight:700;
 }
 
 .reminders-counter{
@@ -81,11 +80,11 @@
 .options-popup{
   height:375px;
   width:270px;
-  position:fixed;
+  position:absolute;
   background:white;
   z-index:2;
-  left:330px;
-  top:90px;
+  left:270px;
+  top:39px;
   border:1px solid #ececec;
   box-shadow: 5px 5px 5px #ececec;
   display:none;
@@ -113,18 +112,19 @@ margin-bottom:1px;
   display:flex;
   flex-direction:column;
   flex-shrink: 0;
+  position:relative;
 }
 
 .pane-header{
   width:100%;
-  height:108px;
+  height:100px;
+  flex-shrink:0;
   background:white;
   border-bottom: 1px solid #ececec;
   font-size:21px;
   color: #878787;
   text-transform:uppercase;
   font-family: 'Lato';
-  padding: 25px;
   box-sizing: border-box;
   letter-spacing: 2.5px;
 }
@@ -136,13 +136,17 @@ margin-bottom:1px;
   display: flex;
   justify-content: space-between;
   font-family: 'Lato';
-  position:relative;
-  top: 28px;
-  letter-spacing:1px;
+  position:absolute;
+  top:60px;
+  height:20px;
+  width:100%;
+  padding:20px;
+  box-sizing:border-box;
 }
 
 .options{
 font-size: 14px;
+height:20px;
 }
 
 .options:hover > .options-popup{
