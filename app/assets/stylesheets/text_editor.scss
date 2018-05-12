@@ -10,12 +10,13 @@
   width: 100%;
   flex-shrink: 0;
   position:relative;
+  box-sizing:border-box;
+  border-bottom: 1px solid #ececec;
 }
 
 .text-editor-content{
   width: 100%;
   margin:auto;
-  border-top:1px solid #ececec;
   padding:20px 0px 0px 30px;
   box-sizing:border-box;
   // display:flex;
@@ -106,4 +107,5 @@ textarea:focus{
 
 .new-notebook-input{
   width:100%;
+
 }
