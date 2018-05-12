@@ -49,7 +49,9 @@ class MenuBar extends React.Component {
       <div className='note-menu-bar'>
         {this.notebookName()}
         <div className='notebook-popup'>
-          <form onSubmit={this.handleSubmit}>
+          <form
+            className='new-notebook'
+            onSubmit={this.handleSubmit}>
             <input
               className='new-notebook-input'
               placeholder='New Notebook'
