@@ -2,76 +2,7 @@ import React from 'react';
 import values from 'lodash/values';
 import { connect } from 'react-redux';
 import { fetchNotes, deleteNote } from '../../actions/notes';
-import { formatTime } from '../../utils/format_time';
-import { Link, withRouter } from 'react-router-dom'
-
-
-
-
-
-class NoteBody extends React.Component {
-  constructor(props){
-    super(props);
-    this.state={
-      collapse: ''
-    };
-    this.collapse = this.collapse.bind(this)
-  }
-
-  crop(){
-    return this.props.note.title.length > 15 ?
-      this.props.note.title.slice(0,15) :
-      this.props.note.title;
-  }
-
-  collapse(){
-    this.setState({collapse: 'collapse'})
-  }
-
-  render(){
-    return(
-      <div className={`note-hover-event ${this.state.collapse} ${this.props.animate}`}>
-      <Link to={`/home/${this.props.note.id}`}>
-        <div className="note-wrapper">
-          <div className='note-body'>
-            <div className='note-header'>
-              <div className='title'>{this.crop()}</div>
-            </div>
-            <div className='date'>{formatTime(this.props.note.updated_at)}</div>
-            <p className='body-of-note'>{this.props.note.body}</p>
-          </div>
-        </div>
-      </Link>
-      <NoteOptions
-        note = {this.props.note}
-        deleteNote = {this.props.deleteNote}
-        collapse = {this.collapse}/>
-    </div>
-    );
-  }
-}
-
-
-
-// props.deleteNote(props.note.id)}}>
-
-let NoteOptions = (props) => {
- return(
-   <div className='note-options'>
-     <div className='note-icon note-share'></div>
-     <div className='note-icon note-reminder'></div>
-     <div className='note-icon note-star'></div>
-     <div className='note-icon note-trash'
-          onClick={(e) => {
-            props.collapse();
-            setTimeout(() => props.deleteNote(props.note.id),1000)}}>
-     </div>
-   </div>
- );
-};
-
-NoteOptions = withRouter(NoteOptions)
-
+import NoteBody from './note_body'
 
 class NotesPane extends React.Component {
   constructor(props){
@@ -84,6 +15,9 @@ class NotesPane extends React.Component {
   componentDidMount(){
     this.props.fetchNotes();
   }
+
+  //TODO: add 'animations' to state and push in the most recent note to be
+  //animated. Then get rid of all of this nasty conditional logic.
 
   componentWillReceiveProps(nextProps){
     const diff = nextProps.notes.length - this.props.notes.length;
@@ -153,8 +87,7 @@ class NotesPane extends React.Component {
 
 const mapState = state => {
   return {
-    notes: values(state.entities.notes),
-    newest: state.entities.newestNote
+    notes: values(state.entities.notes)
   };
 };
 

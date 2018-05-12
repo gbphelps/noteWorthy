@@ -1,4 +1,5 @@
 import React from 'react';
+import MenuBar from './menu_bar'
 
 export default class TextEditor extends React.Component{
   constructor(props){
@@ -43,17 +44,23 @@ export default class TextEditor extends React.Component{
 
         <div className='text-editor-header'>
 
-        <div
-          className='button accent'
-          onClick={this.handleSubmit}
-          style={{
-            width:'120px',
-            marginLeft:'10px',
-            position:'absolute',
-            right:'10px',
-            padding:'0px'}}>
-            {this.props.formType}
+          <div className='note-main-options'>
+            note options
           </div>
+
+          <div
+            className='button accent'
+            onClick={this.handleSubmit}
+            style={{
+              width:'120px',
+              marginLeft:'10px',
+              position:'absolute',
+              right:'10px',
+              padding:'0px'}}>
+              {this.props.formType}
+            </div>
+
+            <MenuBar />
 
         </div>
 
