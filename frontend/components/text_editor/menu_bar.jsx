@@ -22,7 +22,7 @@ class MenuBar extends React.Component {
   }
 
   notebooksList(){
-    return this.props.notebooks.map(notebook => (
+    return values(this.props.notebooks).map(notebook => (
       <li
         className={`notebook-li ${this.selected(notebook.id)}`}
         key={notebook.id}
@@ -35,11 +35,19 @@ class MenuBar extends React.Component {
   handleSubmit(e){
     e.preventDefault;
     this.props.createNotebook(this.state);
+    this.setState({name: ''})
+  }
+
+  notebookName(){
+    return this.props.notebooks && this.props.notebookId ?
+      this.props.notebooks[this.props.notebookId].name :
+      'Select Notebook >';
   }
 
   render(){
     return(
-      <div className='note-menu-bar'>Select Notebook >
+      <div className='note-menu-bar'>
+        {this.notebookName()}
         <div className='notebook-popup'>
           <form onSubmit={this.handleSubmit}>
             <input
@@ -58,7 +66,7 @@ class MenuBar extends React.Component {
 
 const mapState = state => {
   return {
-    notebooks: values(state.entities.notebooks)
+    notebooks: state.entities.notebooks
   };
 };
 
