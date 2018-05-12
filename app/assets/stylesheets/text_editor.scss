@@ -9,6 +9,7 @@
   height: 100px;
   width: 100%;
   flex-shrink: 0;
+  position:relative;
 }
 
 .text-editor-content{
@@ -66,4 +67,24 @@ textarea {
 
 textarea:focus{
   outline: none;
+}
+
+.notebook-popup{
+  height:100px;
+  width:360px;
+  position:absolute;
+  background:white;
+  border:1px solid #ececec;
+  box-shadow: 5px 5px 5px #ececec;
+  display:none;
+}
+
+
+.note-menu-bar{
+  position:absolute;
+  bottom: 0px;
+}
+
+.note-menu-bar:hover > .notebook-popup{
+  display: block;
 }

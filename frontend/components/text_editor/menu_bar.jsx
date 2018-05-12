@@ -8,7 +8,9 @@ export default class MenuBar extends React.Component {
 
   render(){
     return(
-      <div id='note-menu-bar'>MENUBAR</div>
+      <div className='note-menu-bar'>MENUBAR
+        <div className='notebook-popup'/>
+      </div>
     );
   }
 }
