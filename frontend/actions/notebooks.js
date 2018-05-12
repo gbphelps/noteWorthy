@@ -1,4 +1,5 @@
-import * as Api from '../utils/notebooks'
+import * as Api from '../utils/notebooks';
+import { receiveNotes } from './notes';
 
 export const RECEIVE_NOTEBOOKS = 'RECEIVE_NOTEBOOKS';
 export const RECEIVE_NOTEBOOK = 'RECEIVE_NOTEBOOK';
@@ -14,7 +15,7 @@ export const receiveNotebooks = notebooks => {
 export const receiveNotebook = notebook => {
   return {
     type: 'RECEIVE_NOTEBOOKS',
-    notebook
+    payload: notebook
   };
 };
 
@@ -29,6 +30,19 @@ export const fetchNotebooks = () => dispatch => {
   return Api.fetchNotebooks()
     .then(notebooks => dispatch(receiveNotebooks(notebooks)));
 };
+
+
+
+
+////////////////////////////////NOTE: many need to give this its own action
+export const fetchFromNotebook = id => dispatch => {
+  return Api.fetchNotebook(id)
+    .then(notebook => dispatch(receiveNotes(notebook.notes)))
+};
+///////////////////////////////////////////////////////////////////////////
+
+
+
 
 export const createNotebook = notebook => dispatch => {
   return Api.createNotebook(notebook)

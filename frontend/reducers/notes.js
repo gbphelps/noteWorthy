@@ -4,7 +4,9 @@ import merge from 'lodash/merge'
 const notesReducer = (state = {}, action) => {
   switch(action.type){
     case RECEIVE_NOTES:
-      return action.notes;
+      return action.notes ?
+        action.notes :
+        {};
     case RECEIVE_NOTE:
       return merge({},state,{[action.note.id]: action.note});
     case REMOVE_NOTE:
