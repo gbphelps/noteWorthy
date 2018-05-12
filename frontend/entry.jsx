@@ -20,5 +20,5 @@ document.addEventListener('DOMContentLoaded',()=>{
   ReactDOM.render(<Root store = {store} />, root);
 });
 
-import * as a from './utils/notebooks';
+import * as a from './actions/notebooks';
 window.a = a;

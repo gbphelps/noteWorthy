@@ -10,7 +10,7 @@ class Note < ApplicationRecord
 
   has_many :taggings,
     foreign_key: :note_id,
-    class_name: 'Taggings'
+    class_name: 'Tagging'
 
   has_many :tags,
     through: :taggings,

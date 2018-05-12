@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   has_many :notebooks,
     foreign_key: :user_id,
-    class_name: :notebooks
+    class_name: 'Notebook'
 
   has_many :notes,
     through: :notebooks,
