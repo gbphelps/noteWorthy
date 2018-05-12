@@ -9,6 +9,10 @@ class Api::NotebooksController < ApplicationController
     end
   end
 
+  def index
+    @notebooks = Notebook.all
+  end
+
   def show
     @notebook = Notebook.find(params[:id])
   end

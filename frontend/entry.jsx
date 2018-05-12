@@ -19,3 +19,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   ///////////////////////////////
   ReactDOM.render(<Root store = {store} />, root);
 });
+
+import * as a from './utils/notebooks';
+window.a = a;
