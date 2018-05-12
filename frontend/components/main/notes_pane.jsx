@@ -30,7 +30,7 @@ class NoteBody extends React.Component {
 
   render(){
     return(
-      <div className={`note-hover-event ${this.state.collapse}`}>
+      <div className={`note-hover-event ${this.state.collapse} ${this.props.animate}`}>
       <Link to={`/home/${this.props.note.id}`}>
         <div className="note-wrapper">
           <div className='note-body'>
@@ -76,27 +76,45 @@ NoteOptions = withRouter(NoteOptions)
 class NotesPane extends React.Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {
+      animate: ''
+    };
   }
 
   componentDidMount(){
     this.props.fetchNotes();
   }
 
-  newNote(id){
-    return this.state.newest === id ? 'newest' : '';
+  componentWillReceiveProps(nextProps){
+    const diff = nextProps.notes.length - this.props.notes.length;
+    if ( diff === 1){
+      this.setState({animate: 'animate'})
+    }
+
+    if (diff === -1){
+      this.setState({animate: ''})
+    }
   }
 
   notesList(){
     const list = [];
-    this.props.notes.forEach(note =>
+    const last = this.props.notes[this.props.notes.length-1];
+    const rest = this.props.notes.slice(0,this.props.notes.length-1);
+    rest.forEach(note =>
       list.unshift(
         <NoteBody
           key={note.id}
           note={note}
           deleteNote={this.props.deleteNote}
-          newest={this.newNote(note.id)}/>
+          animate=''/>
       ));
+      list.unshift(
+        <NoteBody
+          key={last.id}
+          note={last}
+          deleteNote={this.props.deleteNote}
+          animate={this.state.animate}/>
+      );
     return list;
   }
 
@@ -105,6 +123,7 @@ class NotesPane extends React.Component {
   }
 
   render(){
+    if (!this.props.notes.length) return null;
     return(
       <div className="pane-notes">
           <nav className="pane-header">
@@ -134,7 +153,8 @@ class NotesPane extends React.Component {
 
 const mapState = state => {
   return {
-    notes: values(state.entities.notes)
+    notes: values(state.entities.notes),
+    newest: state.entities.newestNote
   };
 };
 
