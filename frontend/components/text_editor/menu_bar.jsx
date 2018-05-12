@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchNotebooks } from '../../actions/notebooks';
+import { fetchNotebooks, createNotebook } from '../../actions/notebooks';
 import values from 'lodash/values'
 
 class MenuBar extends React.Component {
   constructor(props){
     super(props);
-    this.state={}
+    this.state={
+      name: ''
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount(){
@@ -27,13 +30,23 @@ class MenuBar extends React.Component {
         {notebook.name}
       </li>
     ));
-  };
+  }
 
+  handleSubmit(e){
+    e.preventDefault;
+    this.props.createNotebook(this.state);
+  }
 
   render(){
     return(
       <div className='note-menu-bar'>Select Notebook >
         <div className='notebook-popup'>
+          <form onSubmit={this.handleSubmit}>
+            <input
+              placeholder='New Notebook'
+              value={this.state.name}
+              onChange={(e)=>this.setState({name: e.target.value})}/>
+          </form>
           <ul>
             {this.notebooksList()}
           </ul>
@@ -51,7 +64,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchNotebooks: () => dispatch(fetchNotebooks())
+    fetchNotebooks: () => dispatch(fetchNotebooks()),
+    createNotebook: name => dispatch(createNotebook(name))
   };
 };
 

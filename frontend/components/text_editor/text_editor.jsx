@@ -50,7 +50,6 @@ export default class TextEditor extends React.Component{
         <div className='text-editor-header'>
 
           <div className='note-main-options'>
-            note options
           </div>
 
           <div

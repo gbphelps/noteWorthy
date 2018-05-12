@@ -9,7 +9,6 @@ const notebooksReducer = (state = {}, action) => {
     case RECEIVE_NOTEBOOKS:
       return action.notebooks;
     case RECEIVE_NOTEBOOK:
-      debugger
       return merge({},state,{[action.payload.notebook.id]: action.payload.notebook});
     case REMOVE_NOTEBOOK:
       const prev = merge({},state);
