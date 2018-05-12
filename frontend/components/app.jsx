@@ -4,11 +4,11 @@ import Login from './session_components/login_form_container';
 import Signup from './session_components/signup_form_container';
 import { AuthRoute } from '../utils/login_route';
 import { ProtectedRoute } from '../utils/protected_route';
-import NavBar from './main/navbar';
-import NotesPane from './main/notes_pane';
+import NavBar from './navbar/navbar';
+import NotesPane from './notes_pane/notes_pane';
 import CreateNote from './text_editor/create_note';
 import UpdateNote from './text_editor/edit_note';
-import { Main } from './main/main_page'
+import { Main } from './main_page'
 
 import {
   Route,
