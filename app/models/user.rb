@@ -5,6 +5,17 @@ class User < ApplicationRecord
   attr_reader :password
   after_initialize :ensure_token
 
+  has_many :notebooks,
+    foreign_key: :user_id,
+    class_name: :notebooks
+
+  has_many :notes,
+    through: :notebooks,
+    source: :notes
+
+
+
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
