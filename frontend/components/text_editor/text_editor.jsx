@@ -4,8 +4,9 @@ import MenuBar from './menu_bar'
 export default class TextEditor extends React.Component{
   constructor(props){
     super(props);
-    this.state={title:'',body:''}
+    this.state={title:'',body:'',notebook_id: null}
     this.handleSubmit=this.handleSubmit.bind(this);
+    this.setNotebook=this.setNotebook.bind(this);
     this.listen = null;
   }
 
@@ -38,6 +39,10 @@ export default class TextEditor extends React.Component{
       .then(action => this.props.history.push(`/home/${action.note.id}`));
   }
 
+  setNotebook(id){
+    this.setState({notebook_id: id});
+  }
+
   render(){
     return(
       <div className='text-editor-pane'>
@@ -60,7 +65,7 @@ export default class TextEditor extends React.Component{
               {this.props.formType}
             </div>
 
-            <MenuBar />
+            <MenuBar setNotebook={this.setNotebook}/>
 
         </div>
 

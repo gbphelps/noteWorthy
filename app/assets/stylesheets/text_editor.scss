@@ -70,7 +70,10 @@ textarea:focus{
 }
 
 .notebook-popup{
-  height:100px;
+  max-height:300px;
+  padding:10px;
+  box-sizing:border-box;
+  overflow-y:scroll;
   width:360px;
   position:absolute;
   background:white;
@@ -87,4 +90,9 @@ textarea:focus{
 
 .note-menu-bar:hover > .notebook-popup{
   display: block;
+}
+
+.notebook-li{
+  padding-bottom:3px;
+  font-family:'Scope One'
 }
