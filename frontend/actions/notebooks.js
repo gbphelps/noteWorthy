@@ -14,14 +14,14 @@ export const receiveNotebooks = notebooks => {
 
 export const receiveNotebook = notebook => {
   return {
-    type: 'RECEIVE_NOTEBOOKS',
+    type: 'RECEIVE_NOTEBOOK',
     payload: notebook
   };
 };
 
 export const removeNotebook = id => {
   return {
-    type: 'RECEIVE_NOTEBOOKS',
+    type: 'REMOVE_NOTEBOOK',
     id
   };
 };
