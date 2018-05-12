@@ -1,4 +1,6 @@
-json.extract! @notebook, :id, :user_id, :name, :shortcut, :default
+json.notebook do
+  json.extract! @notebook, :id, :user_id, :name, :shortcut, :default
+end
 
 json.notes do
   @notebook.notes.each do |note|
@@ -7,3 +9,6 @@ json.notes do
     end
   end
 end
+
+#TODO: Can use this view to grab all of the notes you need to display. SO instead of
+#calling #index in notes controller, call #show for the notebook you're viewing
