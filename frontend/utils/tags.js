@@ -1,12 +1,12 @@
 export const fetchTags = () => {
-  $.ajax({
+  return $.ajax({
     method: 'GET',
     url: 'api/tags'
   });
 };
 
 export const createTag = tag => {
-  $.ajax({
+  return $.ajax({
     method: 'POST',
     url: 'api/tags'
   });
@@ -16,7 +16,7 @@ export const createTag = tag => {
 //NOTE: consider removing this along with controller action and route
 //not sure you'll need this functionality
 export const updateTag = tag => {
-  $.ajax({
+  return $.ajax({
     method: 'PATCH',
     url: `api/tags/${tag.id}`,
     data: { data }
@@ -27,7 +27,7 @@ export const updateTag = tag => {
 
 
 export const deleteTag = id => {
-  $.ajax({
+  return $.ajax({
     method: 'DELETE',
     url: `api/tags/${id}`
   });

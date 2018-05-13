@@ -25,6 +25,11 @@ export const removeTag = id => {
   };
 };
 
+
+export const fetchTags = () => dispatch => {
+  return Api.fetchTags().then(tags => dispatch(receiveTags(tags)));
+}
+
 export const createTag = tag => dispatch => {
   return Api.createTag(tag).then(tag => dispatch(receiveTag(tag)));
 }

@@ -9,6 +9,14 @@ class TagSelector extends React.Component {
     this.state={}
   }
 
+  componentDidMount(){
+    this.props.fetchTags();
+  }
+
+  tagsList(){
+    return values(this.props.tags).map(tag => <li key={tag.id}>{tag.name}</li>)
+  }
+
   render(){
     return(
       <div className='tag-selector'>Select Tags</div>
