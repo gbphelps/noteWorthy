@@ -1,21 +1,24 @@
 import React from 'react';
-import NotebookSelector from './notebook'
-import TagSelector from './tags'
+import NotebookSelector from './notebook';
+import TagSelector from './tags';
+import pull from 'lodash/pull'
 
 export default class TextEditor extends React.Component{
   constructor(props){
     super(props);
-    this.state={title:'',body:'',notebook_id: null}
-    this.handleSubmit=this.handleSubmit.bind(this);
-    this.setNotebook=this.setNotebook.bind(this);
-    this.listen = null;
+    this.state={
+      title:'',
+      body:'',
+      notebook_id: null,
+      tags: {}
+    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.setNotebook = this.setNotebook.bind(this);
+    this.toggleTag = this.toggleTag.bind(this);
   }
 
   componentDidMount(){
     if (!this.props.note) this.props.history.push('/home');
-    // if (this.props.formType === 'Edit'){
-    //   this.listen = setInterval(()=>this.props.action(this.state),5000);
-    // };
     this.props.onMount(this.props.match.params.noteId);
   }
 
@@ -44,6 +47,20 @@ export default class TextEditor extends React.Component{
     this.setState({notebook_id: id});
   }
 
+
+///////////////////////////////////////////////////
+  toggleTag(id){
+    console.log('triggered');
+    const tags = Object.assign({},this.state.tags);
+    if (tags[id]){
+      delete tags[id];
+    }else{
+      tags[id] = true;
+    }
+    this.setState({ tags });
+  }
+  /////////////////////////////////////////////////
+
   render(){
     return(
       <div className='text-editor-pane'>
@@ -70,7 +87,9 @@ export default class TextEditor extends React.Component{
                   setNotebook={this.setNotebook}
                   notebookId={this.state.notebook_id}/>
 
-                <TagSelector />
+                <TagSelector
+                  toggleTag={this.toggleTag}
+                  selectedTags={this.state.tags}/>
             </div>
 
         </div>

@@ -4,6 +4,11 @@ import { fetchTags, createTag } from '../../actions/tags';
 import values from 'lodash/values';
 import { CSSTransitionGroup } from 'react-transition-group';
 
+
+
+
+//TODO: Change popups to conditional render
+
 class TagSelector extends React.Component {
   constructor(props){
     super(props);
@@ -18,12 +23,18 @@ class TagSelector extends React.Component {
     this.props.fetchTags();
   }
 
+  selected(id){
+    return this.props.selectedTags[id] ?
+    'selected' : '';
+  }
+
   tagsList(){
     const list = [];
     values(this.props.tags).forEach(tag =>
       list.unshift(
         <li
-          className='note-li'
+          onClick={()=>this.props.toggleTag(tag.id)}
+          className={`note-li ${this.selected(tag.id)}`}
           key={tag.id}>
           {tag.name}
         </li>

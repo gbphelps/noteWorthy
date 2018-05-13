@@ -4,6 +4,9 @@ import { fetchNotebooks, createNotebook } from '../../actions/notebooks';
 import values from 'lodash/values';
 import { CSSTransitionGroup } from 'react-transition-group'
 
+
+//TODO: change popups to conditional render
+
 class NotebookSelector extends React.Component {
   constructor(props){
     super(props);
