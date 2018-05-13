@@ -28,6 +28,7 @@ class TagSelector extends React.Component {
     'selected' : '';
   }
 
+
   tagsList(){
     const list = [];
     values(this.props.tags).forEach(tag =>

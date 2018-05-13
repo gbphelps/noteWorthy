@@ -12,6 +12,9 @@ export default class TextEditor extends React.Component{
       notebook_id: null,
       tags: {}
     }
+
+    //TODO: Need to submit new taggings for each of the tags in the state here onSubmit
+    
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setNotebook = this.setNotebook.bind(this);
     this.toggleTag = this.toggleTag.bind(this);
