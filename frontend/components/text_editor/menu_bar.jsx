@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchNotebooks, createNotebook } from '../../actions/notebooks';
-import values from 'lodash/values'
+import values from 'lodash/values';
+import { CSSTransitionGroup } from 'react-transition-group'
 
 class MenuBar extends React.Component {
   constructor(props){
@@ -59,7 +60,12 @@ class MenuBar extends React.Component {
               onChange={(e)=>this.setState({name: e.target.value})}/>
           </form>
           <ul>
-            {this.notebooksList()}
+            <CSSTransitionGroup
+              transitionName='notebook'
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={500}>
+              {this.notebooksList()}
+            </CSSTransitionGroup>
           </ul>
         </div>
       </div>

@@ -71,7 +71,6 @@ textarea:focus{
 
 .notebook-popup{
   height:0px;
-  padding:0 10px;
   box-sizing:border-box;
   overflow-y:scroll;
   width:360px;
@@ -112,6 +111,10 @@ textarea:focus{
 
 .new-notebook-input{
   width:100%;
+  margin:0;
+  border:none;
+  border-bottom: 1px solid #ececec;
+  border-radius: 0px;
 }
 
 .new-notebook{
