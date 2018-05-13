@@ -1,4 +1,5 @@
 import { RECEIVE_TAG, RECEIVE_TAGS, REMOVE_TAG } from '../actions/tags';
+import merge from 'lodash/merge'
 
 const tagsReducer = (state = {}, action) => {
   switch (action.type){

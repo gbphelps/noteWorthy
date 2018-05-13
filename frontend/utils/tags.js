@@ -8,7 +8,8 @@ export const fetchTags = () => {
 export const createTag = tag => {
   return $.ajax({
     method: 'POST',
-    url: 'api/tags'
+    url: 'api/tags',
+    data: { tag }
   });
 };
 
@@ -19,12 +20,10 @@ export const updateTag = tag => {
   return $.ajax({
     method: 'PATCH',
     url: `api/tags/${tag.id}`,
-    data: { data }
+    data: { tag }
   });
 };
 ////
-
-
 
 export const deleteTag = id => {
   return $.ajax({

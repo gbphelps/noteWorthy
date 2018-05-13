@@ -54,7 +54,7 @@ class NotebookSelector extends React.Component {
             className='new-notebook'
             onSubmit={this.handleSubmit}>
             <input
-              className='new-notebook-input'
+              className='note-input'
               placeholder='New Notebook'
               value={this.state.name}
               onChange={(e)=>this.setState({name: e.target.value})}/>

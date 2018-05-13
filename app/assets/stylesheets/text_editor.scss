@@ -69,6 +69,17 @@ textarea:focus{
   outline: none;
 }
 
+.note-menu-bar{
+  position:absolute;
+  bottom: 0px;
+  cursor:pointer;
+  padding:10px;
+  display:flex;
+}
+
+
+/////////////////////////////////
+
 .notebook-popup{
   height:0px;
   box-sizing:border-box;
@@ -81,15 +92,6 @@ textarea:focus{
   transition:.5s;
   border:1px solid #ececec;
   border-bottom:none;
-}
-
-
-.note-menu-bar{
-  position:absolute;
-  bottom: 0px;
-  cursor:pointer;
-  padding:10px;
-  display:flex;
 }
 
 .notebook-selector:hover > .notebook-popup{
@@ -114,7 +116,7 @@ textarea:focus{
   color: #2dbe60
 }
 
-.new-notebook-input{
+.note-input{
   width:100%;
   margin:0;
   border:none;
@@ -125,3 +127,23 @@ textarea:focus{
 .new-notebook{
   height:auto;
 }
+
+///////////////////////////////////////
+.tags-popup {
+  height: 0;
+  width: 150px;
+  border: 1px solid #ececec;
+  border-bottom: none;
+  position: absolute;
+  top: 36px;
+  transition: .5s;
+  overflow-y: scroll;
+}
+
+.tag-selector:hover > .tags-popup{
+  height: 300px;
+  box-shadow: 5px 5px 5px #ececec;
+  border-bottom: 1px solid #ececec;
+}
+
+///////////////////////////////////////

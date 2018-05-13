@@ -6,7 +6,11 @@ import values from 'lodash/values';
 class TagSelector extends React.Component {
   constructor(props){
     super(props);
-    this.state={}
+    this.state={
+      name: ''
+    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateName = this.updateName.bind(this);
   }
 
   componentDidMount(){
@@ -17,9 +21,26 @@ class TagSelector extends React.Component {
     return values(this.props.tags).map(tag => <li key={tag.id}>{tag.name}</li>)
   }
 
+  handleSubmit(e){
+    this.props.createTag(this.state)
+  }
+
+  updateName(e){
+    this.setState({name: e.target.value});
+  }
+
   render(){
     return(
-      <div className='tag-selector'>Select Tags</div>
+      <div className='tag-selector'>Select Tags
+        <div className='tags-popup'>
+          <form onSubmit={this.handleSubmit}>
+            <input
+              className='note-input'
+              onChange={this.updateName}
+              value={this.state.name}/>
+          </form>
+        </div>
+      </div>
     );
   }
 }
@@ -33,7 +54,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     fetchTags: () => dispatch(fetchTags()),
-    createTag: tag => dispatch(createTag())
+    createTag: tag => dispatch(createTag(tag))
   };
 };
 
