@@ -189,7 +189,7 @@ height:20px;
   width:100%;
   background:white;
   position:relative;
-  transition: height 1s;
+  transition: 1s;
 }
 
 .note-hover-event:hover {
@@ -201,9 +201,9 @@ height:20px;
   border:none;
 }
 
-.collapse {
-  height: 0px;
-}
+// .collapse {
+//   height: 0px;
+// }
 
 @keyframes expand {
   0% {height: 0px; background: #2dbe60;}
@@ -212,26 +212,24 @@ height:20px;
 }
 
 @keyframes colorize {
-  0% {color: white;}
-  70% {color:white;}
+  0% {color: white; border:none}
+  70% {color:white; border:none}
   100% {color: inherit;}
 }
 
-.animate{
+.note-enter {
   animation-name: expand;
-  animation-duration: 1.5s;
+  animation-duration: 1.5s
 }
 
-.animate div{
+.note-enter div {
   animation-name: colorize;
-  animation-duration: 1.5s;
+  animation-duration:1.5s
 }
 
-
-
-
-
-
+.note-leave{
+  height: 0px;
+}
 
 
 

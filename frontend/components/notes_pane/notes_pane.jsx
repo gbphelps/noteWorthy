@@ -2,53 +2,27 @@ import React from 'react';
 import values from 'lodash/values';
 import { connect } from 'react-redux';
 import { fetchNotes, deleteNote } from '../../actions/notes';
-import NoteBody from './note_body'
+import NoteBody from './note_body';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 class NotesPane extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      animate: ''
-    };
   }
 
   componentDidMount(){
     this.props.fetchNotes();
   }
 
-  //TODO: add 'animations' to state and push in the most recent note to be
-  //animated. Then get rid of all of this nasty conditional logic.
-
-  componentWillReceiveProps(nextProps){
-    const diff = nextProps.notes.length - this.props.notes.length;
-    if ( diff === 1){
-      this.setState({animate: 'animate'})
-    }
-
-    if (diff === -1){
-      this.setState({animate: ''})
-    }
-  }
-
   notesList(){
     const list = [];
-    const last = this.props.notes[this.props.notes.length-1];
-    const rest = this.props.notes.slice(0,this.props.notes.length-1);
-    rest.forEach(note =>
+    this.props.notes.forEach(note =>
       list.unshift(
         <NoteBody
           key={note.id}
           note={note}
-          deleteNote={this.props.deleteNote}
-          animate=''/>
+          deleteNote={this.props.deleteNote}/>
       ));
-      list.unshift(
-        <NoteBody
-          key={last.id}
-          note={last}
-          deleteNote={this.props.deleteNote}
-          animate={this.state.animate}/>
-      );
     return list;
   }
 
@@ -78,7 +52,12 @@ class NotesPane extends React.Component {
                   </div>
                 </div>
               </div>
-              {this.notesList()}
+              <CSSTransitionGroup
+                transitionName='note'
+                transitionEnterTimeout={1500}
+                transitionLeaveTimeout={1000}>
+                {this.notesList()}
+              </CSSTransitionGroup>
           </div>
       </div>
     );

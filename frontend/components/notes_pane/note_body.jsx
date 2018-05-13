@@ -6,10 +6,6 @@ import NoteOptions from './note_options'
 export default class NoteBody extends React.Component {
   constructor(props){
     super(props);
-    this.state={
-      collapse: ''
-    };
-    this.collapse = this.collapse.bind(this)
   }
 
   crop(){
@@ -18,13 +14,9 @@ export default class NoteBody extends React.Component {
       this.props.note.title;
   }
 
-  collapse(){
-    this.setState({collapse: 'collapse'})
-  }
-
   render(){
     return(
-      <div className={`note-hover-event ${this.state.collapse} ${this.props.animate}`}>
+      <div className={`note-hover-event`}>
       <Link to={`/home/${this.props.note.id}`}>
         <div className="note-wrapper">
           <div className='note-body'>
@@ -36,8 +28,7 @@ export default class NoteBody extends React.Component {
       </Link>
       <NoteOptions
         note = {this.props.note}
-        deleteNote = {this.props.deleteNote}
-        collapse = {this.collapse}/>
+        deleteNote = {this.props.deleteNote}/>
     </div>
     );
   }

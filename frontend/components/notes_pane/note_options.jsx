@@ -10,11 +10,13 @@ let NoteOptions = (props) => {
      <div className='note-icon note-star'></div>
      <div className='note-icon note-trash'
           onClick={(e) => {
-            props.collapse();
-            setTimeout(() => props.deleteNote(props.note.id),1000)}}>
+            props.deleteNote(props.note.id);}}>
      </div>
    </div>
  );
 };
 
 export default withRouter(NoteOptions)
+
+
+//setTimeout(() => props.deleteNote(props.note.id),1000)
