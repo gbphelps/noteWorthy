@@ -14,7 +14,7 @@ export default class TextEditor extends React.Component{
     }
 
     //TODO: Need to submit new taggings for each of the tags in the state here onSubmit
-    
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setNotebook = this.setNotebook.bind(this);
     this.toggleTag = this.toggleTag.bind(this);
@@ -28,7 +28,7 @@ export default class TextEditor extends React.Component{
   componentWillReceiveProps(nextProps){
     if (!nextProps.note) return this.props.history.push('/home');
     if (nextProps.note.id !== +this.props.match.params.noteId){
-      this.props.onMount(this.props.match.params.noteId);
+      this.props.onMount(nextProps.note.id);
     } else {
       this.setState(nextProps.note)
     }

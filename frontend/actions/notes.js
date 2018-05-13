@@ -12,7 +12,7 @@ export const RECEIVE_NOTE = 'RECEIVE_NOTE';
 export const receiveNote = note => {
   return {
     type: RECEIVE_NOTE,
-    note
+    payload: note
   };
 };
 
@@ -33,7 +33,10 @@ export const fetchNotes = () => dispatch => {
 ///NOT SURE YOU'RE USING - CONSIDER DELETING
 export const fetchNote = id => dispatch => {
   return Api.fetchNote(id)
-    .then(note => dispatch(receiveNote(note)))
+    .then(note => {
+      console.log(note);
+      dispatch(receiveNote(note))}
+  )
 }
 ////////////////////////////////////////////
 
