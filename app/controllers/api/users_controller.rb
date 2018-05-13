@@ -19,7 +19,6 @@ class Api::UsersController < ApplicationController
 
   def lookup
     identifier = params[:identifier]
-    #debugger
     @user = User.find_by(email: identifier) || User.find_by(username: identifier)
     if @user
       render :show

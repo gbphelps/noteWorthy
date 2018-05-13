@@ -23,14 +23,17 @@ class NotebookSelector extends React.Component {
   }
 
   notebooksList(){
-    return values(this.props.notebooks).map(notebook => (
-      <li
-        className={`note-li ${this.selected(notebook.id)}`}
-        key={notebook.id}
-        onClick={() => this.props.setNotebook(notebook.id)}>
-        {notebook.name}
-      </li>
+    const list = []
+    values(this.props.notebooks).forEach(notebook =>
+      list.unshift(
+        <li
+          className={`note-li ${this.selected(notebook.id)}`}
+          key={notebook.id}
+          onClick={() => this.props.setNotebook(notebook.id)}>
+          {notebook.name}
+        </li>
     ));
+    return list;
   }
 
   handleSubmit(e){
@@ -61,9 +64,9 @@ class NotebookSelector extends React.Component {
           </form>
           <ul>
             <CSSTransitionGroup
-              transitionName='notebook'
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={500}>
+              transitionName='noteListItem'
+              transitionEnterTimeout={1000}
+              transitionLeaveTimeout={1000}>
               {this.notebooksList()}
             </CSSTransitionGroup>
           </ul>

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchTags, createTag } from '../../actions/tags';
 import values from 'lodash/values';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 class TagSelector extends React.Component {
   constructor(props){
@@ -18,7 +19,16 @@ class TagSelector extends React.Component {
   }
 
   tagsList(){
-    return values(this.props.tags).map(tag => <li className='note-li' key={tag.id}>{tag.name}</li>);
+    const list = [];
+    values(this.props.tags).forEach(tag =>
+      list.unshift(
+        <li
+          className='note-li'
+          key={tag.id}>
+          {tag.name}
+        </li>
+      ));
+    return list;
   }
 
   handleSubmit(e){
@@ -43,7 +53,12 @@ class TagSelector extends React.Component {
               value={this.state.name}/>
           </form>
           <ul>
-            {this.tagsList()}
+            <CSSTransitionGroup
+              transitionName='noteListItem'
+              transitionEnterTimeout={1000}
+              transitionLeaveTimeout={1000}>
+              {this.tagsList()}
+            </CSSTransitionGroup>
           </ul>
         </div>
       </div>

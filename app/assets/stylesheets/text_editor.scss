@@ -103,9 +103,14 @@ textarea:focus{
 }
 
 .note-li{
-  padding:12px 18px;
+  padding-left:18px;
   font-family:'Scope One';
-  transition: .3s;
+  transition: .5s;
+  height: 40px;
+  line-height: 40px;
+  animation-duration: 1s;
+  overflow:hidden;
+  background:white;
 }
 
 .note-li:hover{
@@ -147,5 +152,16 @@ textarea:focus{
   border-bottom: 1px solid #ececec;
   z-index: 2;
 }
+
+.noteListItem-enter{
+  animation-name: expandListItem;
+}
+
+@keyframes expandListItem {
+  0% {height: 0px; background: #2dbe60; color:white}
+  70% {height: 40px; background: #2dbe60; color:white}
+  100% {background:white; color: inherit}
+}
+
 
 ///////////////////////////////////////
