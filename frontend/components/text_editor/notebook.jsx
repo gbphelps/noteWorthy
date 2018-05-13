@@ -25,7 +25,7 @@ class NotebookSelector extends React.Component {
   notebooksList(){
     return values(this.props.notebooks).map(notebook => (
       <li
-        className={`notebook-li ${this.selected(notebook.id)}`}
+        className={`note-li ${this.selected(notebook.id)}`}
         key={notebook.id}
         onClick={() => this.props.setNotebook(notebook.id)}>
         {notebook.name}
@@ -42,7 +42,7 @@ class NotebookSelector extends React.Component {
   notebookName(){
     return this.props.notebooks && this.props.notebookId ?
       this.props.notebooks[this.props.notebookId].name :
-      'Select Notebook >';
+      'Select Notebook';
   }
 
   render(){
@@ -51,7 +51,7 @@ class NotebookSelector extends React.Component {
         {this.notebookName()}
         <div className='notebook-popup'>
           <form
-            className='new-notebook'
+            className='note-form'
             onSubmit={this.handleSubmit}>
             <input
               className='note-input'

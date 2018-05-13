@@ -18,7 +18,7 @@ class TagSelector extends React.Component {
   }
 
   tagsList(){
-    return values(this.props.tags).map(tag => <li key={tag.id}>{tag.name}</li>)
+    return values(this.props.tags).map(tag => <li className='note-li' key={tag.id}>{tag.name}</li>);
   }
 
   handleSubmit(e){
@@ -33,12 +33,18 @@ class TagSelector extends React.Component {
     return(
       <div className='tag-selector'>Select Tags
         <div className='tags-popup'>
-          <form onSubmit={this.handleSubmit}>
+          <form
+            className='note-form'
+            onSubmit={this.handleSubmit}>
             <input
               className='note-input'
               onChange={this.updateName}
+              placeholder='New tag'
               value={this.state.name}/>
           </form>
+          <ul>
+            {this.tagsList()}
+          </ul>
         </div>
       </div>
     );

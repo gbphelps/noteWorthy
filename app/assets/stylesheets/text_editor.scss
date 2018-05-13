@@ -99,15 +99,16 @@ textarea:focus{
   height: 300px;
   box-shadow: 5px 5px 5px #ececec;
   border-bottom: 1px solid #ececec;
+  z-index: 2;
 }
 
-.notebook-li{
+.note-li{
   padding:12px 18px;
   font-family:'Scope One';
   transition: .3s;
 }
 
-.notebook-li:hover{
+.note-li:hover{
   background: #2dbe60;
   color:white;
 }
@@ -124,7 +125,7 @@ textarea:focus{
   border-radius: 0px;
 }
 
-.new-notebook{
+.note-form{
   height:auto;
 }
 
@@ -144,6 +145,7 @@ textarea:focus{
   height: 300px;
   box-shadow: 5px 5px 5px #ececec;
   border-bottom: 1px solid #ececec;
+  z-index: 2;
 }
 
 ///////////////////////////////////////
