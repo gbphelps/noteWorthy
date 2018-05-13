@@ -89,9 +89,10 @@ textarea:focus{
   bottom: 0px;
   cursor:pointer;
   padding:10px;
+  display:flex;
 }
 
-.note-menu-bar:hover > .notebook-popup{
+.notebook-selector:hover > .notebook-popup{
   display: block;
   height: 300px;
   box-shadow: 5px 5px 5px #ececec;

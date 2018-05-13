@@ -1,5 +1,6 @@
 import React from 'react';
-import MenuBar from './menu_bar'
+import NotebookSelector from './notebook'
+import TagSelector from './tags'
 
 export default class TextEditor extends React.Component{
   constructor(props){
@@ -64,9 +65,13 @@ export default class TextEditor extends React.Component{
               {this.props.formType}
             </div>
 
-            <MenuBar
-              setNotebook={this.setNotebook}
-              notebookId={this.state.notebook_id}/>
+            <div className='note-menu-bar'>
+                <NotebookSelector
+                  setNotebook={this.setNotebook}
+                  notebookId={this.state.notebook_id}/>
+
+                <TagSelector />
+            </div>
 
         </div>
 

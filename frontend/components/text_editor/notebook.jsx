@@ -4,7 +4,7 @@ import { fetchNotebooks, createNotebook } from '../../actions/notebooks';
 import values from 'lodash/values';
 import { CSSTransitionGroup } from 'react-transition-group'
 
-class MenuBar extends React.Component {
+class NotebookSelector extends React.Component {
   constructor(props){
     super(props);
     this.state={
@@ -47,7 +47,7 @@ class MenuBar extends React.Component {
 
   render(){
     return(
-      <div className='note-menu-bar'>
+      <div className='notebook-selector'>
         {this.notebookName()}
         <div className='notebook-popup'>
           <form
@@ -86,4 +86,4 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default connect(mapState,mapDispatch)(MenuBar)
+export default connect(mapState,mapDispatch)(NotebookSelector)
