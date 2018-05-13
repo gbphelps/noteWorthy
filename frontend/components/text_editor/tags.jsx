@@ -24,7 +24,7 @@ class TagSelector extends React.Component {
   }
 
   selected(id){
-    return this.props.selectedTags[id] ?
+    return this.props.taggings[id] ?
     'selected' : '';
   }
 
@@ -80,7 +80,7 @@ class TagSelector extends React.Component {
 
 const mapState = state => {
   return {
-    tags: state.entities.tags //remember that these are object form still
+    tags: state.entities.tags, //remember that these are object form still
   };
 };
 

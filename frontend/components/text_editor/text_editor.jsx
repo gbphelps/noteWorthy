@@ -10,7 +10,7 @@ export default class TextEditor extends React.Component{
       title:'',
       body:'',
       notebook_id: null,
-      tags: {}
+      taggings: {}
     }
 
     //TODO: Need to submit new taggings for each of the tags in the state here onSubmit
@@ -30,7 +30,9 @@ export default class TextEditor extends React.Component{
     if (nextProps.note.id !== +this.props.match.params.noteId){
       this.props.onMount(nextProps.note.id);
     } else {
-      this.setState(nextProps.note)
+      console.log('NOTE',nextProps);
+      this.setState(
+        Object.assign({},nextProps.note,{taggings: nextProps.taggings}))
     }
   }
 
@@ -53,14 +55,15 @@ export default class TextEditor extends React.Component{
 
 ///////////////////////////////////////////////////
   toggleTag(id){
-    console.log('triggered');
-    const tags = Object.assign({},this.state.tags);
-    if (tags[id]){
-      delete tags[id];
+    console.log(this.state.taggings);
+    const taggings = Object.assign({},this.state.taggings);
+    if (taggings[id]){
+      delete taggings[id];
+      //ADD LOGIC TO DELETE TAGGING?
     }else{
-      tags[id] = true;
+      taggings[id] = true;
     }
-    this.setState({ tags });
+    this.setState({ taggings });
   }
   /////////////////////////////////////////////////
 
@@ -92,7 +95,7 @@ export default class TextEditor extends React.Component{
 
                 <TagSelector
                   toggleTag={this.toggleTag}
-                  selectedTags={this.state.tags}/>
+                  taggings={this.state.taggings}/>
             </div>
 
         </div>
