@@ -45,7 +45,7 @@ export default class TextEditor extends React.Component{
   handleSubmit(e){
     e.preventDefault();
     this.props.action(this.state)
-      .then(action => this.props.history.push(`/home/${action.note.id}`));
+      .then(action => this.props.history.push(`/home/${action.payload.note.id}`));
   }
 
   setNotebook(id){
@@ -59,7 +59,7 @@ export default class TextEditor extends React.Component{
     const taggings = Object.assign({},this.state.taggings);
     if (taggings[id]){
       delete taggings[id];
-      this.props.deleteTagging(this.props.taggings[id].id)
+      // this.props.deleteTagging(this.props.taggings[id].id)
       //ADD LOGIC TO DELETE TAGGING?
     }else{
       taggings[id] = true;

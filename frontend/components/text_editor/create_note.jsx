@@ -14,7 +14,6 @@ const mapDispatch = (dispatch,ownProps) => {
   return {
     action: note => dispatch(createNote(note)),
     onMount: ()=>{},
-    scrap: ()=>{}
   };
 };
 
