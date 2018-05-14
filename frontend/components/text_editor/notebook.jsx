@@ -47,7 +47,7 @@ class NotebookSelector extends React.Component {
   }
 
   handleSubmit(e){
-    e.preventDefault;
+    e.preventDefault();
     this.props.createNotebook(this.state);
     this.setState({name: ''})
   }

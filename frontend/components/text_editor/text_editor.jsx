@@ -79,11 +79,6 @@ export default class TextEditor extends React.Component{
       .then(noteId => {if (!this.props.match.params.noteId) this.props.history.push(`/home/${noteId}`)})
   }
 
-
-
-
-
-
   setNotebook(id){
     this.setState({notebook_id: id});
   }
