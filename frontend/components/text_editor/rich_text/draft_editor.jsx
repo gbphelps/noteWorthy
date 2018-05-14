@@ -1,5 +1,6 @@
 import React from 'react';
-import {Editor, EditorState, Modifier, RichUtils} from 'draft-js'
+import {Editor, EditorState, Modifier, RichUtils} from 'draft-js';
+import { colorStyleMap } from './colors'
 
 export default class ColorfulEditorExample extends React.Component {
 
@@ -52,7 +53,7 @@ export default class ColorfulEditorExample extends React.Component {
     return (
       <div className='editor-root'>
 
-        <ColorControls
+        <EditorHeader
           editorState={editorState}
           onToggle={this.toggleColor}
         />
@@ -101,57 +102,28 @@ class StyleButton extends React.Component {
   }
 }
 
-
-
-
-var COLORS = [
-  {color: 'red', style: 'red'},
-  {color: 'orange', style: 'orange'},
-  {color: 'yellow', style: 'yellow'},
-  {color: 'green', style: 'green'},
-  {color: 'blue', style: 'blue'},
-  {color: 'indigo', style: 'indigo'},
-  {color: 'violet', style: 'violet'},
-];
-
-
-const ColorControls = (props) => {
+const EditorHeader = (props) => {
   var currentStyle = props.editorState.getCurrentInlineStyle();
   return (
-    <div className='controls'>
-      {Object.keys(colorStyleMap).map(color =>
-        <StyleButton
-          active={currentStyle.has(color)}
-          onToggle={props.onToggle}
-          style={color}
-          color={colorStyleMap[color].color}
-          key={color}
-        />
-      )}
-    </div>
-  );
-};
+    <div className='editor-header'>
+      <div className='control-panel'>
+        <div>Hello World</div>
 
-const colorStyleMap = {
-  red: {
-    color: 'rgba(255, 0, 0, 1.0)',
-  },
-  orange: {
-    color: 'rgba(255, 127, 0, 1.0)',
-  },
-  yellow: {
-    color: 'rgba(180, 180, 0, 1.0)',
-  },
-  green: {
-    color: 'rgba(0, 180, 0, 1.0)',
-  },
-  blue: {
-    color: 'rgba(0, 0, 255, 1.0)',
-  },
-  indigo: {
-    color: 'rgba(75, 0, 130, 1.0)',
-  },
-  violet: {
-    color: 'rgba(127, 0, 255, 1.0)',
-  },
+
+        <div className='color-tab'>Colors
+          <div className='color-popup'>
+          {Object.keys(colorStyleMap).map(color =>
+            <StyleButton
+              active={currentStyle.has(color)}
+              onToggle={props.onToggle}
+              style={color}
+              color={colorStyleMap[color].color}
+              key={color}
+            />
+          )}
+          </div>
+        </div>
+    </div>
+  </div>
+  );
 };

@@ -1,38 +1,78 @@
-.draft-editor{
-  color:black;
-  font-family:serif;
-  font-size:20px;
-  background:white;
-  width:100%
-}
 
 .color-swatch{
-  height: 20px;
-  width: 20px;
+  height: 15px;
+  width: 15px;
   float:left;
-  margin:1px;
   box-sizing:border-box;
+  flex-shrink: 0;
+  margin: 2px;
 }
 
 .editor-root{
   font-family: 'Georgia', serif;
   font-size: 14px;
-  width: 600px;
+  width: 100%;
   display: flex;
   flex-direction:column;
   background:white;
+  position:relative;
 }
 
 .editor-body{
   border-top: 1px solid #ddd;
   cursor: text;
   font-size: 16px;
-  min-height: 400px;
   padding-top: 20px;
+  padding-left: 20px;
+  background:white;
+  height: 100%;
 }
 
-.controls{
-  background:black;
+.editor-header{
+  background:white;
   height: 100px;
+  width:100%;
   flex-shrink: 0;
+  position:relative;
+}
+
+.control-panel{
+  display:flex;
+  justify-content: space-between;
+  position: relative;
+  top:70px;
+  height:30px;
+  background:black;
+}
+
+.color-tab{
+  width: 160px;
+  flex-shrink: 0px;
+  padding:0px 10px;
+  background:red;
+}
+
+.color-popup{
+  width:160px;
+  background:white;
+  box-sizing: border-box;
+
+  border: 1px solid #ececec;
+  border-bottom: none;
+  position:relative;
+  top:10px;
+  transition: .3s;
+
+  align-content: flex-start;
+  display: flex;
+  flex-wrap:wrap;
+
+  height:0;
+  overflow:hidden;
+}
+
+.color-tab:hover > .color-popup{
+  height:160px;
+  box-shadow: 5px 5px 5px #ececec;
+  border-bottom: 1px solid #ececec;
 }

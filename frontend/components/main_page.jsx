@@ -7,7 +7,7 @@ import React from 'react';
 
 
 ////////////////////////////////////////
-import DraftEditor from './text_editor/draft_editor'
+import DraftEditor from './text_editor/rich_text/draft_editor'
 ////////////////////////////////////////
 
 
