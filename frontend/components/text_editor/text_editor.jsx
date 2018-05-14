@@ -11,8 +11,6 @@ export default class TextEditor extends React.Component{
       body:'',
       notebook_id: null,
       taggings: {},
-      // mountTags: false,
-      // mountNotebooks: false,
     }
 
     //TODO: Need to submit new taggings for each of the tags in the state here onSubmit
@@ -33,7 +31,6 @@ export default class TextEditor extends React.Component{
     if (nextProps.note.id !== +this.props.match.params.noteId){
       this.props.onMount(nextProps.note.id);
     } else {
-      console.log('NOTE',nextProps);
       this.setState(
         Object.assign({},nextProps.note,{taggings: nextProps.taggings}))
     }
@@ -46,17 +43,36 @@ export default class TextEditor extends React.Component{
   }
 
 
-  handleTaggings(){
-    console.log(this.props.taggings, this.state.taggings);
+  handleTaggings(noteId){
+
+
+    const prevTags = Object.keys(this.props.taggings);
+    const newTags = Object.keys(this.state.taggings);
+
+    prevTags.forEach(tagId => {
+      if (!this.state.taggings[tagId]){
+        this.props.deleteTagging(this.props.taggings[tagId].id)
+      }
+    });
+
+    newTags.forEach(tagId => {
+      if (!this.props.taggings[tagId]){
+        console.log(+noteId, +tagId);
+        this.props.createTagging(+noteId, +tagId);
+      }
+    });
+
   }
 
 
 
   handleSubmit(e){
     e.preventDefault();
-    this.handleTaggings();
     this.props.action(this.state)
-      .then(action => this.props.history.push(`/home/${action.payload.note.id}`));
+      .then(action => {
+        this.handleTaggings(action.payload.note.id);
+        this.props.history.push(`/home/${action.payload.note.id}`
+        )});
   }
 
   setNotebook(id){

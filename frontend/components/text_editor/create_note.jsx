@@ -2,11 +2,13 @@ import React from 'react';
 import TextEditor from './text_editor';
 import { connect } from 'react-redux';
 import { createNote } from '../../actions/notes';
+import { createTagging } from '../../utils/taggings'
 
 const mapState = state => {
   return {
     note: {title:'', body:''},
-    formType: 'Create Note'
+    formType: 'Create Note',
+    taggings: {},
   };
 };
 
@@ -14,6 +16,7 @@ const mapDispatch = (dispatch,ownProps) => {
   return {
     action: note => dispatch(createNote(note)),
     onMount: ()=>{},
+    createTagging
   };
 };
 

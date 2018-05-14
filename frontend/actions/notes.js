@@ -34,7 +34,6 @@ export const fetchNotes = () => dispatch => {
 export const fetchNote = id => dispatch => {
   return Api.fetchNote(id)
     .then(note => {
-      console.log(note);
       dispatch(receiveNote(note))}
   )
 }
