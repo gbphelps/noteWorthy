@@ -36,7 +36,14 @@ class NotebookSelector extends React.Component {
           {notebook.name}
         </li>
     ));
-    return list;
+    return (
+      <CSSTransitionGroup
+        transitionName='noteListItem'
+        transitionEnterTimeout={1000}
+        transitionLeaveTimeout={1000}>
+        {list}
+      </CSSTransitionGroup>
+    );
   }
 
   handleSubmit(e){
@@ -66,12 +73,7 @@ class NotebookSelector extends React.Component {
               onChange={(e)=>this.setState({name: e.target.value})}/>
           </form>
           <ul>
-            <CSSTransitionGroup
-              transitionName='noteListItem'
-              transitionEnterTimeout={1000}
-              transitionLeaveTimeout={1000}>
-              {this.notebooksList()}
-            </CSSTransitionGroup>
+            {values(this.props.notebooks).length ? this.notebooksList() : null}
           </ul>
         </div>
       </div>

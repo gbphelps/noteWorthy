@@ -40,7 +40,14 @@ class TagSelector extends React.Component {
           {tag.name}
         </li>
       ));
-    return list;
+    return (
+      <CSSTransitionGroup
+        transitionName='noteListItem'
+        transitionEnterTimeout={1000}
+        transitionLeaveTimeout={1000}>
+        {list}
+      </CSSTransitionGroup>
+    );
   }
 
   handleSubmit(e){
@@ -65,12 +72,7 @@ class TagSelector extends React.Component {
               value={this.state.name}/>
           </form>
           <ul>
-            <CSSTransitionGroup
-              transitionName='noteListItem'
-              transitionEnterTimeout={1000}
-              transitionLeaveTimeout={1000}>
-              {this.tagsList()}
-            </CSSTransitionGroup>
+            {values(this.props.tags).length ? this.tagsList() : null}
           </ul>
         </div>
       </div>
