@@ -2,6 +2,8 @@ json.notebook do
   json.extract! @notebook, :id, :user_id, :name, :shortcut, :default
 end
 
+json.notes({})
+
 json.notes do
   @notebook.notes.each do |note|
     json.set! note.id do

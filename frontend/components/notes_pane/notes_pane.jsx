@@ -23,7 +23,14 @@ class NotesPane extends React.Component {
           note={note}
           deleteNote={this.props.deleteNote}/>
       ));
-    return list;
+    return (
+      <CSSTransitionGroup
+        transitionName='note'
+        transitionEnterTimeout={1500}
+        transitionLeaveTimeout={1000}>
+        {list}
+      </CSSTransitionGroup>
+    );
   }
 
   numNotes(){
@@ -31,7 +38,6 @@ class NotesPane extends React.Component {
   }
 
   render(){
-    if (!this.props.notes.length) return null;
     return(
       <div className="pane-notes">
           <nav className="pane-header">
@@ -52,12 +58,7 @@ class NotesPane extends React.Component {
                   </div>
                 </div>
               </div>
-              <CSSTransitionGroup
-                transitionName='note'
-                transitionEnterTimeout={1500}
-                transitionLeaveTimeout={1000}>
-                {this.notesList()}
-              </CSSTransitionGroup>
+                {this.props.notes.length ? this.notesList() : null}
           </div>
       </div>
     );

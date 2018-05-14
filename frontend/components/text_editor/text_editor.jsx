@@ -10,12 +10,15 @@ export default class TextEditor extends React.Component{
       title:'',
       body:'',
       notebook_id: null,
-      taggings: {}
+      taggings: {},
+      // mountTags: false,
+      // mountNotebooks: false,
     }
 
     //TODO: Need to submit new taggings for each of the tags in the state here onSubmit
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTaggings = this.handleTaggings.bind(this);
     this.setNotebook = this.setNotebook.bind(this);
     this.toggleTag = this.toggleTag.bind(this);
   }
@@ -42,8 +45,16 @@ export default class TextEditor extends React.Component{
     };
   }
 
+
+  handleTaggings(){
+    console.log(this.props.taggings, this.state.taggings);
+  }
+
+
+
   handleSubmit(e){
     e.preventDefault();
+    this.handleTaggings();
     this.props.action(this.state)
       .then(action => this.props.history.push(`/home/${action.payload.note.id}`));
   }
