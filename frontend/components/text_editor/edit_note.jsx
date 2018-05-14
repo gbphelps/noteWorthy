@@ -5,6 +5,7 @@ import { updateNote, fetchNote } from '../../actions/notes';
 import { deleteTagging, createTagging } from '../../utils/taggings';
 
 
+
 const mapState = (state, ownProps) => {
   return {
     note: state.entities.notes[ownProps.match.params.noteId],
@@ -18,7 +19,7 @@ const mapDispatch = (dispatch,ownProps) => {
     onMount: id => dispatch(fetchNote(id)),
     action: note => dispatch(updateNote(note)),
     deleteTagging,
-    createTagging
+    createTagging,
   };
 };
 

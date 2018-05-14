@@ -11,6 +11,7 @@ export default class TextEditor extends React.Component{
       body:'',
       notebook_id: null,
       taggings: {},
+      altered: false
     }
 
     //TODO: Need to submit new taggings for each of the tags in the state here onSubmit
@@ -28,8 +29,9 @@ export default class TextEditor extends React.Component{
 
   componentWillReceiveProps(nextProps){
     if (!nextProps.note) return this.props.history.push('/home');
-    if (nextProps.note.id !== +this.props.match.params.noteId){
+    if (nextProps.note.id !== +this.props.match.params.noteId || this.state.altered === true){
       this.props.onMount(nextProps.note.id);
+      this.setState({altered:false})
     } else {
       this.setState(
         Object.assign({},nextProps.note,{taggings: nextProps.taggings}))
@@ -43,37 +45,44 @@ export default class TextEditor extends React.Component{
   }
 
 
-  handleTaggings(noteId){
+  handleTaggings(prev, next, noteId){
 
-
-    const prevTags = Object.keys(this.props.taggings);
-    const newTags = Object.keys(this.state.taggings);
+    const prevTags = Object.keys(prev);
+    const newTags = Object.keys(next);
+    let altered = false;
 
     prevTags.forEach(tagId => {
-      if (!this.state.taggings[tagId]){
-        this.props.deleteTagging(this.props.taggings[tagId].id)
+      if (!next[tagId]){
+        altered = true;
+        this.props.deleteTagging(prev[tagId].id);
       }
     });
 
     newTags.forEach(tagId => {
-      if (!this.props.taggings[tagId]){
-        console.log(+noteId, +tagId);
+      if (!prev[tagId]){
+        altered = true;
         this.props.createTagging(+noteId, +tagId);
       }
     });
 
+    this.setState({taggings: next, altered: altered})
+    return noteId;
   }
-
-
 
   handleSubmit(e){
+    const prev = this.props.taggings;
+    const next = this.state.taggings;
+
     e.preventDefault();
     this.props.action(this.state)
-      .then(action => {
-        this.handleTaggings(action.payload.note.id);
-        this.props.history.push(`/home/${action.payload.note.id}`
-        )});
+      .then(action => this.handleTaggings(prev, next, action.payload.note.id))
+      .then(noteId => {if (!this.props.match.params.noteId) this.props.history.push(`/home/${noteId}`)})
   }
+
+
+
+
+
 
   setNotebook(id){
     this.setState({notebook_id: id});
@@ -82,12 +91,9 @@ export default class TextEditor extends React.Component{
 
 ///////////////////////////////////////////////////
   toggleTag(id){
-    console.log(this.state.taggings);
     const taggings = Object.assign({},this.state.taggings);
     if (taggings[id]){
       delete taggings[id];
-      // this.props.deleteTagging(this.props.taggings[id].id)
-      //ADD LOGIC TO DELETE TAGGING?
     }else{
       taggings[id] = true;
     }
