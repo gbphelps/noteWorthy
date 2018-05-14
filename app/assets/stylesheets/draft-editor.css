@@ -43,12 +43,17 @@
   top:70px;
   height:30px;
   background:black;
+  z-index: 2;
 }
+
+
+
+
+
 
 .color-tab{
   width: 160px;
   flex-shrink: 0px;
-  padding:0px 10px;
   background:red;
 }
 
@@ -59,8 +64,8 @@
 
   border: 1px solid #ececec;
   border-bottom: none;
-  position:relative;
-  top:10px;
+  position:absolute;
+  top:30px;
   transition: .3s;
 
   align-content: flex-start;
