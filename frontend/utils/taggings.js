@@ -5,7 +5,7 @@ export const createTagging = (noteId, tagId) => {
     data: {tagging: {
       note_id: noteId,
       tag_id: tagId
-    }};
+    }}
   });
 };
 

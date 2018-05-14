@@ -2,7 +2,7 @@ import React from 'react';
 import TextEditor from './text_editor';
 import { connect } from 'react-redux';
 import { updateNote, fetchNote } from '../../actions/notes';
-import * as Api from '../../utils/notes'
+import { deleteTagging } from '../../utils/taggings';
 
 
 const mapState = (state, ownProps) => {
@@ -16,7 +16,8 @@ const mapState = (state, ownProps) => {
 const mapDispatch = (dispatch,ownProps) => {
   return {
     onMount: id => dispatch(fetchNote(id)),
-    action: note => dispatch(updateNote(note))
+    action: note => dispatch(updateNote(note)),
+    deleteTagging: id => deleteTagging(id)
   };
 };
 

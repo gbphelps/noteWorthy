@@ -59,6 +59,7 @@ export default class TextEditor extends React.Component{
     const taggings = Object.assign({},this.state.taggings);
     if (taggings[id]){
       delete taggings[id];
+      this.props.deleteTagging(this.props.taggings[id].id)
       //ADD LOGIC TO DELETE TAGGING?
     }else{
       taggings[id] = true;
