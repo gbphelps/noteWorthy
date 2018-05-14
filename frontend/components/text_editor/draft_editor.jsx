@@ -15,6 +15,7 @@ export default class ColorfulEditorExample extends React.Component {
   _toggleColor(toggledColor) {
     const {editorState} = this.state;
     const selection = editorState.getSelection();
+
     // Let's just allow one color at a time. Turn off all active colors.
     const nextContentState = Object.keys(colorStyleMap)
       .reduce((contentState, color) => {
@@ -26,12 +27,14 @@ export default class ColorfulEditorExample extends React.Component {
       'change-inline-style'
     );
     const currentStyle = editorState.getCurrentInlineStyle();
+
     // Unset style override for current color.
     if (selection.isCollapsed()) {
       nextEditorState = currentStyle.reduce((state, color) => {
         return RichUtils.toggleInlineStyle(state, color);
       }, nextEditorState);
     }
+
     // If the color is being toggled on, apply it.
     if (!currentStyle.has(toggledColor)) {
       nextEditorState = RichUtils.toggleInlineStyle(
@@ -39,6 +42,7 @@ export default class ColorfulEditorExample extends React.Component {
         toggledColor
       );
     }
+
     this.onChange(nextEditorState);
   }
 
@@ -46,19 +50,24 @@ export default class ColorfulEditorExample extends React.Component {
   render() {
     const {editorState} = this.state;
     return (
-      <div style={styles.root}>
+      <div className='editor-root'>
+
         <ColorControls
           editorState={editorState}
           onToggle={this.toggleColor}
         />
-        <div style={styles.editor} onClick={this.focus}>
-          <Editor
-            customStyleMap={colorStyleMap}
-            editorState={editorState}
-            onChange={this.onChange}
-            placeholder="Write something colorful..."
-            ref={(ref) => this.editor = ref}
-          />
+
+        <div
+          className='editor-body'
+          onClick={this.focus}>
+            <Editor
+              customStyleMap={colorStyleMap}
+              editorState={editorState}
+              onChange={this.onChange}
+              placeholder="Note here..."
+              ref={(ref) => this.editor = ref}
+            />
+
         </div>
       </div>
     );
@@ -86,7 +95,7 @@ class StyleButton extends React.Component {
       <div
         className='color-swatch'
         onMouseDown={this.onToggle}
-        style={{background: this.props.color, boxSizing:'border-box', border}}>
+        style={{background: this.props.color, border}}>
       </div>
     );
   }
@@ -109,23 +118,19 @@ var COLORS = [
 const ColorControls = (props) => {
   var currentStyle = props.editorState.getCurrentInlineStyle();
   return (
-    <div style={styles.controls}>
+    <div className='controls'>
       {Object.keys(colorStyleMap).map(color =>
         <StyleButton
           active={currentStyle.has(color)}
           onToggle={props.onToggle}
           style={color}
           color={colorStyleMap[color].color}
+          key={color}
         />
       )}
     </div>
   );
 };
-
-
-// This object provides the styling information for our custom color
-// styles.
-
 
 const colorStyleMap = {
   red: {
@@ -149,35 +154,4 @@ const colorStyleMap = {
   violet: {
     color: 'rgba(127, 0, 255, 1.0)',
   },
-};
-
-
-const styles = {
-  root: {
-    fontFamily: '\'Georgia\', serif',
-    fontSize: 14,
-    padding: 20,
-    width: 600,
-  },
-  editor: {
-    borderTop: '1px solid #ddd',
-    cursor: 'text',
-    fontSize: 16,
-    marginTop: 20,
-    minHeight: 400,
-    paddingTop: 20,
-  },
-  controls: {
-    fontFamily: '\'Helvetica\', sans-serif',
-    fontSize: 14,
-    marginBottom: 10,
-    userSelect: 'none',
-  },
-  styleButton: {
-    color: '#999',
-    cursor: 'pointer',
-    marginRight: 16,
-    padding: '2px 0',
-  },
-
 };
