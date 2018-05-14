@@ -76,17 +76,17 @@ class StyleButton extends React.Component {
     };
   }
   render() {
-    let style = styles.styleButton;
-    // if (this.props.active) {
-    //   style = {...styles.styleButton, ...colorStyleMap[this.props.style]};
-    // } else {
-    //   style = styles.styleButton;
-    // }
+    let border;
+    if (this.props.active) {
+      border = '1px solid black';
+    } else {
+      border = 'none';
+    }
     return (
       <div
         className='color-swatch'
         onMouseDown={this.onToggle}
-        style={{background: this.props.color}}>
+        style={{background: this.props.color, boxSizing:'border-box', border}}>
       </div>
     );
   }
@@ -96,13 +96,13 @@ class StyleButton extends React.Component {
 
 
 var COLORS = [
-  {color: '#ff0000', style: 'red'},
-  {color: '#ff8800', style: 'orange'},
-  {color: '#ffff00', style: 'yellow'},
-  {color: '#00ff00', style: 'green'},
-  {color: '#0000ff', style: 'blue'},
-  {color: '#ff00ff', style: 'indigo'},
-  {color: '00ffff', style: 'violet'},
+  {color: 'red', style: 'red'},
+  {color: 'orange', style: 'orange'},
+  {color: 'yellow', style: 'yellow'},
+  {color: 'green', style: 'green'},
+  {color: 'blue', style: 'blue'},
+  {color: 'indigo', style: 'indigo'},
+  {color: 'violet', style: 'violet'},
 ];
 
 
@@ -110,13 +110,12 @@ const ColorControls = (props) => {
   var currentStyle = props.editorState.getCurrentInlineStyle();
   return (
     <div style={styles.controls}>
-      {COLORS.map(type =>
+      {Object.keys(colorStyleMap).map(color =>
         <StyleButton
-          active={currentStyle.has(type.style)}
-          label={type.label}
+          active={currentStyle.has(color)}
           onToggle={props.onToggle}
-          style={type.style}
-          color={type.color}
+          style={color}
+          color={colorStyleMap[color].color}
         />
       )}
     </div>
@@ -180,4 +179,5 @@ const styles = {
     marginRight: 16,
     padding: '2px 0',
   },
+
 };
