@@ -28,11 +28,12 @@
 }
 
 .editor-header{
-  background:pink;
   height: 100px;
   width:100%;
   flex-shrink: 0;
   position:relative;
+  border-bottom: 1px solid #ececec;
+  box-sizing:border-box;
 }
 
 .control-panel{
@@ -51,17 +52,17 @@
 
 
 
-
+.control-panel > div{
+  padding:5px;
+  font-family: 'Lato';
+}
 .color-tab{
-  border: 1px solid #ececec;
-  border-bottom:none;
-  width: 60px;
 }
 
 .font-tab{
-  border: 1px solid #ececec;
-  border-bottom: none;
-  width: 60px;
+}
+
+.size-tab{
 }
 
 .font-popup{
@@ -107,8 +108,42 @@
   overflow:hidden;
 }
 
+
+
 .color-tab:hover > .color-popup{
   height:160px;
   box-shadow: 5px 5px 5px #ececec;
   border-bottom: 1px solid #ececec;
+}
+
+
+
+
+
+.size-popup{
+ background:white;
+ height: 0;
+ overflow-y: scroll;
+ transition:.3s;
+ position:absolute;
+ top:30px;
+ width:30px;
+ border: 1px solid #ececec;
+ border-bottom: 0px;
+}
+
+
+.size-tab:hover .size-popup{
+  box-shadow: 5px 5px 5px #ececec;
+  border-bottom: 1px solid #ececec;
+  height: 150px;
+}
+
+.size-popup{
+  text-align: center;
+}
+
+.radio{
+  cursor: pointer;
+  box-sizing: border-box;
 }

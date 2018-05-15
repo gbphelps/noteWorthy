@@ -5,7 +5,11 @@ import values from 'lodash/values';
 import * as Maps from './style_maps';
 import ControlPanel from './controls/control_panel';
 
-const allStyles = values(Maps).reduce((acc,map)=> Object.assign(acc,map),{});
+const allStyles =
+  values(Maps).reduce(
+    (acc,map) =>
+      Object.assign(acc,map),{}
+    );
 
 
 

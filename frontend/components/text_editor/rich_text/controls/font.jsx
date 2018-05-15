@@ -6,17 +6,20 @@ export default class FontButton extends React.Component {
   }
 
   render() {
-    let border;
+    let background;
+    let color;
     if (this.props.active) {
-      border = '1px solid black';
+      background = '#2dbe60';
+      color = 'white';
     } else {
-      border = 'none';
+      background = 'white';
+      color = 'inherit';
     }
     return (
       <li
-        className='font-name'
+        className='font-name radio'
         onMouseDown={e => this.props.onToggle(e)(this.props.style)}
-        style={{border}}>
+        style={{background,color}}>
         {this.props.style}
       </li>
     );

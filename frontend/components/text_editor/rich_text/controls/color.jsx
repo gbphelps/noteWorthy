@@ -14,7 +14,7 @@ export default class ColorButton extends React.Component {
     }
     return (
       <div
-        className='color-swatch'
+        className='color-swatch radio'
         onMouseDown={e => this.props.onToggle(e)(this.props.style)}
         style={{background: this.props.style, border}}>
       </div>

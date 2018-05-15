@@ -13,6 +13,7 @@ import FontButton from './font';
 const ControlPanel = (props) => {
 
   const currentStyle = props.editorState.getCurrentInlineStyle();
+  //constructs a radio panel when given a button component and a map of styles
   const RadioPanel = ({component: Component, styleMap}) => {
     return Object.keys(styleMap).map(value => {
       return (
@@ -35,8 +36,7 @@ const ControlPanel = (props) => {
             <ul>
               <RadioPanel
                 component={FontButton}
-                styleMap={Maps.fontFamily}
-                />
+                styleMap={Maps.fontFamily}/>
             </ul>
           </div>
         </div>
@@ -49,6 +49,17 @@ const ControlPanel = (props) => {
               styleMap={Maps.color}/>
           </div>
         </div>
+
+        <div className='size-tab'>Size
+           <div className='size-popup'>
+            <ul>
+              <RadioPanel
+                component={FontButton}
+                styleMap={Maps.fontSize}/>
+            </ul>
+          </div>
+        </div>
+
     </div>
   </div>
   );
