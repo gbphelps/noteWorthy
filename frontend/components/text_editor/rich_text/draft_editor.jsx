@@ -1,10 +1,16 @@
 import React from 'react';
 import {Editor, EditorState, Modifier, RichUtils} from 'draft-js';
-import { colorStyleMap } from './colors';
-import { fontStyleMap } from './fonts';
 import values from 'lodash/values';
 
-export default class ColorfulEditorExample extends React.Component {
+import { colorStyleMap } from './style_maps/colors';
+import { fontStyleMap } from './style_maps/fonts';
+import { fontSizeStyleMap } from './style_maps/font_sizes';
+
+import ControlPanel from './controls/control_panel';
+
+
+
+export default class RichTextEditor extends React.Component {
 
   constructor(props) {
     super(props);
@@ -14,16 +20,13 @@ export default class ColorfulEditorExample extends React.Component {
     this.toggleProperty = this.toggleProperty.bind(this)
   }
 
-
-
-
-/////////////////////////////////////////////////////
   toggleProperty(styleMap){
+  //return curried function that handles the specific set of styles contained in styleMap
   return toggledStyle => {
     const {editorState} = this.state;
     const selection = editorState.getSelection();
 
-    //TURN OFF ALL OTHER STYLES IN THIS MAP
+    //remove all styles in styleMap from selection
     const nextContentState = Object.keys(styleMap).reduce(
         (contentState, style) => {
         return Modifier.removeInlineStyle(
@@ -45,6 +48,7 @@ export default class ColorfulEditorExample extends React.Component {
     if (selection.isCollapsed()) {
       nextEditorState = currentStyle.reduce((state, style) => {
         return styleMap[style] ? RichUtils.toggleInlineStyle(state, style) : state
+        //only remove style if it is in the current styleMap
       }, nextEditorState);
     }
 
@@ -66,17 +70,20 @@ export default class ColorfulEditorExample extends React.Component {
     return (
       <div className='editor-root'>
 
-        <EditorHeader
+        <ControlPanel
           editorState={editorState}
-          onColorToggle={this.toggleProperty(colorStyleMap)}
-          onFontToggle={this.toggleProperty(fontStyleMap)}
+          toggleProperty={this.toggleProperty}
         />
 
         <div
           className='editor-body'
           onClick={this.focus}>
             <Editor
-              customStyleMap={Object.assign({},colorStyleMap,fontStyleMap)}
+              customStyleMap=
+                {Object.assign({},
+                  colorStyleMap,
+                  fontStyleMap,
+                  fontSizeStyleMap)}
               editorState={editorState}
               onChange={this.onChange}
               placeholder="Note here..."
@@ -88,102 +95,3 @@ export default class ColorfulEditorExample extends React.Component {
     );
   }
 }
-
-
-//////////////////////////////////////
-class ColorButton extends React.Component {
-  constructor(props) {
-    console.log(props);
-    super(props);
-    this.onToggle = (e) => {
-      e.preventDefault();
-      this.props.onToggle(this.props.style);
-    };
-  }
-  render() {
-    let border;
-    if (this.props.active) {
-      border = '1px solid black';
-    } else {
-      border = 'none';
-    }
-    return (
-      <div
-        className='color-swatch'
-        onMouseDown={this.onToggle}
-        style={{background: this.props.color, border}}>
-      </div>
-    );
-  }
-}
-///////////////////////////////////////////////////
-
-class FontButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onToggle = (e) => {
-      e.preventDefault();
-      this.props.onToggle(this.props.style);
-    };
-  }
-  render() {
-    let border;
-    if (this.props.active) {
-      border = '1px solid black';
-    } else {
-      border = 'none';
-    }
-    return (
-      <li
-        className='font-name'
-        onMouseDown={this.onToggle}
-        style={{border}}>
-        {this.props.fontName}
-      </li>
-    );
-  }
-}
-//////////////////////////////////
-
-
-
-
-const EditorHeader = (props) => {
-  var currentStyle = props.editorState.getCurrentInlineStyle();
-  return (
-    <div className='editor-header'>
-      <div className='control-panel'>
-
-
-        <div className='font-tab'>Fonts
-           <div className='font-popup'>
-            <ul>
-              {Object.keys(fontStyleMap).map(font =>
-                <FontButton
-                  active={currentStyle.has(font)}
-                  onToggle={props.onFontToggle}
-                  style={font}
-                  fontName={font}
-                  key={font}/>)}
-            </ul>
-          </div>
-        </div>
-
-
-        <div className='color-tab'>Colors
-          <div className='color-popup'>
-          {Object.keys(colorStyleMap).map(color =>
-            <ColorButton
-              active={currentStyle.has(color)}
-              onToggle={props.onColorToggle}
-              style={color}
-              color={colorStyleMap[color].color}
-              key={color}
-            />
-          )}
-          </div>
-        </div>
-    </div>
-  </div>
-  );
-};
