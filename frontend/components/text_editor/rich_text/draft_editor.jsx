@@ -19,37 +19,40 @@ export default class ColorfulEditorExample extends React.Component {
 
 /////////////////////////////////////////////////////
   toggleProperty(styleMap){
-  return toggledColor => {
+  return toggledStyle => {
     const {editorState} = this.state;
     const selection = editorState.getSelection();
 
-    // Let's just allow one color at a time. Turn off all active colors.
+    //TURN OFF ALL OTHER STYLES IN THIS MAP
     const nextContentState = Object.keys(styleMap).reduce(
-        (contentState, color) => {
+        (contentState, style) => {
         return Modifier.removeInlineStyle(
           contentState,
           selection,
-          color)
+          style)
       }, editorState.getCurrentContent());
+
     let nextEditorState = EditorState.push(
       editorState,
       nextContentState,
       'change-inline-style'
     );
+
     const currentStyle = editorState.getCurrentInlineStyle();
-    console.log(currentStyle);
-    // Unset style override for current color.
+    console.log('CurrentStyle', currentStyle);
+
+    // Unset style override for current style.
     if (selection.isCollapsed()) {
-      nextEditorState = currentStyle.reduce((state, color) => {
-        return RichUtils.toggleInlineStyle(state, color);
+      nextEditorState = currentStyle.reduce((state, style) => {
+        return styleMap[style] ? RichUtils.toggleInlineStyle(state, style) : state
       }, nextEditorState);
     }
 
     // If the color is being toggled on, apply it.
-    if (!currentStyle.has(toggledColor)) {
+    if (!currentStyle.has(toggledStyle)) {
       nextEditorState = RichUtils.toggleInlineStyle(
         nextEditorState,
-        toggledColor
+        toggledStyle
       );
     }
 
@@ -65,7 +68,8 @@ export default class ColorfulEditorExample extends React.Component {
 
         <EditorHeader
           editorState={editorState}
-          onToggle={this.toggleProperty(colorStyleMap)}
+          onColorToggle={this.toggleProperty(colorStyleMap)}
+          onFontToggle={this.toggleProperty(fontStyleMap)}
         />
 
         <div
@@ -89,6 +93,7 @@ export default class ColorfulEditorExample extends React.Component {
 //////////////////////////////////////
 class ColorButton extends React.Component {
   constructor(props) {
+    console.log(props);
     super(props);
     this.onToggle = (e) => {
       e.preventDefault();
@@ -156,7 +161,7 @@ const EditorHeader = (props) => {
               {Object.keys(fontStyleMap).map(font =>
                 <FontButton
                   active={currentStyle.has(font)}
-                  onToggle={props.onToggle}
+                  onToggle={props.onFontToggle}
                   style={font}
                   fontName={font}
                   key={font}/>)}
@@ -170,7 +175,7 @@ const EditorHeader = (props) => {
           {Object.keys(colorStyleMap).map(color =>
             <ColorButton
               active={currentStyle.has(color)}
-              onToggle={props.onToggle}
+              onToggle={props.onColorToggle}
               style={color}
               color={colorStyleMap[color].color}
               key={color}
