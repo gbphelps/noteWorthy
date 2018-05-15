@@ -20,8 +20,7 @@ const ControlPanel = (props) => {
           active={currentStyle.has(value)}
           onToggle={props.toggleProperty(styleMap)}
           style={value}
-          key={value}
-          uniqueUI={value}/>
+          key={value}/>
       );
     });
   };

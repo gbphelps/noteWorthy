@@ -19,7 +19,7 @@ export default class ColorButton extends React.Component {
       <div
         className='color-swatch'
         onMouseDown={this.onToggle}
-        style={{background: this.props.uniqueUI, border}}>
+        style={{background: this.props.style, border}}>
       </div>
     );
   }

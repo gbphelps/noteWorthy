@@ -20,7 +20,7 @@ export default class FontButton extends React.Component {
         className='font-name'
         onMouseDown={this.onToggle}
         style={{border}}>
-        {this.props.uniqueUI}
+        {this.props.style}
       </li>
     );
   }
