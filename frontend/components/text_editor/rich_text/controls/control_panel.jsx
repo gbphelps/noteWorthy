@@ -1,12 +1,31 @@
 import React from 'React'
 
-import * as Maps from '../style_maps/style_maps'
+import * as Maps from '../style_maps'
 
 import ColorButton from './color';
 import FontButton from './font';
 
+
+
+
+
+
 const ControlPanel = (props) => {
-  var currentStyle = props.editorState.getCurrentInlineStyle();
+
+  const currentStyle = props.editorState.getCurrentInlineStyle();
+  const RadioPanel = ({component: Component, styleMap}) => {
+    return Object.keys(styleMap).map(value => {
+      return (
+        <Component
+          active={currentStyle.has(value)}
+          onToggle={props.toggleProperty(styleMap)}
+          style={value}
+          key={value}
+          uniqueUI={value}/>
+      );
+    });
+  };
+
   return (
     <div className='editor-header'>
       <div className='control-panel'>
@@ -15,13 +34,10 @@ const ControlPanel = (props) => {
         <div className='font-tab'>Fonts
            <div className='font-popup'>
             <ul>
-              {Object.keys(Maps.fontFamily).map(font =>
-                <FontButton
-                  active={currentStyle.has(font)}
-                  onToggle={props.toggleProperty(Maps.fontFamily)}
-                  style={font}
-                  fontName={font}
-                  key={font}/>)}
+              <RadioPanel
+                component={FontButton}
+                styleMap={Maps.fontFamily}
+                />
             </ul>
           </div>
         </div>
@@ -29,15 +45,9 @@ const ControlPanel = (props) => {
 
         <div className='color-tab'>Colors
           <div className='color-popup'>
-          {Object.keys(Maps.color).map(color =>
-            <ColorButton
-              active={currentStyle.has(color)}
-              onToggle={props.toggleProperty(Maps.color)}
-              style={color}
-              color={Maps.color[color].color}
-              key={color}
-            />
-          )}
+            <RadioPanel
+              component={ColorButton}
+              styleMap={Maps.color}/>
           </div>
         </div>
     </div>

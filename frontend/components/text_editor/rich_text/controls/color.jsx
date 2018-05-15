@@ -2,7 +2,6 @@ import React from 'react';
 
 export default class ColorButton extends React.Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this.onToggle = (e) => {
       e.preventDefault();
@@ -20,7 +19,7 @@ export default class ColorButton extends React.Component {
       <div
         className='color-swatch'
         onMouseDown={this.onToggle}
-        style={{background: this.props.color, border}}>
+        style={{background: this.props.uniqueUI, border}}>
       </div>
     );
   }

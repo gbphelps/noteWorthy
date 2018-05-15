@@ -2,7 +2,7 @@ import React from 'react';
 import {Editor, EditorState, Modifier, RichUtils} from 'draft-js';
 import values from 'lodash/values';
 
-import * as Maps from './style_maps/style_maps';
+import * as Maps from './style_maps';
 import ControlPanel from './controls/control_panel';
 
 const allStyles = values(Maps).reduce((acc,map)=> Object.assign(acc,map),{});
@@ -46,7 +46,6 @@ export default class RichTextEditor extends React.Component {
     );
 
     const currentStyle = editorState.getCurrentInlineStyle();
-    console.log('CurrentStyle', currentStyle);
 
     // Unset style override for current style.
     if (selection.isCollapsed()) {
