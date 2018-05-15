@@ -40,9 +40,6 @@ export const colorStyleMap = {
 
 
 
-
-
-
   red2: {
     color: 'rgba(255, 0, 0, 1)'
   },
@@ -80,5 +77,5 @@ export const colorStyleMap = {
   },
   violet2: {
     color: 'rgba(127, 0, 255, 1)',
-  },
+  }
 };
