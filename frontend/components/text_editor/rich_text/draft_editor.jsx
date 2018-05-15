@@ -26,7 +26,8 @@ export default class RichTextEditor extends React.Component {
 
   toggleProperty(styleMap){
   //return curried function that handles the specific set of styles contained in styleMap
-  return toggledStyle => {
+  return e => toggledStyle => {
+    e.preventDefault();
     const {editorState} = this.state;
     const selection = editorState.getSelection();
 

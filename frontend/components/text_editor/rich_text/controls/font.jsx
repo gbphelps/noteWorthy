@@ -3,11 +3,8 @@ import React from 'react';
 export default class FontButton extends React.Component {
   constructor(props) {
     super(props);
-    this.onToggle = (e) => {
-      e.preventDefault();
-      this.props.onToggle(this.props.style);
-    };
   }
+
   render() {
     let border;
     if (this.props.active) {
@@ -18,7 +15,7 @@ export default class FontButton extends React.Component {
     return (
       <li
         className='font-name'
-        onMouseDown={this.onToggle}
+        onMouseDown={e => this.props.onToggle(e)(this.props.style)}
         style={{border}}>
         {this.props.style}
       </li>

@@ -3,11 +3,8 @@ import React from 'react';
 export default class ColorButton extends React.Component {
   constructor(props) {
     super(props);
-    this.onToggle = (e) => {
-      e.preventDefault();
-      this.props.onToggle(this.props.style);
-    };
   }
+
   render() {
     let border;
     if (this.props.active) {
@@ -18,7 +15,7 @@ export default class ColorButton extends React.Component {
     return (
       <div
         className='color-swatch'
-        onMouseDown={this.onToggle}
+        onMouseDown={e => this.props.onToggle(e)(this.props.style)}
         style={{background: this.props.style, border}}>
       </div>
     );
