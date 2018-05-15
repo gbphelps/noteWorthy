@@ -2,11 +2,15 @@ import React from 'react';
 import {Editor, EditorState, Modifier, RichUtils} from 'draft-js';
 import values from 'lodash/values';
 
-import { colorStyleMap } from './style_maps/colors';
-import { fontStyleMap } from './style_maps/fonts';
-import { fontSizeStyleMap } from './style_maps/font_sizes';
-
+import * as Maps from './style_maps/style_maps';
 import ControlPanel from './controls/control_panel';
+
+const allStyles = values(Maps).reduce((acc,map)=> Object.assign(acc,map),{});
+
+
+
+
+
 
 
 
@@ -79,11 +83,7 @@ export default class RichTextEditor extends React.Component {
           className='editor-body'
           onClick={this.focus}>
             <Editor
-              customStyleMap=
-                {Object.assign({},
-                  colorStyleMap,
-                  fontStyleMap,
-                  fontSizeStyleMap)}
+              customStyleMap={allStyles}
               editorState={editorState}
               onChange={this.onChange}
               placeholder="Note here..."

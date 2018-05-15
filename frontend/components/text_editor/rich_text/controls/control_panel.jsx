@@ -1,8 +1,6 @@
 import React from 'React'
 
-import { colorStyleMap } from '../style_maps/colors';
-import { fontStyleMap } from '../style_maps/fonts';
-import { fontSizeStyleMap } from '../style_maps/font_sizes';
+import * as Maps from '../style_maps/style_maps'
 
 import ColorButton from './color';
 import FontButton from './font';
@@ -17,10 +15,10 @@ const ControlPanel = (props) => {
         <div className='font-tab'>Fonts
            <div className='font-popup'>
             <ul>
-              {Object.keys(fontStyleMap).map(font =>
+              {Object.keys(Maps.fontFamily).map(font =>
                 <FontButton
                   active={currentStyle.has(font)}
-                  onToggle={props.toggleProperty(fontStyleMap)}
+                  onToggle={props.toggleProperty(Maps.fontFamily)}
                   style={font}
                   fontName={font}
                   key={font}/>)}
@@ -31,12 +29,12 @@ const ControlPanel = (props) => {
 
         <div className='color-tab'>Colors
           <div className='color-popup'>
-          {Object.keys(colorStyleMap).map(color =>
+          {Object.keys(Maps.color).map(color =>
             <ColorButton
               active={currentStyle.has(color)}
-              onToggle={props.toggleProperty(colorStyleMap)}
+              onToggle={props.toggleProperty(Maps.color)}
               style={color}
-              color={colorStyleMap[color].color}
+              color={Maps.color[color].color}
               key={color}
             />
           )}
