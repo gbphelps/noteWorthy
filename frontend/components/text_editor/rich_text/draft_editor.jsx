@@ -11,21 +11,25 @@ export default class ColorfulEditorExample extends React.Component {
     this.state = {editorState: EditorState.createEmpty()};
     this.focus = () => this.editor.focus();
     this.onChange = (editorState) => this.setState({editorState});
-    this.toggleColor = (toggledColor) => this._toggleColor(toggledColor);
+    this.toggleProperty = this.toggleProperty.bind(this)
   }
 
 
 
 
 /////////////////////////////////////////////////////
-  _toggleColor(toggledColor) {
+  toggleProperty(styleMap){
+  return toggledColor => {
     const {editorState} = this.state;
     const selection = editorState.getSelection();
 
     // Let's just allow one color at a time. Turn off all active colors.
-    const nextContentState = Object.keys(colorStyleMap)
-      .reduce((contentState, color) => {
-        return Modifier.removeInlineStyle(contentState, selection, color)
+    const nextContentState = Object.keys(styleMap).reduce(
+        (contentState, color) => {
+        return Modifier.removeInlineStyle(
+          contentState,
+          selection,
+          color)
       }, editorState.getCurrentContent());
     let nextEditorState = EditorState.push(
       editorState,
@@ -51,51 +55,7 @@ export default class ColorfulEditorExample extends React.Component {
 
     this.onChange(nextEditorState);
   }
-/////////////////////////////////////////////////////
-//
-// _toggleFont(toggledFont) {
-//   const {editorState} = this.state;
-//   const selection = editorState.getSelection();
-//
-//   // Let's just allow one color at a time. Turn off all active colors.
-//   const nextContentState = Object.keys(fontStyleMap)
-//     .reduce((contentState, font) => {
-//       return Modifier.removeInlineStyle(contentState, selection, fontFamily)
-//     }, editorState.getCurrentContent());
-//   let nextEditorState = EditorState.push(
-//     editorState,
-//     nextContentState,
-//     'change-inline-style'
-//   );
-//   const currentStyle = editorState.getCurrentInlineStyle();
-//   console.log(currentStyle);
-//   // Unset style override for current font.
-//   if (selection.isCollapsed()) {
-//     nextEditorState = currentStyle.reduce((state, fontFamily) => {
-//       return RichUtils.toggleInlineStyle(state, fontFamily);
-//     }, nextEditorState);
-//   }
-//
-//   // If the font is being toggled on, apply it.
-//   if (!currentStyle.has(toggledFont)) {
-//     nextEditorState = RichUtils.toggleInlineStyle(
-//       nextEditorState,
-//       toggledFont
-//     );
-//   }
-//
-//   this.onChange(nextEditorState);
-// }
-///////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
+}
 
 
   render() {
@@ -105,14 +65,14 @@ export default class ColorfulEditorExample extends React.Component {
 
         <EditorHeader
           editorState={editorState}
-          onToggle={this.toggleColor}
+          onToggle={this.toggleProperty(colorStyleMap)}
         />
 
         <div
           className='editor-body'
           onClick={this.focus}>
             <Editor
-              customStyleMap={Object.assign(colorStyleMap,fontStyleMap)}
+              customStyleMap={Object.assign({},colorStyleMap,fontStyleMap)}
               editorState={editorState}
               onChange={this.onChange}
               placeholder="Note here..."
