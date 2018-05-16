@@ -2,19 +2,19 @@ import React from 'react';
 import NotebookSelector from './notebook';
 import TagSelector from './tags';
 import Quill from 'quill';
+import { quillStartup } from './quill_startup';
+import { Toolbar } from './toolbar'
 
 export default class TextEditor extends React.Component{
   constructor(props){
     super(props);
     this.state={
       title:'',
-      body:'',
+      body:"{\"richText\":{\"ops\":[{\"insert\":\"\\n\"}]},\"plainText\":\"\\n\"}",
       notebook_id: null,
       taggings: {},
       altered: false
     }
-
-    //TODO: Need to submit new taggings for each of the tags in the state here onSubmit
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTaggings = this.handleTaggings.bind(this);
@@ -22,20 +22,14 @@ export default class TextEditor extends React.Component{
     this.toggleTag = this.toggleTag.bind(this);
   }
 
+  redirect(){
+    this.props.history.push('/home');
+  }
+
   componentDidMount(){
-    if (!this.props.note) this.props.history.push('/home');
+    if (!this.props.note) this.redirect();
     this.props.onMount(this.props.match.params.noteId);
-    ///////////////////////////////////////////////////////
-    const container = document.getElementById('editor');
-    const toolbarOptions = [['bold','italic','underline']]
-    const options = {
-      modules: {
-        toolbar: toolbarOptions
-      },
-      placeholder: 'Compose an epic...',
-      theme: 'snow'
-    };
-    this.editor = new Quill(container, options);
+    this.editor = quillStartup();
     this.editor.on('editor-change',()=>{
       const richText=this.editor.getContents();
       const plainText=this.editor.getText();
@@ -46,29 +40,34 @@ export default class TextEditor extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    if (!nextProps.note) return this.props.history.push('/home');
-    if (nextProps.note.id !== +this.props.match.params.noteId || this.state.altered === true){
-      this.props.onMount(nextProps.note.id);
+    const fetchedNote = nextProps.note;
+    const prevId = +this.props.match.params.noteId;
+
+    if (!fetchedNote) return this.redirect();
+    if (fetchedNote.id !== prevId || this.state.altered === true){
+      this.props.onMount(fetchedNote.id);
       this.setState({altered:false})
     } else {
-      this.editor.setContents(JSON.parse(nextProps.note.body).richText)
+      this.editor.setContents(JSON.parse(fetchedNote.body).richText)
       this.setState(
-        Object.assign({},nextProps.note,{taggings: nextProps.taggings}))
+        Object.assign({},fetchedNote,{taggings: nextProps.taggings}))
     }
   }
 
 
-  update(field){
-    return e => {
-      this.setState({[field]: e.target.value});
-    };
+  handleSubmit(e){
+    const prev = this.props.taggings;
+    const next = this.state.taggings;
+
+    e.preventDefault();
+    this.props.action(this.state)
+      .then(action =>
+        this.handleTaggings(prev, next, action.payload.note.id))
+      .then(noteId => {
+        if (!this.props.match.params.noteId){
+          this.props.history.push(`/home/${noteId}`)
+        }})
   }
-
-
-
-
-
-
 
   handleTaggings(prev, next, noteId){
 
@@ -77,8 +76,7 @@ export default class TextEditor extends React.Component{
     let altered = false;
 
     prevTags.forEach(tagId => {
-      if (!next[tagId]){
-        altered = true;
+      if (!next[tagId]){altered = true;
         this.props.deleteTagging(prev[tagId].id);
       }
     });
@@ -94,31 +92,22 @@ export default class TextEditor extends React.Component{
     return noteId;
   }
 
-  handleSubmit(e){
-    const prev = this.props.taggings;
-    const next = this.state.taggings;
-
-    e.preventDefault();
-    this.props.action(this.state)
-      .then(action => this.handleTaggings(prev, next, action.payload.note.id))
-      .then(noteId => {if (!this.props.match.params.noteId) this.props.history.push(`/home/${noteId}`)})
-  }
-
   setNotebook(id){
     this.setState({notebook_id: id});
   }
 
-
-///////////////////////////////////////////////////
   toggleTag(id){
     const taggings = Object.assign({},this.state.taggings);
-    if (taggings[id]){
-      delete taggings[id];
-    }else{
-      taggings[id] = true;
-    }
+    taggings[id] ? delete taggings[id] : taggings[id] = true;
     this.setState({ taggings });
   }
+
+  update(field){
+    return e => {
+      this.setState({[field]: e.target.value});
+    };
+  }
+
   /////////////////////////////////////////////////
 
   render(){
@@ -149,8 +138,8 @@ export default class TextEditor extends React.Component{
 
             </div>
           </div>
+            <Toolbar />
             <input value={this.state.title} onChange={this.update('title')}/>
-            <div id='toolbar'/>
             <div id='editor'/>
         </div>
     );

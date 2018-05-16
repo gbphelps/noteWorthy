@@ -71,6 +71,7 @@ export default class SessionForm extends React.Component {
           </div>
 
           <input
+            className='input'
             type='text'
             placeholder='Email or Username'
             value={this.state.identifier}
@@ -78,13 +79,14 @@ export default class SessionForm extends React.Component {
           <div className={this.state.passwordField ? 'grown' : 'grow'}>
             <div className=''>
               <input
+                className='input'
                 type='password'
                 placeholder='Password'
                 value={this.state.password}
                 onChange={this.update('password')}/>
             </div>
           </div>
-          <button className='accent' onClick={
+          <button className='button accent' onClick={
               this.state.passwordField ?
               this.handleSubmit :
               this.lookup}>

@@ -5,8 +5,6 @@ import values from 'lodash/values';
 import { CSSTransitionGroup } from 'react-transition-group';
 
 
-
-
 //TODO: Change popups to conditional render
 
 class TagSelector extends React.Component {

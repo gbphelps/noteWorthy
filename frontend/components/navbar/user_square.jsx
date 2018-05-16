@@ -25,7 +25,7 @@ export default class UserSquare extends React.Component {
         <i className="fas fa-cog"></i>
         <div className={'user-popup ' + this.status()}>
           <button
-            className='accent'
+            className='accent button'
             style={{margin:'auto',display:'block'}}
             onClick={this.props.logout}>
             Log Out

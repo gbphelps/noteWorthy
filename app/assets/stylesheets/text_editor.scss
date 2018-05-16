@@ -1,8 +1,8 @@
+
 .text-editor-pane{
-  width: 100%;
+  height: calc(100vh - 159px);
+  width: calc(100vw - 422px);
   background: white;
-  display:flex;
-  flex-direction:column;
 }
 
 .text-editor-header{
@@ -19,8 +19,6 @@
   margin:auto;
   padding:20px 0px 0px 30px;
   box-sizing:border-box;
-  // display:flex;
-  // flex-direction:column;
   height:100%
 };
 

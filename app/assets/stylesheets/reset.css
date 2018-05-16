@@ -2,8 +2,8 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-/*
-html, body, div, span, applet, p, object, iframe,
+
+/* html, body, div, span, applet, p, object, iframe,
 h1, h2, h3, h4, h5, h6, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -22,8 +22,8 @@ time, mark, audio, video, button {
 	font-size: 100%;
 	font: inherit;
 	background-color: transparent;
-}
-
+} */
+/*
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
