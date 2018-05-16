@@ -1,7 +1,7 @@
 import React from 'react';
 import NotebookSelector from './notebook';
 import TagSelector from './tags';
-import pull from 'lodash/pull'
+import Quill from 'quill';
 
 export default class TextEditor extends React.Component{
   constructor(props){
@@ -25,6 +25,21 @@ export default class TextEditor extends React.Component{
   componentDidMount(){
     if (!this.props.note) this.props.history.push('/home');
     this.props.onMount(this.props.match.params.noteId);
+    ///////////////////////////////////////////////////////
+    const container = document.getElementById('editor');
+    const toolbarOptions = [['bold','italic','underline']]
+    const options = {
+      modules: {
+        toolbar: toolbarOptions
+      },
+      placeholder: 'Compose an epic...',
+      theme: 'snow'
+    };
+    this.editor = new Quill(container, options);
+    this.editor.on('editor-change',()=>{
+      const content=this.editor.getContents();
+      this.setState({body: JSON.stringify(content)});
+    });
   }
 
   componentWillReceiveProps(nextProps){
@@ -33,16 +48,23 @@ export default class TextEditor extends React.Component{
       this.props.onMount(nextProps.note.id);
       this.setState({altered:false})
     } else {
+      this.editor.setContents(JSON.parse(nextProps.note.body))
       this.setState(
         Object.assign({},nextProps.note,{taggings: nextProps.taggings}))
     }
   }
+
 
   update(field){
     return e => {
       this.setState({[field]: e.target.value});
     };
   }
+
+
+
+
+
 
 
   handleTaggings(prev, next, noteId){
@@ -99,11 +121,7 @@ export default class TextEditor extends React.Component{
   render(){
     return(
       <div className='text-editor-pane'>
-
         <div className='text-editor-header'>
-
-          <div className='note-main-options'>
-          </div>
 
           <div
             className='button accent'
@@ -125,24 +143,13 @@ export default class TextEditor extends React.Component{
                 <TagSelector
                   toggleTag={this.toggleTag}
                   taggings={this.state.taggings}/>
+
             </div>
-
+          </div>
+            <input value={this.state.title} onChange={this.update('title')}/>
+            <div id='toolbar'/>
+            <div id='editor'/>
         </div>
-
-        <div className='text-editor-content'>
-          <form className='text-editor-field' onSubmit={this.handleSubmit}>
-            <input
-              type='text'
-              className='editor-note-title'
-              value={this.state.title}
-              onChange={this.update('title')}/>
-            <textarea
-              className='editor-note-body'
-              onChange={this.update('body')}
-              value={this.state.body}/>
-          </form>
-        </div>
-      </div>
     );
   }
 }

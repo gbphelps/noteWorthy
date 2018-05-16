@@ -42,7 +42,7 @@ h1{
   margin: 4px 2px;
 }
 
-button, input, .button{
+.button{
   width:320px;
   height:43px;
   line-height:43px;

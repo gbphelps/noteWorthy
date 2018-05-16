@@ -15,7 +15,6 @@ export default class QuillEditor extends React.Component{
         toolbar: toolbarOptions
       },
       placeholder: 'Compose an epic...',
-      readOnly: true,
       theme: 'snow'
     };
     const editor = new Quill(container, options);

@@ -5,28 +5,19 @@ import EditNote from './text_editor/edit_note';
 import { ProtectedRoute } from '../utils/protected_route';
 import React from 'react';
 
-////////////////////////////////////////
-import DraftEditor from './text_editor/rich_text/draft_editor'
-////////////////////////////////////////
-// import QuillEditor from './text_editor/quill/quill_editor'
-
-
 export const Main = () => {
   return (
     <div className='main'>
       <NavBar />
       <NotesPane />
-      <DraftEditor />
+        <ProtectedRoute
+          path='/home'
+          exact={true}
+          component={CreateNote}/>
+        <ProtectedRoute
+          path='/home/:noteId'
+          exact={true}
+          component={EditNote}/>
     </div>
   );
 }
-
-//TODO: put this back where the <DraftEditor /> is
-// <ProtectedRoute
-//   path='/home'
-//   exact={true}
-//   component={CreateNote}/>
-// <ProtectedRoute
-//   path='/home/:noteId'
-//   exact={true}
-//   component={EditNote}/>
