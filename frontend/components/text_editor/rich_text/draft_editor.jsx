@@ -1,5 +1,5 @@
 import React from 'react';
-import {Editor, EditorState, Modifier, RichUtils} from 'draft-js';
+import {Editor, EditorState, Modifier, RichUtils, convertToRaw} from 'draft-js';
 import values from 'lodash/values';
 
 import * as Maps from './style_maps';
@@ -17,17 +17,30 @@ export default class RichTextEditor extends React.Component {
     super(props);
     this.state = {
       editorState: EditorState.createEmpty(),
-      style:{}
+      style:{},
+      data:{
+        title:'',
+        body:'',
+        notebook_id: null,
+        taggings: {},
+        altered: false
+      }
     };
     this.focus = () => this.editor.focus();
     this.onChange = this.onChange.bind(this);
     this.getStyle = this.getStyle.bind(this);
     this.toggleProperty = this.toggleProperty.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   onChange(editorState){
     this.setState({ editorState })
   }
+
+
+
+
+
 
   getStyle(){
     let styles = {
@@ -42,6 +55,11 @@ export default class RichTextEditor extends React.Component {
       ))
     return styles;
   }
+
+
+
+
+
 
 
   toggleProperty(styleMap){
@@ -92,14 +110,43 @@ export default class RichTextEditor extends React.Component {
 }
 
 
+
+
+
+
+
+
+handleSubmit(e){
+  e.preventDefault();
+  const content = this.state.editorState.getCurrentContent();
+  console.log(JSON.stringify(convertToRaw(content)));
+}
+
+
+
+
+
+
+
+
+
+
   render() {
     const {editorState} = this.state;
     return (
-      <div className='editor-root' onClick={this.focus}>
+      <div className='editor-root'>
 
+      <div className='button accent' onClick={e=>this.handleSubmit(e)}>
+        Submit
+      </div>
+
+      <div onClick={this.focus}>
         <ControlPanel
           editorState={editorState}
           toggleProperty={this.toggleProperty}/>
+      </div>
+
+      <input/>
 
         <div
           className='editor-body'

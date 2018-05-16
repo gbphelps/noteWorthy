@@ -4,7 +4,8 @@ import * as Maps from '../style_maps'
 import ColorButton from './color';
 import FontButton from './font';
 
-import { convertToRaw } from 'draft-js'
+
+
 
 const RadioPanelHelper =
 ({toggleProperty, editorState}) => ({component: Component, styleMap}) => {
@@ -22,23 +23,10 @@ const RadioPanelHelper =
 
 
 
-
-
-
-
 class ControlPanel extends React.Component{
   constructor(props){
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  handleSubmit(e){
-    e.preventDefault();
-    const content = this.props.editorState.getCurrentContent();
-    console.log(JSON.stringify(convertToRaw(content)));
-  }
-
-
 
   render(){
     const RadioPanel = RadioPanelHelper(this.props);
@@ -74,10 +62,6 @@ class ControlPanel extends React.Component{
                   styleMap={Maps.fontSize}/>
               </ul>
             </div>
-          </div>
-
-          <div onClick={e=>this.handleSubmit(e)}>
-            Submit
           </div>
 
       </div>
