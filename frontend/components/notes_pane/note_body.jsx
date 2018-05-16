@@ -22,7 +22,7 @@ export default class NoteBody extends React.Component {
           <div className='note-body'>
             <div className='title'>{this.crop()}</div>
             <div className='date'>{formatTime(this.props.note.updated_at)}</div>
-            <p className='body-of-note'>{this.props.note.body}</p>
+            <p className='body-of-note'>{JSON.parse(this.props.note.body).plainText}</p>
           </div>
         </div>
       </Link>

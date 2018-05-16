@@ -37,8 +37,11 @@ export default class TextEditor extends React.Component{
     };
     this.editor = new Quill(container, options);
     this.editor.on('editor-change',()=>{
-      const content=this.editor.getContents();
-      this.setState({body: JSON.stringify(content)});
+      const richText=this.editor.getContents();
+      const plainText=this.editor.getText();
+      this.setState({
+        body: JSON.stringify({richText,plainText})
+      });
     });
   }
 
@@ -48,7 +51,7 @@ export default class TextEditor extends React.Component{
       this.props.onMount(nextProps.note.id);
       this.setState({altered:false})
     } else {
-      this.editor.setContents(JSON.parse(nextProps.note.body))
+      this.editor.setContents(JSON.parse(nextProps.note.body).richText)
       this.setState(
         Object.assign({},nextProps.note,{taggings: nextProps.taggings}))
     }
