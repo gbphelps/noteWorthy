@@ -11,27 +11,44 @@ const allStyles =
       Object.assign(acc,map),{}
     );
 
-
-
-
-
-
-
-
 export default class RichTextEditor extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {editorState: EditorState.createEmpty()};
+    this.state = {
+      editorState: EditorState.createEmpty(),
+      style:{}
+    };
     this.focus = () => this.editor.focus();
-    this.onChange = (editorState) => this.setState({editorState});
-    this.toggleProperty = this.toggleProperty.bind(this)
+    this.onChange = this.onChange.bind(this);
+    this.getStyle = this.getStyle.bind(this);
+    this.toggleProperty = this.toggleProperty.bind(this);
   }
+
+  onChange(editorState){
+    this.setState({ editorState })
+  }
+
+  getStyle(){
+    let styles = {
+      color: '#000',
+      fontFamily: 'Georgia',
+      fontSize: '14pt'
+    };
+
+    values(Maps).map(styleMap =>
+      Object.keys(styleMap).forEach(style => {
+        if (this.state.editorState.getCurrentInlineStyle().has(style)) styles = Object.assign(styles, allStyles[style]);}
+      ))
+    return styles;
+  }
+
 
   toggleProperty(styleMap){
   //return curried function that handles the specific set of styles contained in styleMap
-  return e => toggledStyle => {
+  return (e, toggledStyle) => {
     e.preventDefault();
+
     const {editorState} = this.state;
     const selection = editorState.getSelection();
 
@@ -51,7 +68,6 @@ export default class RichTextEditor extends React.Component {
     );
 
     const currentStyle = editorState.getCurrentInlineStyle();
-
     // Unset style override for current style.
     if (selection.isCollapsed()) {
       nextEditorState = currentStyle.reduce((state, style) => {
@@ -68,7 +84,10 @@ export default class RichTextEditor extends React.Component {
       );
     }
 
-    this.onChange(nextEditorState);
+    const active = this.getStyle();
+    const next = allStyles[toggledStyle];
+    this.setState({ editorState:nextEditorState, style:Object.assign(active,next) })
+    // this.onChange(nextEditorState);
   }
 }
 
@@ -76,24 +95,21 @@ export default class RichTextEditor extends React.Component {
   render() {
     const {editorState} = this.state;
     return (
-      <div className='editor-root'>
+      <div className='editor-root' onClick={this.focus}>
 
         <ControlPanel
           editorState={editorState}
-          toggleProperty={this.toggleProperty}
-        />
+          toggleProperty={this.toggleProperty}/>
 
         <div
           className='editor-body'
-          onClick={this.focus}>
+          onClick={this.getStyle}>
             <Editor
               customStyleMap={allStyles}
               editorState={editorState}
               onChange={this.onChange}
               placeholder="Note here..."
-              ref={(ref) => this.editor = ref}
-            />
-
+              ref={(ref) => this.editor = ref}/>
         </div>
       </div>
     );
