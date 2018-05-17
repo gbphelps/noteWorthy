@@ -28,7 +28,8 @@ export default class NoteBody extends React.Component {
       </Link>
       <NoteOptions
         note = {this.props.note}
-        deleteNote = {this.props.deleteNote}/>
+        deleteNote = {this.props.deleteNote}
+        updateNote = {this.props.updateNote}/>
     </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import values from 'lodash/values';
 import { connect } from 'react-redux';
-import { fetchNotes, deleteNote } from '../../actions/notes';
+import { fetchNotes, deleteNote, updateNote } from '../../actions/notes';
 import NoteBody from './note_body';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { toggle } from '../../actions/ui'
@@ -50,7 +50,8 @@ class NotesPane extends React.Component {
         <NoteBody
           key={note.id}
           note={note}
-          deleteNote={this.props.deleteNote}/>
+          deleteNote={this.props.deleteNote}
+          updateNote={this.props.updateNote}/>
       ));
     return (
       <CSSTransitionGroup
@@ -102,6 +103,7 @@ const mapDispatch = dispatch => {
   return {
     fetchNotes: () => dispatch(fetchNotes()),
     deleteNote: id => dispatch(deleteNote(id)),
+    updateNote: note => dispatch(updateNote(note)),
     toggle: () => dispatch(toggle('notes'))
   }
 };
