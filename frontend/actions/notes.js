@@ -1,5 +1,14 @@
 import * as Api from '../utils/notes'
 
+
+export const RECEIVE_SHORTCUTS = 'RECEIVE_SHORTCUTS';
+export const receiveShortcuts = notes => {
+  return {
+    type: RECEIVE_SHORTCUTS,
+    notes
+  };
+};
+
 export const RECEIVE_NOTES = 'RECEIVE_NOTES';
 export const receiveNotes = notes => {
   return {
@@ -38,6 +47,12 @@ export const fetchNote = id => dispatch => {
   )
 }
 ////////////////////////////////////////////
+
+
+export const fetchShortcuts = () => dispatch => {
+  return Api.fetchShortcuts()
+    .then(notes => dispatch(receiveShortcuts(notes)))
+};
 
 export const updateNote = note => dispatch => {
   return Api.updateNote(note)

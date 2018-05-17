@@ -54,10 +54,13 @@ class NavBar extends React.Component {
         </nav>
 
         <nav className='lower-nav'>
-          <LinkedIcon
-            text='Shortcuts'
-            icon='star'
-            path='/'/>
+      
+          <div className={'star icon'} onClick={()=>this.props.toggle('shortcuts')}>
+              <div className='popup'>
+                <img className='popup-arrow' src={popupTail}/>
+                <div className='popup-body'>Shortcuts</div>
+              </div>
+            </div>
 
           <div className={'note icon'} onClick={()=>this.props.toggle('notes')}>
               <div className='popup'>

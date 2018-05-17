@@ -4,6 +4,12 @@ class Api::NotesController < ApplicationController
     @notes = current_user.notes
   end
 
+  def shortcuts
+    @notes = current_user.notes.where(shortcut: true)
+    render :index
+  end
+
+
   def create
     @note = Note.new(note_params)
     @note.user_id = current_user.id

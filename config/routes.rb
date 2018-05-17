@@ -13,7 +13,12 @@ Rails.application.routes.draw do
 
     resource :session, only: [:create, :destroy]
 
-    resources :notes, only: [:index, :create, :update, :destroy, :show]
+    resources :notes, only: [:index, :create, :update, :destroy, :show] do
+      collection do
+        get 'shortcuts'
+      end
+    end
+
     resources :notebooks, only: [:index, :create, :update, :destroy, :show]
     resources :tags, only: [:index, :create, :update, :destroy, :show]
     resources :taggings, only: [:index, :create, :update, :destroy, :show]

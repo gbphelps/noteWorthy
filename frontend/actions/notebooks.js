@@ -33,15 +33,10 @@ export const fetchNotebooks = () => dispatch => {
 
 
 
-
-////////////////////////////////NOTE: many need to give this its own action
 export const fetchFromNotebook = id => dispatch => {
   return Api.fetchNotebook(id)
     .then(notebook => dispatch(receiveNotes(notebook.notes)))
 };
-///////////////////////////////////////////////////////////////////////////
-
-
 
 
 export const createNotebook = notebook => dispatch => {

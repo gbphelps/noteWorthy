@@ -1,7 +1,10 @@
 import NavBar from './navbar/navbar';
+
 import NotesPane from './notes_pane/notes_pane';
-import NotebooksPane from './notebooks_pane/notebooks_pane'
-import SearchPane from './notebooks_pane/search'
+import NotebooksPane from './sliding_panes/notebooks_pane';
+import SearchPane from './sliding_panes/search';
+import ShortcutsPane from './sliding_panes/shortcuts'
+
 import CreateNote from './text_editor/create_note';
 import EditNote from './text_editor/edit_note';
 import { ProtectedRoute } from '../utils/protected_route';
@@ -22,6 +25,7 @@ export const Main = () => {
           component={EditNote}/>
         <NotebooksPane />
         <SearchPane />
+        <ShortcutsPane />
     </div>
   );
 }

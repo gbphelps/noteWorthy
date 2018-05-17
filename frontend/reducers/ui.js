@@ -3,13 +3,15 @@ import { TOGGLE } from '../actions/ui';
 const nullState = {
   notebooks: false,
   search: false,
-  notes: false
+  notes: false,
+  shortcuts: false
 }
 
 const initialState = {
   notes: true,
   notebooks: false,
-  search: false
+  search: false,
+  shortcuts: false
 }
 
 

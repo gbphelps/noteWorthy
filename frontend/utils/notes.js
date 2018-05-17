@@ -34,3 +34,10 @@ export const deleteNote = id => {
     url: `api/notes/${id}`
   });
 };
+
+export const fetchShortcuts = () => {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/notes/shortcuts'
+  });
+};
