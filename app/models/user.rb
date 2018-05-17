@@ -10,7 +10,7 @@ class User < ApplicationRecord
     class_name: 'Notebook'
 
   has_many :notes,
-    through: :notebooks,
+    foreign_key: :user_id,
     source: :notes
 
   def password=(password)

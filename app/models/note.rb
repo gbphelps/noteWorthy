@@ -4,9 +4,9 @@ class Note < ApplicationRecord
     class_name: 'Notebook',
     optional: true
 
-  has_one :user,
-    through: :notebook,
-    source: :user
+  belongs_to :user,
+    foreign_key: :user_id,
+    class_name: 'User'
 
   has_many :taggings,
     foreign_key: :note_id,

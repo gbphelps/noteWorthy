@@ -1,11 +1,12 @@
 class Api::NotesController < ApplicationController
 
   def index
-    @notes = Note.all
+    @notes = current_user.notes
   end
 
   def create
     @note = Note.new(note_params)
+    @note.user_id = current_user.id
     if @note.save
       render :show
     else

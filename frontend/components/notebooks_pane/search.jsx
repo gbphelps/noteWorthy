@@ -3,6 +3,7 @@ import { fetchNotes } from '../../actions/notes'
 import { toggle } from '../../actions/ui'
 import { connect } from 'react-redux'
 import values from 'lodash/values'
+import { withRouter } from 'react-router-dom'
 
 class SlidingPane extends React.Component {
   constructor(props){
@@ -37,6 +38,7 @@ class SlidingPane extends React.Component {
   onClick(id){
     this.props.toggle();
     this.animateExit();
+    this.props.history.push(`/home/${id}`);
   }
 
   update(e){
@@ -47,11 +49,21 @@ class SlidingPane extends React.Component {
     return values(this.props.notes).map(note =>
       note.title.includes(this.state.search) ||
       JSON.parse(note.body).plainText.includes(this.state.search) ? (
-        <li
-          className='search-entry'
-          key={note.id}>
-          {note.title}
-          {JSON.parse(note.body).plainText}
+        <li className='search-entry-container'>
+          <div
+            className='search-entry'
+            onClick={()=>this.onClick(note.id)}
+            key={note.id}>
+
+            <div className='notebook-search-entry-title'>
+              {note.title || 'Untitled'}
+            </div>
+
+            <div className='notebook-search-entry-body'>
+              {JSON.parse(note.body).plainText}
+            </div>
+
+          </div>
         </li>  ) : null )
   }
 
@@ -95,4 +107,4 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default connect(mapState,mapDispatch)(SlidingPane)
+export default withRouter(connect(mapState,mapDispatch)(SlidingPane))
