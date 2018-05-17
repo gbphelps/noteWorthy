@@ -46,8 +46,9 @@ class SlidingPane extends React.Component {
   notesList(){
     return values(this.props.notes).map(note =>
       note.title.includes(this.state.search) ||
-      note.body.includes(this.state.search) ? (
+      JSON.parse(note.body).plainText.includes(this.state.search) ? (
         <li
+          className='search-entry'
           key={note.id}>
           {note.title}
           {JSON.parse(note.body).plainText}
@@ -62,7 +63,7 @@ class SlidingPane extends React.Component {
         <div className='notebooks-pane'>
           <div>Search</div>
           <input
-            className='input'
+            className='search-field'
             placeholder='Search Notes'
             value={this.state.search}
             onChange={this.update}/>

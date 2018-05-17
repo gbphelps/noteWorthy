@@ -12,7 +12,7 @@ const uiReducer = (state = nullState, action) => {
     case TOGGLE:
       return Object.assign({},nullState, {[action.entity]: !state[action.entity]});
     default:
-      return nullState;
+      return state;
   }
 }
 

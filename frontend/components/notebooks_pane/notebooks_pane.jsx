@@ -26,6 +26,7 @@ class SlidingPane extends React.Component {
     if (!nextProps.active && this.state.on){
       this.animateExit();
     }else if (!this.state.on && nextProps.active){
+      this.props.fetchNotebooks();
       this.setState({on: true, panelExit: false})
     }
   }
@@ -50,9 +51,11 @@ class SlidingPane extends React.Component {
     return values(this.props.notebooks).map(notebook =>
       notebook.name.includes(this.state.search) ? (
         <li
+          className='search-entry'
           key={notebook.id}
           onClick={()=>this.onClick(notebook.id)}>
-          {notebook.name}
+          <div className='notebook-search-entry-title'>{notebook.name}</div>
+          <div className='notebook-search-entry-body'>{notebook.notes.length} notes</div>
         </li>  ) : null )
   }
 
@@ -62,12 +65,19 @@ class SlidingPane extends React.Component {
       <div className={`notebooks-modular ${this.state.panelExit}`}>
         <div className='notebooks-veil'/>
         <div className='notebooks-pane'>
-          <div>Notebooks</div>
-          <input
-            className='input'
-            placeholder='Search Notebooks'
-            value={this.state.search}
-            onChange={this.update}/>
+
+          <div className='notebooks-header'>
+            <div className='pane-title'>Notebooks</div>
+
+          <div className='search-field-container'>
+            <input
+              className='search-field'
+              placeholder='Search Notebooks'
+              value={this.state.search}
+              onChange={this.update}/>
+          </div>
+        </div>
+
           {this.notebookList()}
         </div>
       </div>

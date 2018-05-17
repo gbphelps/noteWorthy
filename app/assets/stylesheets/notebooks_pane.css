@@ -21,6 +21,24 @@
   border-right: 1px solid #ececec;
   animation-name: panelSlider;
   animation-duration: 1s;
+  overflow-y: scroll;
+}
+
+.notebooks-header{
+  height: 125px;
+  border-bottom: 1px solid #ececec;
+  position: sticky;
+  top:0px;
+}
+
+.pane-title{
+  margin: 20px 0 0 30px;
+  position:absolute;
+  color:#777;
+  font-family: 'Lato';
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .panel-exit > .notebooks-pane{
@@ -29,6 +47,35 @@
 
 .panel-exit > .notebooks-veil{
   animation-name: veilExit;
+}
+
+.search-entry{
+  padding: 10px 30px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.search-field-container{
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+}
+
+
+.search-field{
+  padding: 4px;
+  width: 400px;
+  height: 40px;
+  margin: auto;
+  display:block;
+  font-size: 16px;
+  font-family: 'Lato';
+  box-sizing: border-box;
+}
+
+.search-field::placeholder{
+  font-size: 16px;
+  text-align: center;
 }
 
 @keyframes panelSlider {
