@@ -2,15 +2,22 @@ import { TOGGLE } from '../actions/ui';
 
 const nullState = {
   notebooks: false,
-  search: false
+  search: false,
+  notes: false
 }
 
+const initialState = {
+  notes: true,
+  notebooks: false,
+  search: false
+}
 
 
 const uiReducer = (state = nullState, action) => {
   switch(action.type) {
     case TOGGLE:
-      return Object.assign({},nullState, {[action.entity]: !state[action.entity]});
+      console.log(state);
+      return Object.assign({}, nullState, {[action.entity]: !state[action.entity]});
     default:
       return state;
   }

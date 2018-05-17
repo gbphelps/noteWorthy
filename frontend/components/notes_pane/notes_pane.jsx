@@ -4,15 +4,44 @@ import { connect } from 'react-redux';
 import { fetchNotes, deleteNote } from '../../actions/notes';
 import NoteBody from './note_body';
 import { CSSTransitionGroup } from 'react-transition-group';
+import { toggle } from '../../actions/ui'
 
 class NotesPane extends React.Component {
   constructor(props){
     super(props);
+
+    this.state={
+      on: false,
+      panelExit: '',
+    }
   }
 
   componentDidMount(){
     this.props.fetchNotes();
   }
+
+/////////
+  componentWillReceiveProps(nextProps){
+    if (!nextProps.active && this.state.on){
+      this.animateExit();
+    }else if (!this.state.on && nextProps.active){
+      this.setState({on: true, panelExit: false})
+    }
+  }
+
+  animateExit(){
+    this.setState({panelExit:'shrink-pane'});
+    setTimeout(()=>this.setState({on: false}),900);
+  }
+/////////////
+
+
+
+
+
+
+
+
 
   notesList(){
     const list = [];
@@ -39,14 +68,11 @@ class NotesPane extends React.Component {
 
   render(){
     return(
-      <div className="pane-notes">
+      <div className='pane-notes'>
           <nav className="pane-header">
             <div>Notes</div>
             <div className='pane-subhead'>
               <div>{this.numNotes()} notes</div>
-              <div className='options'>Options<img className='tiny pointer' src={downSmall}></img>
-                <div className="options-popup"></div>
-              </div>
             </div>
           </nav>
           <div className="pane-content">
@@ -67,7 +93,8 @@ class NotesPane extends React.Component {
 
 const mapState = state => {
   return {
-    notes: values(state.entities.notes)
+    notes: values(state.entities.notes),
+    active: state.ui.notes
   };
 };
 
@@ -75,9 +102,16 @@ const mapDispatch = dispatch => {
   return {
     fetchNotes: () => dispatch(fetchNotes()),
     deleteNote: id => dispatch(deleteNote(id)),
+    toggle: () => dispatch(toggle('notes'))
   }
 };
 
 
 
 export default connect(mapState,mapDispatch)(NotesPane)
+
+
+
+// <div className='options'>Options<img className='tiny pointer' src={downSmall}></img>
+//   <div className="options-popup"></div>
+// </div>

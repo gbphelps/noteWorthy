@@ -22,19 +22,19 @@
   animation-name: panelSlider;
   animation-duration: 1s;
   overflow-y: scroll;
+  color:#777;
 }
 
 .notebooks-header{
+  padding: 20px 30px;
+  box-sizing:border-box;
   height: 125px;
   border-bottom: 1px solid #ececec;
-  position: sticky;
+  position:relative;
   top:0px;
 }
 
 .pane-title{
-  margin: 20px 0 0 30px;
-  position:absolute;
-  color:#777;
   font-family: 'Lato';
   font-size: 22px;
   text-transform: uppercase;
@@ -50,15 +50,48 @@
 }
 
 .search-entry{
-  padding: 10px 30px;
+  padding: 10px 10px;
+  box-sizing: border-box;
   cursor: pointer;
   font-size: 20px;
+  width: 420px;
+  margin: auto;
+  border-bottom: 1px solid #ececec;
 }
+
+
+.search-entry-container{
+  width:100%;
+  transition: .3s;
+  box-sizing: border-box;
+  height: 60px;
+}
+
+.search-entry-container:hover{
+  color: white;
+  background: #2dbe60;
+}
+
+.search-entry-container:hover div{
+  border: none;
+}
+
+
+.notebook-search-entry-title{
+  font-family: 'Scope One';
+  font-size: 18px
+}
+
+.notebook-search-entry-body{
+  font-family: 'Lato';
+  font-size: 12px;
+  letter-spacing: .5px;
+}
+
 
 .search-field-container{
   position: absolute;
-  bottom: 20px;
-  width: 100%;
+  bottom: 15px;
 }
 
 

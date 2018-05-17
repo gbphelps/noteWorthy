@@ -61,12 +61,19 @@ class SlidingPane extends React.Component {
       <div className={`notebooks-modular ${this.state.panelExit}`}>
         <div className='notebooks-veil'/>
         <div className='notebooks-pane'>
-          <div>Search</div>
+
+      <div className='notebooks-header'>
+        <div className='pane-title'>Search</div>
+          <div className='search-field-container'>
           <input
             className='search-field'
             placeholder='Search Notes'
             value={this.state.search}
             onChange={this.update}/>
+        </div>
+      </div>
+
+
           {this.notesList()}
         </div>
       </div>
