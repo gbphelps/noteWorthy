@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import UserSquare from './user_square';
 import { logout } from '../../actions/session';
-import { Link, withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom';
+import { toggleNotebooks } from '../../actions/ui';
 
 
 let LinkedIcon = ({text, icon, path}) => {
@@ -58,10 +59,14 @@ class NavBar extends React.Component {
             text='Notes'
             icon='note'
             path='/'/>
-          <LinkedIcon
-            text='Notebooks'
-            icon='notebook'
-            path='/'/>
+
+          <div className={'notebook icon'} onClick={this.props.toggleNotebooks}>
+              <div className='popup'>
+                <img className='popup-arrow' src={popupTail}/>
+                <div className='popup-body'>Notebooks</div>
+              </div>
+            </div>
+
           <LinkedIcon
             text='Tags'
             icon='tag'
@@ -83,7 +88,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    toggleNotebooks: () => dispatch(toggleNotebooks())
   };
 };
 

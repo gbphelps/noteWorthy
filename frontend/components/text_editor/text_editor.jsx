@@ -40,6 +40,9 @@ export default class TextEditor extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
+    if (!nextProps.note.title.length) {
+      document.getElementsByClassName('title-input')[0].focus();
+    }
     const fetchedNote = nextProps.note;
     const prevId = +this.props.match.params.noteId;
 
@@ -139,7 +142,11 @@ export default class TextEditor extends React.Component{
             </div>
           </div>
             <Toolbar />
-            <input value={this.state.title} onChange={this.update('title')}/>
+            <input
+              className='title-input'
+              value={this.state.title}
+              placeholder='Title your note'
+              onChange={this.update('title')}/>
             <div id='editor'/>
         </div>
     );

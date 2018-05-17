@@ -1,8 +1,8 @@
 
 .text-editor-pane{
-  height: calc(100vh - 159px);
+  height: 100%;
   width: calc(100vw - 422px);
-  background: white;
+  background:white;
 }
 
 .text-editor-header{
@@ -23,10 +23,11 @@
 };
 
 
-.editor-note-title{
+.title-input{
   display:block;
   margin:0;
-  padding: 0 30px 0 0;
+  padding: 0 0 0 18px;
+  box-sizing:border-box;
   border-radius:0;
   border:none;
   font-family:'Scope One';
@@ -35,8 +36,12 @@
   width:100%;
 }
 
-.editor-note-title:focus{
+.title-input:focus{
   border:none;
+}
+.title-input::placeholder{
+  color:#2dbe60;
+  font-family: 'Scope One'
 }
 
 .text-editor-field{
@@ -50,7 +55,7 @@
 
 .note-menu-bar{
   position:absolute;
-  bottom: 0px;
+  bottom: -3px;
   cursor:pointer;
   padding:10px;
   display:flex;
@@ -76,6 +81,7 @@
   transition:.5s;
   border:1px solid #ececec;
   border-bottom:none;
+  z-index: 2;
 }
 
 .notebook-selector:hover > .notebook-popup{
@@ -83,7 +89,6 @@
   height: 300px;
   box-shadow: 5px 5px 5px #ececec;
   border-bottom: 1px solid #ececec;
-  z-index: 2;
 }
 
 .note-li{

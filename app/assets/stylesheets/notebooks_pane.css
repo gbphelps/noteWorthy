@@ -1,0 +1,34 @@
+.notebooks-veil{
+  position:fixed;
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  background:white;
+  z-index:3;
+  opacity: .9;
+  animation-name: cloud;
+  animation-duration: 1s;
+}
+
+.notebooks-pane{
+  background: white;
+  height:100%;
+  width:460px;
+  position:absolute;
+  left:70px;
+  z-index:3;
+  border-right: 1px solid #ececec;
+  animation-name: panelSlider;
+  animation-duration: 1s;
+}
+
+@keyframes panelSlider {
+  0% {left:-390px}
+  100% {left:70px}
+}
+
+@keyframes cloud {
+  0% {opacity: 0}
+  100% {opacity: .9}
+}
