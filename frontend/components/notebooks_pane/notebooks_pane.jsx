@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { toggle } from '../../actions/ui';
 import { fetchNotebooks, fetchFromNotebook } from '../../actions/notebooks';
 
@@ -35,6 +36,7 @@ class SlidingPane extends React.Component {
   }
 
   onClick(id){
+    this.props.history.push('/home')
     this.props.fetchFromNotebook(id);
     this.props.toggle();
     this.animateExit();
@@ -88,4 +90,4 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default connect(mapState,mapDispatch)(SlidingPane)
+export default withRouter(connect(mapState,mapDispatch)(SlidingPane))

@@ -28,6 +28,7 @@ class SlidingPane extends React.Component {
     }
   }
 
+
   animateExit(){
     this.setState({panelExit:'panel-exit'});
     setTimeout(()=>this.setState({on: false}),900);

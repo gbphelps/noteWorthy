@@ -40,6 +40,7 @@ export default class TextEditor extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
+    console.log(nextProps);
     if (!nextProps.note.title.length) {
       document.getElementsByClassName('title-input')[0].focus();
     }

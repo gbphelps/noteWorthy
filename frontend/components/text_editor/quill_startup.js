@@ -7,7 +7,7 @@ export const quillStartup = () => {
     modules: {
       toolbar: '#toolbar'
     },
-    placeholder: 'Compose an epic...',
+    placeholder: 'Just start typing...',
     theme: 'snow'
   };
   return new Quill(container, options);
