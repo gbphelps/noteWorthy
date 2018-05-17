@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import UserSquare from './user_square';
 import { logout } from '../../actions/session';
 import { Link, withRouter } from 'react-router-dom';
-import { toggleNotebooks, toggleSearch, toggleNotes } from '../../actions/ui';
+import { toggle } from '../../actions/ui';
 
 
 let LinkedIcon = ({text, icon, path}) => {
@@ -45,7 +45,7 @@ class NavBar extends React.Component {
             icon='mtgnote'
             path='/'/>
 
-          <div className={'search icon'} onClick={this.props.toggleSearch}>
+          <div className={'search icon'} onClick={()=>this.props.toggle('search')}>
             <div className='popup'>
               <img className='popup-arrow' src={popupTail}/>
               <div className='popup-body'>Search</div>
@@ -59,14 +59,14 @@ class NavBar extends React.Component {
             icon='star'
             path='/'/>
 
-          <div className={'note icon'} onClick={this.props.toggleNotes}>
+          <div className={'note icon'} onClick={()=>this.props.toggle('notes')}>
               <div className='popup'>
                 <img className='popup-arrow' src={popupTail}/>
                 <div className='popup-body'>Notes</div>
               </div>
             </div>
 
-          <div className={'notebook icon'} onClick={this.props.toggleNotebooks}>
+          <div className={'notebook icon'} onClick={()=>this.props.toggle('notebooks')}>
               <div className='popup'>
                 <img className='popup-arrow' src={popupTail}/>
                 <div className='popup-body'>Notebooks</div>
@@ -95,9 +95,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     logout: () => dispatch(logout()),
-    toggleNotebooks: () => dispatch(toggleNotebooks()),
-    toggleSearch: () => dispatch(toggleSearch()),
-    toggleNotes: () => dispatch(toggleNotes())
+    toggle: entity => dispatch(toggle(entity)),
   };
 };
 

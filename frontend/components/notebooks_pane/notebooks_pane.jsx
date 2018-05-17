@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleNotebooks } from '../../actions/ui';
+import { toggle } from '../../actions/ui';
 import { fetchNotebooks, fetchFromNotebook } from '../../actions/notebooks';
 
 import values from 'lodash/values'
@@ -36,7 +36,7 @@ class SlidingPane extends React.Component {
 
   onClick(id){
     this.props.fetchFromNotebook(id);
-    this.props.toggleNotebooks();
+    this.props.toggle();
     this.animateExit();
   }
 
@@ -84,7 +84,7 @@ const mapDispatch = dispatch => {
   return {
     fetchNotebooks: () => dispatch(fetchNotebooks()),
     fetchFromNotebook: id => dispatch(fetchFromNotebook(id)),
-    toggleNotebooks: () => dispatch(toggleNotebooks())
+    toggle: () => dispatch(toggle('notebooks'))
   };
 };
 

@@ -1,5 +1,4 @@
-import { TOGGLE_NOTEBOOKS, TOGGLE_SEARCH, TOGGLE_NOTES } from '../actions/ui';
-
+import { TOGGLE } from '../actions/ui';
 
 const nullState = {
   notebooks: false,
@@ -10,12 +9,8 @@ const nullState = {
 
 const uiReducer = (state = nullState, action) => {
   switch(action.type) {
-    case TOGGLE_NOTEBOOKS:
-      return Object.assign({}, nullState, {notebooks: !state.notebooks})
-    case TOGGLE_SEARCH:
-      return Object.assign({}, nullState, {search: !state.search})
-    case TOGGLE_NOTES:
-      return Object.assign({}, nullState, {notes: !state.notes})
+    case TOGGLE:
+      return Object.assign({},nullState, {[action.entity]: !state[action.entity]});
     default:
       return nullState;
   }
