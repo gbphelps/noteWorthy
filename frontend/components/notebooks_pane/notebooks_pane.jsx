@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { toggleNotebooks } from '../../actions/ui';
-import { fetchNotebooks } from '../../actions/notebooks';
+import { fetchNotebooks, fetchFromNotebook } from '../../actions/notebooks';
 import values from 'lodash/values'
 
 class NotebooksPane extends React.Component {
@@ -12,7 +12,8 @@ class NotebooksPane extends React.Component {
       panelExit: '',
       search: ''
     }
-    this.update = this.update.bind(this)
+    this.update = this.update.bind(this);
+    this.notebookClick = this.notebookClick.bind(this)
   }
 
   componentDidMount(){
@@ -21,11 +22,21 @@ class NotebooksPane extends React.Component {
 
   componentWillReceiveProps(nextProps){
     if (!nextProps.active && this.state.on){
-      this.setState({panelExit:'panel-exit'});
-      setTimeout(()=>this.setState({on: false}),900);
+      this.animateExit();
     }else if (!this.state.on && nextProps.active){
       this.setState({on: true, panelExit: false})
     }
+  }
+
+  animateExit(){
+    this.setState({panelExit:'panel-exit'});
+    setTimeout(()=>this.setState({on: false}),900);
+  }
+
+  notebookClick(id){
+    this.props.fetchFromNotebook(id);
+    this.props.toggleNotebooks();
+    this.animateExit();
   }
 
   update(e){
@@ -35,7 +46,9 @@ class NotebooksPane extends React.Component {
   notebooksList(){
     return values(this.props.notebooks).map(notebook =>
       notebook.name.includes(this.state.search) ? (
-        <li key={notebook.id}>
+        <li
+          key={notebook.id}
+          onClick={()=>this.notebookClick(notebook.id)}>
           {notebook.name}
         </li>  ) : null )
   }
@@ -68,7 +81,9 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchNotebooks: () => dispatch(fetchNotebooks())
+    fetchNotebooks: () => dispatch(fetchNotebooks()),
+    fetchFromNotebook: id => dispatch(fetchFromNotebook(id)),
+    toggleNotebooks: () => dispatch(toggleNotebooks())
   };
 };
 
