@@ -8,11 +8,6 @@ export default class NoteBody extends React.Component {
     super(props);
   }
 
-  crop(){
-    return this.props.note.title.length > 15 ?
-      this.props.note.title.slice(0,15) :
-      this.props.note.title;
-  }
 
   render(){
     return(
@@ -20,7 +15,7 @@ export default class NoteBody extends React.Component {
       <Link to={`/home/${this.props.note.id}`}>
         <div className="note-wrapper">
           <div className='note-body'>
-            <div className='title'>{this.crop()}</div>
+            <div className='title'>{this.props.note.title}</div>
             <div className='date'>{formatTime(this.props.note.updated_at)}</div>
             <p className='body-of-note'>{JSON.parse(this.props.note.body).plainText}</p>
           </div>
