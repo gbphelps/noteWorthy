@@ -5,14 +5,26 @@ import { toggleNotebooks } from '../../actions/ui'
 class NotebooksPane extends React.Component {
   constructor(props){
     super(props);
-    this.state={}
+    this.state={
+      on: false,
+      panelExit: ''
+    }
   }
-////TODO: ADD LOGIC FOR TIMEOUT AND DISAPPEAR
+
+  componentWillReceiveProps(nextProps){
+    if (!nextProps.active && this.state.on){
+      this.setState({panelExit:'panel-exit'});
+      setTimeout(()=>this.setState({on: false}),900);
+    }else{
+      this.setState({on: true, panelExit: false})
+    }
+  }
+
   render(){
-    if (!this.props.active) return null;
+    if (!this.state.on) return null;
     return(
-      <div className='notebooks-modular'>
-        <div className='notebooks-veil' />
+      <div className={`notebooks-modular ${this.state.panelExit}`}>
+        <div className='notebooks-veil'/>
         <div className='notebooks-pane'>Hello World</div>
       </div>
     )
