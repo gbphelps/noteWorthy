@@ -1,8 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { toggleNotebooks } from '../../actions/ui';
-import { fetchNotebooks, fetchFromNotebook } from '../../actions/notebooks';
-
+import { fetchNotes } from '../../actions/notes'
+import { toggleSearch } from '../../actions/ui'
+import { connect } from 'react-redux'
 import values from 'lodash/values'
 
 class SlidingPane extends React.Component {
@@ -18,7 +17,7 @@ class SlidingPane extends React.Component {
   }
 
   componentDidMount(){
-    this.props.fetchNotebooks()
+    this.props.fetchNotes()
   }
 
   componentWillReceiveProps(nextProps){
@@ -35,8 +34,7 @@ class SlidingPane extends React.Component {
   }
 
   onClick(id){
-    this.props.fetchFromNotebook(id);
-    this.props.toggleNotebooks();
+    this.props.toggleSearch();
     this.animateExit();
   }
 
@@ -44,13 +42,14 @@ class SlidingPane extends React.Component {
       this.setState({search: e.target.value});
   }
 
-  notebookList(){
-    return values(this.props.notebooks).map(notebook =>
-      notebook.name.includes(this.state.search) ? (
+  notesList(){
+    return values(this.props.notes).map(note =>
+      note.title.includes(this.state.search) ||
+      note.body.includes(this.state.search) ? (
         <li
-          key={notebook.id}
-          onClick={()=>this.onClick(notebook.id)}>
-          {notebook.name}
+          key={note.id}>
+          {note.title}
+          {JSON.parse(note.body).plainText}
         </li>  ) : null )
   }
 
@@ -60,13 +59,13 @@ class SlidingPane extends React.Component {
       <div className={`notebooks-modular ${this.state.panelExit}`}>
         <div className='notebooks-veil'/>
         <div className='notebooks-pane'>
-          <div>Notebooks</div>
+          <div>Search</div>
           <input
             className='input'
-            placeholder='Search Notebooks'
+            placeholder='Search Notes'
             value={this.state.search}
             onChange={this.update}/>
-          {this.notebookList()}
+          {this.notesList()}
         </div>
       </div>
     )
@@ -75,16 +74,15 @@ class SlidingPane extends React.Component {
 
 const mapState = state => {
   return {
-    active: state.ui.notebooks,
-    notebooks: state.entities.notebooks,
+    active: state.ui.search,
+    notes: state.entities.notes,
   };
 };
 
 const mapDispatch = dispatch => {
   return {
-    fetchNotebooks: () => dispatch(fetchNotebooks()),
-    fetchFromNotebook: id => dispatch(fetchFromNotebook(id)),
-    toggleNotebooks: () => dispatch(toggleNotebooks())
+    fetchNotes: () => dispatch(fetchNotes()),
+    toggleNotes: () => dispatch(toggleNotes())
   };
 };
 

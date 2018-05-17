@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import UserSquare from './user_square';
 import { logout } from '../../actions/session';
 import { Link, withRouter } from 'react-router-dom';
-import { toggleNotebooks } from '../../actions/ui';
+import { toggleNotebooks, toggleSearch, toggleNotes } from '../../actions/ui';
 
 
 let LinkedIcon = ({text, icon, path}) => {
@@ -44,10 +44,13 @@ class NavBar extends React.Component {
             text='New Meeting Note'
             icon='mtgnote'
             path='/'/>
-          <LinkedIcon
-            text='Search'
-            icon='search'
-            path='/'/>
+
+          <div className={'search icon'} onClick={this.props.toggleSearch}>
+            <div className='popup'>
+              <img className='popup-arrow' src={popupTail}/>
+              <div className='popup-body'>Search</div>
+            </div>
+          </div>
         </nav>
 
         <nav className='lower-nav'>
@@ -55,10 +58,13 @@ class NavBar extends React.Component {
             text='Shortcuts'
             icon='star'
             path='/'/>
-          <LinkedIcon
-            text='Notes'
-            icon='note'
-            path='/'/>
+
+          <div className={'note icon'} onClick={this.props.toggleNotes}>
+              <div className='popup'>
+                <img className='popup-arrow' src={popupTail}/>
+                <div className='popup-body'>Notes</div>
+              </div>
+            </div>
 
           <div className={'notebook icon'} onClick={this.props.toggleNotebooks}>
               <div className='popup'>
@@ -89,7 +95,9 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     logout: () => dispatch(logout()),
-    toggleNotebooks: () => dispatch(toggleNotebooks())
+    toggleNotebooks: () => dispatch(toggleNotebooks()),
+    toggleSearch: () => dispatch(toggleSearch()),
+    toggleNotes: () => dispatch(toggleNotes())
   };
 };
 
