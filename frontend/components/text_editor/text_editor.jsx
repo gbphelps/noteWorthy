@@ -17,7 +17,7 @@ export default class TextEditor extends React.Component{
       taggings: {},
       altered: false,
       change: new Delta(),
-      selection: null
+      selection: null,
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,7 +33,9 @@ export default class TextEditor extends React.Component{
 
   setupDeltaListener(){
     this.editor.on('text-change', delta => {
-      this.setState({change: this.state.change.compose(delta)});
+      this.setState({
+        change: this.state.change.compose(delta)
+      });
     });
   }
 
@@ -74,6 +76,9 @@ export default class TextEditor extends React.Component{
 
   componentDidMount(){
     if (!this.props.note) this.redirect();
+    window.onbeforeunload = () => {
+      if (this.state.change.length() > 0) return 'Wait! Your latest changes have not been saved. Leave site?';
+    }
     this.props.onMount(this.props.match.params.noteId);
     this.editor = quillStartup();
     this.setupDeltaListener();
