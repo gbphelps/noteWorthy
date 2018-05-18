@@ -12,9 +12,12 @@ export const Toolbar = () => (
 
   <button className="ql-bold"></button>
   <button className="ql-italic"></button>
+  <button className="ql-list" value="ordered"></button>
+  <button className="ql-list" value="bullet"></button>
+  <button className="ql-link"></button>
 
-  <select className="ql-color">
-  </select>
+  <select className="ql-color"></select>
+  <select className="ql-background"></select>
 
   <button className="ql-script" value="sub"></button>
   <button className="ql-script" value="super"></button>

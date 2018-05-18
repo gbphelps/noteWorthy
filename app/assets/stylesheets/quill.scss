@@ -23,6 +23,8 @@
 .ql-container.ql-disabled .ql-editor ul[data-checked] > li::before {
   pointer-events: none;
 }
+
+
 .ql-clipboard {
   left: -100000px;
   height: 1px;
