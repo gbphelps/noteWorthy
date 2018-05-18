@@ -29,7 +29,6 @@ export const Toolbar = () => (
 
   <button className="ql-list" value="ordered"></button>
   <button className="ql-list" value="bullet"></button>
-  <button className="ql-link"></button>
 
 
 
