@@ -3,6 +3,99 @@
   overflow-y:scroll;
 }
 
+//////////////////////////////////////////////////////
+
+#toolbar .ql-font span[data-label="Georgia"]::before {
+  font-family: "Georgia";
+}
+
+.ql-font-georgia {
+  font-family: 'Georgia'
+}
+
+//////////////////////////////////////////////////////
+
+
+#toolbar .ql-font span[data-label="Arial"]::before {
+  font-family: "Arial";
+}
+
+.ql-font-arial {
+  font-family: 'Arial'
+}
+
+//////////////////////////////////////////////////////
+
+#toolbar .ql-font span[data-label="Pixels"]::before {
+  font-family: "Press Start 2P";
+}
+
+.ql-font-pressStart2P {
+  font-family: 'Press Start 2P'
+}
+
+//////////////////////////////////////////////////////
+
+#toolbar .ql-font span[data-label="Monoton"]::before {
+  font-family: "Monoton";
+}
+
+.ql-font-monoton {
+  font-family: 'Monoton'
+}
+
+//////////////////////////////////////////////////////
+
+#toolbar .ql-font span[data-label="Sharpie"]::before {
+  font-family: "Permanent Marker";
+}
+
+.ql-font-permanentMarker {
+  font-family: 'Permanent Marker'
+}
+
+//////////////////////////////////////////////////////
+
+#toolbar .ql-font span[data-label="Pacifico"]::before {
+  font-family: "Pacifico";
+}
+
+.ql-font-pacifico {
+  font-family: 'Pacifico'
+}
+
+//////////////////////////////////////////////////////
+
+#toolbar .ql-font span[data-label="Courier"]::before {
+  font-family: "Courier";
+}
+
+.ql-font-courier {
+  font-family: 'Courier'
+}
+
+//////////////////////////////////////////////////////
+
+#toolbar .ql-font span[data-label="Times"]::before {
+  font-family: "Times";
+}
+
+.ql-font-times {
+  font-family: 'Times'
+}
+
+//////////////////////////////////////////////////////
+
+#toolbar .ql-font span[data-label="Lato"]::before {
+  font-family: "Lato";
+}
+
+.ql-font-lato {
+  font-family: 'Lato'
+}
+
+
+
 /*!
  * Quill Editor v1.3.6
  * https://quilljs.com/
@@ -322,7 +415,7 @@
   margin: 0 0 0 auto;
 }
 .ql-editor .ql-bg-black {
-  background-color: #bbb;
+  background-color: #000;
 }
 .ql-editor .ql-bg-red {
   background-color: #e60000;
@@ -848,7 +941,7 @@
   background-color: #fff;
 }
 .ql-snow .ql-color-picker.ql-color .ql-picker-item {
-  background-color: #bbb;
+  background-color: #000;
 }
 .ql-toolbar.ql-snow {
   box-sizing: border-box;

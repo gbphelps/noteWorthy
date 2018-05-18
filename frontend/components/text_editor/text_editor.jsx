@@ -5,6 +5,9 @@ import Quill from 'quill';
 import { quillStartup } from './quill_startup';
 import { Toolbar } from './toolbar'
 
+
+
+
 export default class TextEditor extends React.Component{
   constructor(props){
     super(props);
