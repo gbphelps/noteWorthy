@@ -66,7 +66,10 @@
 
 
 .notebook-selector{
-    width: 200px;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .notebook-popup{
@@ -108,7 +111,7 @@
 }
 
 .selected{
-  color: red
+  background: #ececec;
 }
 
 .note-input{
@@ -145,13 +148,13 @@
   transition: .5s;
   overflow-y: scroll;
   background:white;
+  z-index: 2;
 }
 
 .tag-selector:hover > .tags-popup{
   height: 300px;
   box-shadow: 5px 5px 5px #ececec;
   border-bottom: 1px solid #ececec;
-  z-index: 2;
 }
 
 .noteListItem-enter{
