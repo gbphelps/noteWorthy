@@ -51,6 +51,7 @@ class TagSelector extends React.Component {
   handleSubmit(e){
     e.preventDefault();
     this.props.createTag(this.state)
+    .then(action=>this.props.toggleTag(action.tag.id))
   }
 
   updateName(e){
