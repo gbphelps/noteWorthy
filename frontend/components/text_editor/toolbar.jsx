@@ -11,6 +11,11 @@ export const Toolbar = () => (
   </select>
 
   <button className="ql-bold"></button>
+  <button className="ql-italic"></button>
+
+  <select className="ql-color">
+  </select>
+
   <button className="ql-script" value="sub"></button>
   <button className="ql-script" value="super"></button>
 </div>

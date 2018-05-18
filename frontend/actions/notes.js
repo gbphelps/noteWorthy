@@ -33,7 +33,16 @@ export const removeNote = id => {
   };
 };
 
+export const CLEAR_NOTES = 'CLEAR_NOTES'
+export const clearNotes = () => {
+  return {
+    type: CLEAR_NOTES
+  };
+};
+
+
 export const fetchNotes = () => dispatch => {
+  dispatch(clearNotes());
   return Api.fetchNotes()
     .then(notes => dispatch(receiveNotes(notes)))
 };

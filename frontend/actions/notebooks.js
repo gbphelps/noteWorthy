@@ -1,5 +1,5 @@
 import * as Api from '../utils/notebooks';
-import { receiveNotes } from './notes';
+import { receiveNotes, clearNotes } from './notes';
 
 export const RECEIVE_NOTEBOOKS = 'RECEIVE_NOTEBOOKS';
 export const RECEIVE_NOTEBOOK = 'RECEIVE_NOTEBOOK';
@@ -34,6 +34,7 @@ export const fetchNotebooks = () => dispatch => {
 
 
 export const fetchFromNotebook = id => dispatch => {
+  dispatch(clearNotes());
   return Api.fetchNotebook(id)
     .then(notebook => dispatch(receiveNotes(notebook.notes)))
 };

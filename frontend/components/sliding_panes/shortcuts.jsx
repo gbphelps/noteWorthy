@@ -43,10 +43,9 @@ class SlidingPane extends React.Component {
   shortcutsList(){
     console.log(this.props.shortcuts);
     return values(this.props.shortcuts).map(note =>
-      <li className='search-entry-container'>
+      <li key={note.id} className='search-entry-container'>
         <div
-          className='search-entry'
-          key={note.id}
+          className='search-entry'  
           onClick={()=>this.onClick(note.id)}>
           <div className='notebook-search-entry-title'>{note.title}</div>
         </div>

@@ -1,4 +1,4 @@
-import { RECEIVE_NOTES, RECEIVE_NOTE, REMOVE_NOTE } from '../actions/notes';
+import { RECEIVE_NOTES, RECEIVE_NOTE, REMOVE_NOTE, CLEAR_NOTES } from '../actions/notes';
 import merge from 'lodash/merge'
 
 const notesReducer = (state = {}, action) => {
@@ -11,6 +11,8 @@ const notesReducer = (state = {}, action) => {
       const prev = merge({},state);
       delete prev[action.id];
       return prev;
+    case CLEAR_NOTES:
+      return {};
     default:
       return state;
   }

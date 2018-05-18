@@ -49,11 +49,10 @@ class SlidingPane extends React.Component {
     return values(this.props.notes).map(note =>
       note.title.includes(this.state.search) ||
       JSON.parse(note.body).plainText.includes(this.state.search) ? (
-        <li className='search-entry-container'>
+        <li   key={note.id} className='search-entry-container'>
           <div
             className='search-entry'
-            onClick={()=>this.onClick(note.id)}
-            key={note.id}>
+            onClick={()=>this.onClick(note.id)}>
 
             <div className='notebook-search-entry-title'>
               {note.title || 'Untitled'}
