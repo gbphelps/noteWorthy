@@ -5,8 +5,7 @@ import Quill from 'quill';
 import { quillStartup } from './quill_startup';
 import { Toolbar } from './toolbar'
 
-
-
+const Delta = Quill.import('delta')
 
 export default class TextEditor extends React.Component{
   constructor(props){
@@ -16,7 +15,9 @@ export default class TextEditor extends React.Component{
       body:"{\"richText\":{\"ops\":[{\"insert\":\"\\n\"}]},\"plainText\":\"\\n\"}",
       notebook_id: null,
       taggings: {},
-      altered: false
+      altered: false,
+      change: new Delta(),
+      selection: null
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,10 +30,23 @@ export default class TextEditor extends React.Component{
     this.props.history.push('/home');
   }
 
-  componentDidMount(){
-    if (!this.props.note) this.redirect();
-    this.props.onMount(this.props.match.params.noteId);
-    this.editor = quillStartup();
+
+  setupDeltaListener(){
+    this.editor.on('text-change', delta => {
+      this.setState({change: this.state.change.compose(delta)});
+    });
+  }
+
+  setupAutosave(){
+    setInterval(()=> {
+      if (this.state.change.length() > 0){
+        console.log('pizzarat');
+        this.postToDatabase();
+      }
+    }, 5000)
+  }
+
+  setupControlledState(){
     this.editor.on('editor-change',()=>{
       const richText=this.editor.getContents();
       const plainText=this.editor.getText();
@@ -42,10 +56,33 @@ export default class TextEditor extends React.Component{
     });
   }
 
+  postToDatabase(){
+
+    this.setState({
+      change: new Delta(),
+      selection: this.editor.getSelection()
+    });
+
+    return this.props.action({
+      title: this.state.title,
+      body: this.state.body,
+      notebook_id: this.state.notebook_id,
+      id: this.state.id
+    })
+  }
+
+
+  componentDidMount(){
+    if (!this.props.note) this.redirect();
+    this.props.onMount(this.props.match.params.noteId);
+    this.editor = quillStartup();
+    this.setupDeltaListener();
+    this.setupControlledState();
+    if (this.props.formType==='Edit') this.setupAutosave();
+  }
+
+
   componentWillReceiveProps(nextProps){
-    if (nextProps.note && !nextProps.note.title.length) {
-      document.getElementsByClassName('title-input')[0].focus();
-    }
     const fetchedNote = nextProps.note;
     const prevId = +this.props.match.params.noteId;
 
@@ -54,9 +91,13 @@ export default class TextEditor extends React.Component{
       this.props.onMount(fetchedNote.id);
       this.setState({altered:false})
     } else {
-      this.editor.setContents(JSON.parse(fetchedNote.body).richText)
+      this.editor.setContents(JSON.parse(fetchedNote.body).richText);
+      this.editor.setSelection(this.state.selection);
       this.setState(
-        Object.assign({},fetchedNote,{taggings: nextProps.taggings}))
+        Object.assign({},fetchedNote,{
+          taggings: nextProps.taggings,
+          change: new Delta()
+        }))
     }
   }
 
@@ -66,7 +107,8 @@ export default class TextEditor extends React.Component{
     const next = this.state.taggings;
 
     e.preventDefault();
-    this.props.action(this.state)
+
+    this.postToDatabase()
       .then(action =>
         this.handleTaggings(prev, next, action.payload.note.id))
       .then(noteId => {
@@ -129,7 +171,7 @@ export default class TextEditor extends React.Component{
               marginLeft:'10px',
               position:'fixed',
               right:'20px',
-              top: '10px',
+              top: '5px',
               padding:'0px'}}>
               {this.props.formType}
             </div>

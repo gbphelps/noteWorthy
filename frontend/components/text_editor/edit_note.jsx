@@ -10,7 +10,7 @@ const mapState = (state, ownProps) => {
   return {
     note: state.entities.notes[ownProps.match.params.noteId],
     taggings: state.entities.taggings,
-    formType: 'Edit Note'
+    formType: 'Edit'
   };
 };
 
