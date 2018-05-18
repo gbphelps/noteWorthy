@@ -139,15 +139,17 @@ export default class TextEditor extends React.Component{
                   toggleTag={this.toggleTag}
                   taggings={this.state.taggings}/>
 
+                <Toolbar />
             </div>
           </div>
-            <Toolbar />
+          <div className='text-editor-content'>
             <input
               className='title-input'
               value={this.state.title}
               placeholder='Title your note'
               onChange={this.update('title')}/>
             <div id='editor'/>
+            </div>
         </div>
     );
   }

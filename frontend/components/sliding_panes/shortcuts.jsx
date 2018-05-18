@@ -45,7 +45,7 @@ class SlidingPane extends React.Component {
     return values(this.props.shortcuts).map(note =>
       <li key={note.id} className='search-entry-container'>
         <div
-          className='search-entry'  
+          className='search-entry'
           onClick={()=>this.onClick(note.id)}>
           <div className='notebook-search-entry-title'>{note.title}</div>
         </div>
@@ -56,7 +56,8 @@ class SlidingPane extends React.Component {
     if (!this.state.on) return null;
     return(
       <div className={`notebooks-modular ${this.state.panelExit}`}>
-        <div className='notebooks-veil'/>
+        <div className='notebooks-veil'
+             onClick={this.props.toggle}/>
         <div className='notebooks-pane'>
 
           <div className='notebooks-header'>

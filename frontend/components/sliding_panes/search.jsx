@@ -70,7 +70,8 @@ class SlidingPane extends React.Component {
     if (!this.state.on) return null;
     return(
       <div className={`notebooks-modular ${this.state.panelExit}`}>
-        <div className='notebooks-veil'/>
+        <div className='notebooks-veil'
+             onClick={this.props.toggle}/>
         <div className='notebooks-pane'>
 
       <div className='notebooks-header'>
