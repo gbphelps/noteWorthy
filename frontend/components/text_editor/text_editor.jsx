@@ -124,8 +124,9 @@ export default class TextEditor extends React.Component{
             style={{
               width:'120px',
               marginLeft:'10px',
-              position:'absolute',
-              right:'10px',
+              position:'fixed',
+              right:'20px',
+              top: '10px',
               padding:'0px'}}>
               {this.props.formType}
             </div>

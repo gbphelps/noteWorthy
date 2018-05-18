@@ -25,7 +25,7 @@
 .title-input{
   display:block;
   margin:20px 0 0;
-  padding: 0 0 0 18px;
+  padding: 0 0 0 14px;
   box-sizing:border-box;
   border-radius:0;
   border:none;
@@ -67,6 +67,7 @@
   display: block;
   position:relative;
   bottom:5px;
+  z-index: 4
 }
 
 
@@ -85,7 +86,7 @@
   height:0px;
   box-sizing:border-box;
   overflow-y:scroll;
-  width:300px;
+  width:250px;
   position:absolute;
   top:37px;
   left:-1px;
@@ -149,7 +150,7 @@
 
 .tags-popup {
   height: 0;
-  width: 100px;
+  width: 150px;
   border: 1px solid #ececec;
   border-bottom: none;
   position: absolute;
