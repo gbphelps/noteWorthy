@@ -38,7 +38,10 @@ class SlidingPane extends React.Component {
   onClick(id){
     this.props.toggle();
     this.animateExit();
-    this.props.history.push(`/home/${id}`);
+    //TODO: Need to figure out which notebook you want to push to, or whether to keep as /null.
+    //current notebook, notebook containing note, or null (inbox)??
+    //REDIRECT TO WHICHEVER NOTEBOOK USER IS LOOKING IN (INCLUDE SEARCH INBOX OPTION)
+    this.props.history.push(`/home/null/${id}`);
   }
 
   update(e){

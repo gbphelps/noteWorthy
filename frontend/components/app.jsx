@@ -24,7 +24,7 @@ export const App = () => {
   return (
     <div className='app'>
       <ProtectedRoute
-        path = '/home'
+        path = '/home/:notebookId'
         exact = {false}
         component = {Main}/>
       <AuthRoute

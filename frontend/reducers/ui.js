@@ -18,7 +18,6 @@ const initialState = {
 const uiReducer = (state = nullState, action) => {
   switch(action.type) {
     case TOGGLE:
-      console.log(state);
       return Object.assign({}, nullState, {[action.entity]: !state[action.entity]});
     default:
       return state;

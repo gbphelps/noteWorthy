@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatTime } from '../../utils/format_time';
-import NoteOptions from './note_options'
+import NoteOptions from './note_options';
+import { withRouter } from 'react-router-dom'
 
-export default class NoteBody extends React.Component {
+class NoteBody extends React.Component {
   constructor(props){
     super(props);
   }
@@ -11,8 +12,8 @@ export default class NoteBody extends React.Component {
 
   render(){
     return(
-      <div className={`note-hover-event`}>
-      <Link to={`/home/${this.props.note.id}`}>
+      <div className={`note-hover-event`} onClick={()=> console.log(this.props)}>
+      <Link to={`/home/${this.props.match.params.notebookId}/${this.props.note.id}`}>
         <div className="note-wrapper">
           <div className='note-body'>
             <div className='title'>{this.props.note.title || 'Untitled'}</div>
@@ -29,3 +30,5 @@ export default class NoteBody extends React.Component {
     );
   }
 }
+
+export default withRouter(NoteBody)

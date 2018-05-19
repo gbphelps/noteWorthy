@@ -27,7 +27,8 @@ export default class TextEditor extends React.Component{
   }
 
   redirect(){
-    this.props.history.push('/home');
+    console.log('redirecting');
+    this.props.history.push(`/home/${this.props.match.params.notebookId}`);
   }
 
 
@@ -42,7 +43,6 @@ export default class TextEditor extends React.Component{
   setupAutosave(){
     setInterval(()=> {
       if (this.state.change.length() > 0){
-        console.log('pizzarat');
         this.postToDatabase();
       }
     }, 5000)
@@ -75,11 +75,12 @@ export default class TextEditor extends React.Component{
 
 
   componentDidMount(){
-    if (!this.props.note) this.redirect();
+    console.log(this.props);
+    if (!this.props.note) this.redirect(); //TODO: need to find a way not to redirect here
     window.onbeforeunload = () => {
       if (this.state.change.length() > 0) return 'Wait! Your latest changes have not been saved. Leave site?';
     }
-    this.props.onMount(this.props.match.params.noteId);
+    this.props.onMount(this.props.match.params.noteId); //TODO: .fail(this.redirect()), but that doesn't work with the CREATE form
     this.editor = quillStartup();
     this.setupDeltaListener();
     this.setupControlledState();
@@ -110,6 +111,7 @@ export default class TextEditor extends React.Component{
   handleSubmit(e){
     const prev = this.props.taggings;
     const next = this.state.taggings;
+    const notebookId = this.state.notebook_id;
 
     e.preventDefault();
 
@@ -118,7 +120,7 @@ export default class TextEditor extends React.Component{
         this.handleTaggings(prev, next, action.payload.note.id))
       .then(noteId => {
         if (!this.props.match.params.noteId){
-          this.props.history.push(`/home/${noteId}`)
+          this.props.history.push(`/home/${notebookId}/${noteId}`)
         }})
   }
 

@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 const NoteOptions = (props) => {
 
  const toggleShortcut = () => {
-   console.log(props.note.shortcut);
    props.updateNote({
      id: props.note.id,
      shortcut: !props.note.shortcut

@@ -39,7 +39,7 @@ class NavBar extends React.Component {
           <LinkedIcon
             text='New Note'
             icon='plus'
-            path='/'/>
+            path={this.props.match.url}/>
           <LinkedIcon
             text='New Meeting Note'
             icon='mtgnote'
@@ -54,7 +54,7 @@ class NavBar extends React.Component {
         </nav>
 
         <nav className='lower-nav'>
-      
+
           <div className={'star icon'} onClick={()=>this.props.toggle('shortcuts')}>
               <div className='popup'>
                 <img className='popup-arrow' src={popupTail}/>
@@ -104,4 +104,4 @@ const mapDispatch = dispatch => {
 
 
 
-export default connect(mapState,mapDispatch)(NavBar)
+export default withRouter(connect(mapState,mapDispatch)(NavBar))

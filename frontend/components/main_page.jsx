@@ -16,11 +16,11 @@ export const Main = () => {
       <NavBar />
       <NotesPane />
         <ProtectedRoute
-          path='/home'
+          path='/home/:notebookId'
           exact={true}
           component={CreateNote}/>
         <ProtectedRoute
-          path='/home/:noteId'
+          path='/home/:notebookId/:noteId'
           exact={true}
           component={EditNote}/>
         <NotebooksPane />

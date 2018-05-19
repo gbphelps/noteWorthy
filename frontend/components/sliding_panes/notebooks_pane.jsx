@@ -37,7 +37,7 @@ class SlidingPane extends React.Component {
   }
 
   onClick(id){
-    this.props.history.push('/home')
+    this.props.history.push(`/home/${id}`)
     this.props.fetchFromNotebook(id);
     this.props.toggle();
     this.animateExit();

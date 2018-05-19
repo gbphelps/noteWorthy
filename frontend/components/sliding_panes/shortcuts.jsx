@@ -35,13 +35,16 @@ class SlidingPane extends React.Component {
   }
 
   onClick(id){
-    this.props.history.push(`/home/${id}`);
+    //TODO: Need to figure out which notebook you want to push to, or whether to keep as /null.
+    //current notebook, notebook containing note, or null (inbox)??
+    //shortcuts currently pretty broken - imports the shortcutted note to the current notes list (not good)
+    //also doesn't even pull up the body.
+    this.props.history.push(`/home/null/${id}`);
     this.props.toggle();
     this.animateExit();
   }
 
   shortcutsList(){
-    console.log(this.props.shortcuts);
     return values(this.props.shortcuts).map(note =>
       <li key={note.id} className='search-entry-container'>
         <div

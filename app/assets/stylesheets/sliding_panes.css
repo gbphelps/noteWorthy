@@ -117,8 +117,8 @@
 }
 
 @keyframes panelSlider {
-  0% {left:-390px}
-  100% {left:70px}
+  0% {left:-390px;z-index:5}
+  100% {left:70px;z-index:5}
 }
 
 @keyframes cloud {
