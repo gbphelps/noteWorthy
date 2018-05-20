@@ -2,7 +2,7 @@ class Api::AttachedImagesController < ApplicationController
 
   def create
     @attached_image = AttachedImage.new(image_params)
-    @attached_image.image.attach(io: File.open(image_url(elephant.png)), filename: 'elephant.png')
+    @attached_image.image.attach('./elephant.png')
     if @attached_image.save
       render :show
     else

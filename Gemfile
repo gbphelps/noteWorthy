@@ -30,9 +30,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'jquery-rails'
 
+gem 'activestorage', '~> 5.2'
 
-
-gem "aws-sdk-s3", require: false
+gem 'aws-sdk-s3', '~>1', require: false
 # gem 'paperclip', '5.2.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
