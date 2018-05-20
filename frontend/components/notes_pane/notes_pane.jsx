@@ -6,6 +6,7 @@ import { fetchFromNotebook } from '../../actions/notebooks';
 import NoteBody from './note_body';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { toggle } from '../../actions/ui'
+import { withRouter } from 'react-router-dom'
 
 class NotesPane extends React.Component {
   constructor(props){
@@ -19,8 +20,8 @@ class NotesPane extends React.Component {
 
   componentDidMount(){
     //TODO: change this to fetchFromNotebook and use withRouter. Add logic to handle null/inbox
-    console.log(this.props);
-    this.props.fetchNotes();
+    //oof, other components need all of the notes though. need to implement with logic in the noteslist.
+    this.props.fetchNotes()
   }
 
 /////////
@@ -48,14 +49,17 @@ class NotesPane extends React.Component {
 
   notesList(){
     const list = [];
-    this.props.notes.forEach(note =>
+    const notebookId = this.props.match.params.notebookId;
+
+    this.props.notes.forEach(note => {
+      if (notebookId==='null' || note.notebook_id === +notebookId){
       list.unshift(
         <NoteBody
           key={note.id}
           note={note}
           deleteNote={this.props.deleteNote}
           updateNote={this.props.updateNote}/>
-      ));
+      )}});
     return (
       <CSSTransitionGroup
         transitionName='note'
@@ -107,13 +111,14 @@ const mapDispatch = dispatch => {
     fetchNotes: () => dispatch(fetchNotes()),
     deleteNote: id => dispatch(deleteNote(id)),
     updateNote: note => dispatch(updateNote(note)),
-    toggle: () => dispatch(toggle('notes'))
+    toggle: () => dispatch(toggle('notes')),
+    fetchFromNotebook: id => dispatch(fetchFromNotebook(id))
   }
 };
 
 
 
-export default connect(mapState,mapDispatch)(NotesPane)
+export default withRouter(connect(mapState,mapDispatch)(NotesPane))
 
 
 
