@@ -2,9 +2,10 @@ import Quill from 'quill';
 
 export const quillStartup = () => {
   const container = document.getElementById('editor');
+  const toolbarOptions = ['image']
   const options = {
     modules: {
-      toolbar: '#toolbar'
+      toolbar: '#toolbar' //toolbarOptions
     },
     placeholder: 'Just start typing...',
     theme: 'snow'
