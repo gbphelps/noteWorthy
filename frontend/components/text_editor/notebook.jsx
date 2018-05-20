@@ -55,7 +55,7 @@ class NotebookSelector extends React.Component {
   }
 
   notebookName(){
-    return this.props.notebooks && this.props.notebookId ?
+    return Object.keys(this.props.notebooks).length && this.props.notebookId ?
       this.props.notebooks[this.props.notebookId].name :
       'Select Notebook';
   }

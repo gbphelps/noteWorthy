@@ -16,7 +16,7 @@ const mapState = (state, ownProps) => {
 
 const mapDispatch = (dispatch,ownProps) => {
   return {
-    onMount: id => dispatch(fetchNote(id)),
+    fetchNote: id => dispatch(fetchNote(id)),
     action: note => dispatch(updateNote(note)),
     deleteTagging,
     createTagging,

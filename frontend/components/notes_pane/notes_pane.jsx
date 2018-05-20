@@ -2,6 +2,7 @@ import React from 'react';
 import values from 'lodash/values';
 import { connect } from 'react-redux';
 import { fetchNotes, deleteNote, updateNote } from '../../actions/notes';
+import { fetchFromNotebook } from '../../actions/notebooks';
 import NoteBody from './note_body';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { toggle } from '../../actions/ui'
@@ -18,6 +19,7 @@ class NotesPane extends React.Component {
 
   componentDidMount(){
     //TODO: change this to fetchFromNotebook and use withRouter. Add logic to handle null/inbox
+    console.log(this.props);
     this.props.fetchNotes();
   }
 

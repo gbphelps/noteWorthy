@@ -15,7 +15,7 @@ const mapState = state => {
 const mapDispatch = (dispatch,ownProps) => {
   return {
     action: note => dispatch(createNote(note)),
-    onMount: ()=>{},
+    fetchNote: ()=>{},
     createTagging
   };
 };

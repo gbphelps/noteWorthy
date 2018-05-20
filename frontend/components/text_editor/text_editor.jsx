@@ -73,18 +73,23 @@ export default class TextEditor extends React.Component{
     })
   }
 
+  unsavedWarning(){
+    if (this.state.change.length() > 0) return (
+      'Wait! Your latest changes have not been saved. Leave site?'
+    );
+  }
+
 
   componentDidMount(){
-    console.log(this.props);
-    if (!this.props.note) this.redirect(); //TODO: need to find a way not to redirect here
-    window.onbeforeunload = () => {
-      if (this.state.change.length() > 0) return 'Wait! Your latest changes have not been saved. Leave site?';
-    }
-    this.props.onMount(this.props.match.params.noteId); //TODO: .fail(this.redirect()), but that doesn't work with the CREATE form
     this.editor = quillStartup();
     this.setupDeltaListener();
     this.setupControlledState();
-    if (this.props.formType==='Edit') this.setupAutosave();
+    window.onbeforeunload = this.unsavedWarning;
+
+    if (this.props.formType==='Edit'){
+      this.setupAutosave();
+      this.props.fetchNote(this.props.match.params.noteId).fail(this.redirect);
+    }
   }
 
 
@@ -94,7 +99,7 @@ export default class TextEditor extends React.Component{
 
     if (!fetchedNote) return this.redirect();
     if (fetchedNote.id !== prevId || this.state.altered === true){
-      this.props.onMount(fetchedNote.id);
+      this.props.fetchNote(fetchedNote.id);
       this.setState({altered:false})
     } else {
       this.editor.setContents(JSON.parse(fetchedNote.body).richText);
@@ -131,7 +136,8 @@ export default class TextEditor extends React.Component{
     let altered = false;
 
     prevTags.forEach(tagId => {
-      if (!next[tagId]){altered = true;
+      if (!next[tagId]){
+        altered = true;
         this.props.deleteTagging(prev[tagId].id);
       }
     });
