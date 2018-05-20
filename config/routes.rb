@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
     resource :session, only: [:create, :destroy]
 
+    resources :embeds, only: [:show, :index, :create]
+
     resources :notes, only: [:index, :create, :update, :destroy, :show] do
       collection do
         get 'shortcuts'
