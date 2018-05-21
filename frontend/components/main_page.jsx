@@ -10,6 +10,8 @@ import EditNote from './text_editor/edit_note';
 import { ProtectedRoute } from '../utils/protected_route';
 import React from 'react';
 
+import Test from './image_test'
+
 export const Main = () => {
   return (
     <div className='main'>
@@ -26,6 +28,7 @@ export const Main = () => {
         <NotebooksPane />
         <SearchPane />
         <ShortcutsPane />
+        <Test />
     </div>
   );
 }
