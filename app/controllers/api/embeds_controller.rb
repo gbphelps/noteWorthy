@@ -9,6 +9,11 @@ class Api::EmbedsController < ApplicationController
     render :show
   end
 
+  def show
+    @embed = Embed.find(params[:id])
+  end
+
+
 private
 
   def embed_params

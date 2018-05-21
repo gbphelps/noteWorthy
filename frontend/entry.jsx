@@ -21,3 +21,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   ///////////////////////////////
   ReactDOM.render(<Root store = {store} />, root);
 });
+
+import * as Actions from './actions/embeds';
+window.Actions = Actions
