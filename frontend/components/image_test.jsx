@@ -6,10 +6,32 @@ import values from 'lodash/values';
 class Test extends React.Component {
   constructor(props){
     super(props)
+    this.state={
+      imageFile: null,
+      imageUrl: null,
+      index_location: null,
+      note_id: null
+    }
+    this.updateFile = this.updateFile.bind(this)
   }
 
   componentDidMount(){
     this.props.fetchEmbeds();
+  }
+
+  updateFile(e){
+    const file = e.currentTarget.files[0];
+    const fileReader = new FileReader();
+    fileReader.onloadend = () => {
+      this.setState({
+        imageFile: file,
+        imageUrl: fileReader.result
+      });
+    };
+
+    if (file){
+      fileReader.readAsDataURL(file);
+    }
   }
 
   images(){
@@ -19,7 +41,10 @@ class Test extends React.Component {
 
   render(){
     return (
-      <div>{this.images()}</div>
+      <div>{this.images()}
+        <input type='file' onChange={this.updateFile}/>
+        <img src={this.state.imageUrl}/>
+      </div>
     );
   }
 }

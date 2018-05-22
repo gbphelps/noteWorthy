@@ -17,18 +17,20 @@ export const Main = () => {
     <div className='main'>
       <NavBar />
       <NotesPane />
-        <ProtectedRoute
-          path='/home/:notebookId'
-          exact={true}
-          component={CreateNote}/>
-        <ProtectedRoute
-          path='/home/:notebookId/:noteId'
-          exact={true}
-          component={EditNote}/>
-        <NotebooksPane />
-        <SearchPane />
-        <ShortcutsPane />
-        <Test />
+      <Test />
     </div>
   );
 }
+
+
+// <ProtectedRoute
+//   path='/home/:notebookId'
+//   exact={true}
+//   component={CreateNote}/>
+// <ProtectedRoute
+//   path='/home/:notebookId/:noteId'
+//   exact={true}
+//   component={EditNote}/>
+// <NotebooksPane />
+// <SearchPane />
+// <ShortcutsPane />
