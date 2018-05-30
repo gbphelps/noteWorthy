@@ -89,7 +89,9 @@ export default class TextEditor extends React.Component{
 
 
   postToDatabase(){
-
+    //TODO clean this up
+    //TODO differentiate between existing images and new images
+    //can we somehow move these supporting resource posters to the child components...?
     this.setState({
       change: new Delta(),
     });
@@ -118,8 +120,6 @@ export default class TextEditor extends React.Component{
       plainText: this.editor.getText(),
       richText: imageFreeContent
     }
-    //TODO TODO TODO do the commented-out stuff below with imageFreeContent.
-    //Then grab the noteID from the returned promise (will probably have to dig through the action)
     this.props.action({
       title: this.state.title,
       body: JSON.stringify(textObject),
