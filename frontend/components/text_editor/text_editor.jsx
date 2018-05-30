@@ -50,6 +50,7 @@ export default class TextEditor extends React.Component{
     image = Object.assign(image,{index_location: this.state.selection.index})
     images.push(image);
     this.setState({ images });
+    this.editor.insertEmbed(image.index_location, 'image', image.imageUrl);
     console.log(this.state);
   }
 
