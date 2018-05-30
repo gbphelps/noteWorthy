@@ -18,7 +18,7 @@ export const receiveEmbed = embed => {
   }
 }
 
-export const fetchEmbeds = () => dispatch => {
-  Api.fetchEmbeds()
+export const fetchEmbeds = (id) => dispatch => {
+  Api.fetchEmbeds(id)
     .then(embeds => dispatch(receiveEmbeds(embeds)));
 };

@@ -104,12 +104,15 @@ export default class TextEditor extends React.Component{
     let imageFreeContent = this.editor.getContents().filter(op => {
       if (op.insert.image){
         const image = this.state.images.find(image => image.imageUrl === op.insert.image);
-        imagesToUpload.push({
-          imageFile: image.imageFile,
-          index_location: index
-        });
+        if (image.id){
+          ///TODO UPDATE IMAGE
+        }else{
+          imagesToUpload.push({
+            imageFile: image.imageFile,
+            index_location: index
+          });
+        }
         index++;
-        console.log(imagesToUpload);
         return false;
       }
       index += op.insert.length;
@@ -167,7 +170,11 @@ export default class TextEditor extends React.Component{
       this.setState({altered:false})
     } else {
       this.editor.setContents(JSON.parse(fetchedNote.body).richText);
-      console.log(fetchedNote.images);
+      console.log(nextProps);
+      nextProps.images.forEach(image=>{
+        this.editor.insertEmbed(image.index_location, 'image', image.imageUrl)
+      })
+
       this.editor.setSelection(this.state.selection);
       this.setState(
         Object.assign({},fetchedNote,{
