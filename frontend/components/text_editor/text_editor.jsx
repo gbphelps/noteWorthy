@@ -104,7 +104,7 @@ export default class TextEditor extends React.Component{
     let index = 0;
     let imageFreeContent = this.editor.getContents().filter(op => {
       if (op.insert.image){
-        const image = this.state.images.find(image => image.imageUrl === op.insert.image);
+        const image = this.props.images.find(image => image.imageUrl === op.insert.image);
         if (image.id){
           image.index_location = index;
           updateEmbed(image);

@@ -17,11 +17,3 @@ export const updateEmbed = embed => {
     data: {embed: {index_location: embed.index_location}}
   })
 }
-
-
-export const fetchEmbeds = () => {
-  return $.ajax({
-    method: 'GET',
-    url: 'api/embeds'
-  });
-};
