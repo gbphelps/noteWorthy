@@ -9,6 +9,13 @@ class Api::EmbedsController < ApplicationController
     render :show
   end
 
+
+  def update
+    @embed = Embed.find(params[:id])
+    @embed.update(embed_params)
+    render :show
+  end
+
   def show
     @embed = Embed.find(params[:id])
   end

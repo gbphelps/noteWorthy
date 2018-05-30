@@ -5,7 +5,7 @@ import Quill from 'quill';
 import { quillStartup } from './quill_startup';
 import { Toolbar } from './toolbar';
 import ImgUpload from '../image_test';
-import { createEmbed } from '../../utils/embeds';
+import { createEmbed, updateEmbed } from '../../utils/embeds';
 
 
 const Delta = Quill.import('delta')
@@ -93,6 +93,7 @@ export default class TextEditor extends React.Component{
   postToDatabase(){
     //TODO clean this up
     //TODO differentiate between existing images and new images
+    //TODO how will you delete images?
     //can we somehow move these supporting resource posters to the child components...?
     this.setState({
       change: new Delta(),
@@ -105,7 +106,8 @@ export default class TextEditor extends React.Component{
       if (op.insert.image){
         const image = this.state.images.find(image => image.imageUrl === op.insert.image);
         if (image.id){
-          ///TODO UPDATE IMAGE
+          image.index_location = index;
+          updateEmbed(image);
         }else{
           imagesToUpload.push({
             imageFile: image.imageFile,
