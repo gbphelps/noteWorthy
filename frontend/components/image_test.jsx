@@ -1,8 +1,8 @@
 import React from 'react';
-import { fetchEmbeds } from '../actions/embeds';
+
 import { createEmbed } from '../utils/embeds';
-import { connect } from 'react-redux';
-import values from 'lodash/values';
+
+
 
 class Test extends React.Component {
   constructor(props){
@@ -17,19 +17,15 @@ class Test extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount(){
-    this.props.fetchEmbeds();
-  }
 
   updateFile(e){
     const file = e.currentTarget.files[0];
     const fileReader = new FileReader();
     fileReader.onloadend = () => {
-      this.setState({
+      this.props.addImageToState({
         imageFile: file,
         imageUrl: fileReader.result
       });
-      console.log(this.state);
     };
 
     if (file){
@@ -41,22 +37,20 @@ class Test extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('embed[index_location]', this.state.index_location);
-    formData.append('embed[note_id]', this.state.note_id);
-    formData.append('embed[image]', this.state.imageFile);
-    console.log(formData);
-    createEmbed(formData)
+    // const formData = new FormData();
+    // formData.append('embed[index_location]', this.state.index_location);
+    // formData.append('embed[note_id]', this.state.note_id);
+    // formData.append('embed[image]', this.state.imageFile);
+    // console.log(formData);
+    // createEmbed(formData)
+    //This will go to the parent: editor!
   }
 
-  images(){
-    return values(this.props.embeds).map(embed => <img src={embed.url}></img>
-    );
-  }
+
 
   render(){
     return (
-      <div>{this.images()}
+      <div>
         <div className='button' onClick={this.handleSubmit}/>
         <input type='file' onChange={this.updateFile}/>
         <img src={this.state.imageUrl}/>
@@ -65,16 +59,5 @@ class Test extends React.Component {
   }
 }
 
-const mapState = state => {
-  return {
-    embeds: state.entities.embeds
-  };
-};
 
-const mapDispatch = dispatch => {
-  return {
-    fetchEmbeds: () => dispatch(fetchEmbeds())
-  };
-};
-
-export default connect(mapState,mapDispatch)(Test)
+export default Test

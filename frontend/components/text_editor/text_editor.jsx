@@ -3,7 +3,9 @@ import NotebookSelector from './notebook';
 import TagSelector from './tags';
 import Quill from 'quill';
 import { quillStartup } from './quill_startup';
-import { Toolbar } from './toolbar'
+import { Toolbar } from './toolbar';
+import ImgUpload from '../image_test';
+
 
 const Delta = Quill.import('delta')
 
@@ -18,12 +20,14 @@ export default class TextEditor extends React.Component{
       altered: false,
       change: new Delta(),
       selection: null,
+      images:[]
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTaggings = this.handleTaggings.bind(this);
     this.setNotebook = this.setNotebook.bind(this);
     this.toggleTag = this.toggleTag.bind(this);
+    this.addImageToState = this.addImageToState.bind(this);
   }
 
   redirect(){
@@ -40,6 +44,15 @@ export default class TextEditor extends React.Component{
     });
   }
 
+
+  addImageToState(image){
+    const images = this.state.images.slice();
+    image = Object.assign(image,{index_location: this.state.selection.index})
+    images.push(image);
+    this.setState({ images });
+    console.log(this.state);
+  }
+
   setupAutosave(){
     setInterval(()=> {
       if (this.state.change.length() > 0){
@@ -53,8 +66,10 @@ export default class TextEditor extends React.Component{
       const richText=this.editor.getContents();
       const plainText=this.editor.getText();
       this.setState({
-        body: JSON.stringify({richText,plainText})
+        body: JSON.stringify({richText,plainText}),
+        selection:this.editor.getSelection()
       });
+      console.log(this.state);
     });
   }
 
@@ -62,7 +77,6 @@ export default class TextEditor extends React.Component{
 
     this.setState({
       change: new Delta(),
-      selection: this.editor.getSelection()
     });
 
     return this.props.action({
@@ -190,6 +204,8 @@ export default class TextEditor extends React.Component{
             </div>
 
             <div className='note-menu-bar'>
+                <ImgUpload
+                  addImageToState = {this.addImageToState}/>
                 <NotebookSelector
                   setNotebook={this.setNotebook}
                   notebookId={this.state.notebook_id}/>

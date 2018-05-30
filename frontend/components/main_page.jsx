@@ -10,27 +10,23 @@ import EditNote from './text_editor/edit_note';
 import { ProtectedRoute } from '../utils/protected_route';
 import React from 'react';
 
-import Test from './image_test'
 
 export const Main = () => {
   return (
     <div className='main'>
       <NavBar />
       <NotesPane />
-      <Test />
+        <ProtectedRoute
+          path='/home/:notebookId'
+          exact={true}
+          component={CreateNote}/>
+        <ProtectedRoute
+          path='/home/:notebookId/:noteId'
+          exact={true}
+          component={EditNote}/>
+        <NotebooksPane />
+        <SearchPane />
+        <ShortcutsPane />
     </div>
   );
 }
-
-
-// <ProtectedRoute
-//   path='/home/:notebookId'
-//   exact={true}
-//   component={CreateNote}/>
-// <ProtectedRoute
-//   path='/home/:notebookId/:noteId'
-//   exact={true}
-//   component={EditNote}/>
-// <NotebooksPane />
-// <SearchPane />
-// <ShortcutsPane />
