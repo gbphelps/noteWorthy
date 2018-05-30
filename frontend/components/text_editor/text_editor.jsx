@@ -71,6 +71,8 @@ export default class TextEditor extends React.Component{
         selection:this.editor.getSelection()
       });
     });
+    //TODO is this performant? When you fetch can you just parse the JSON and
+    //only deal with parsed rich text body in the state?
   }
 
 
@@ -165,6 +167,7 @@ export default class TextEditor extends React.Component{
       this.setState({altered:false})
     } else {
       this.editor.setContents(JSON.parse(fetchedNote.body).richText);
+      console.log(fetchedNote.images);
       this.editor.setSelection(this.state.selection);
       this.setState(
         Object.assign({},fetchedNote,{

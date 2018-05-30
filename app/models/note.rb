@@ -15,4 +15,8 @@ class Note < ApplicationRecord
   has_many :tags,
     through: :taggings,
     source: :tags
+
+  has_many :embeds,
+    foreign_key: :note_id,
+    class_name: 'Embed'
 end
