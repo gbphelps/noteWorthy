@@ -5,6 +5,7 @@ import Quill from 'quill';
 import { quillStartup } from './quill_startup';
 import { Toolbar } from './toolbar';
 import ImgUpload from '../image_test';
+import { createEmbed } from '../../utils/embeds';
 
 
 const Delta = Quill.import('delta')
@@ -51,7 +52,6 @@ export default class TextEditor extends React.Component{
     images.push(image);
     this.setState({ images });
     this.editor.insertEmbed(image.index_location, 'image', image.imageUrl);
-    console.log(this.state);
   }
 
   setupAutosave(){
@@ -70,9 +70,23 @@ export default class TextEditor extends React.Component{
         body: JSON.stringify({richText,plainText}),
         selection:this.editor.getSelection()
       });
-      console.log(this.state);
     });
   }
+
+
+  saveImage(image){
+    const formData = new FormData();
+    formData.append('embed[index_location]', image.index_location);
+    formData.append('embed[note_id]', image.note_id);
+    formData.append('embed[image]', image.imageFile);
+    createEmbed(formData)
+  }
+
+
+
+
+
+
 
   postToDatabase(){
 
@@ -80,11 +94,44 @@ export default class TextEditor extends React.Component{
       change: new Delta(),
     });
 
-    return this.props.action({
+    const imagesToUpload = [];
+
+    let index = 0;
+    let imageFreeContent = this.editor.getContents().filter(op => {
+      if (op.insert.image){
+        const image = this.state.images.find(image => image.imageUrl === op.insert.image);
+        imagesToUpload.push({
+          imageFile: image.imageFile,
+          index_location: index
+        });
+        index++;
+        console.log(imagesToUpload);
+        return false;
+      }
+      index += op.insert.length;
+      return true;
+    });
+
+
+    console.log('content', imageFreeContent, 'images', imagesToUpload);
+    const textObject = {
+      plainText: this.editor.getText(),
+      richText: imageFreeContent
+    }
+    //TODO TODO TODO do the commented-out stuff below with imageFreeContent.
+    //Then grab the noteID from the returned promise (will probably have to dig through the action)
+    this.props.action({
       title: this.state.title,
-      body: this.state.body,
+      body: JSON.stringify(textObject),
       notebook_id: this.state.notebook_id,
       id: this.state.id
+    }).then(action => {
+      const note_id = action.payload.note.id;
+      imagesToUpload.forEach(image=>{
+        image.note_id = note_id;
+        this.saveImage(image)
+      });
+      return action;
     })
   }
 
