@@ -1,8 +1,11 @@
-export const createEmbed = embed => {
+export const createEmbed = (formData) => {
   return $.ajax({
     method: 'POST',
     url: 'api/embeds',
-    data: { embed }
+    dataType: 'json',
+    contentType: false,
+    processData: false,
+    data: formData
   });
 };
 

@@ -17,6 +17,6 @@ class Api::EmbedsController < ApplicationController
 private
 
   def embed_params
-    params.require(:embed).permit(:note_id, :index_location)
+    params.require(:embed).permit(:note_id, :index_location, :image)
   end
 end
