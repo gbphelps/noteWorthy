@@ -126,7 +126,9 @@ export default class TextEditor extends React.Component{
   }
 
   embed(url, location){
-    this.editor.insertEmbed(location, 'image', url)
+    const index = this.state.selection.index;
+    this.editor.insertEmbed(location, 'image', url);
+    this.editor.setSelection(index + 1);
   }
 
   unsavedWarning(){
@@ -167,7 +169,6 @@ export default class TextEditor extends React.Component{
       if (!this.state.refresh){
       const contents = JSON.parse(fetchedNote.body).richText;
       this.editor.setContents(contents);
-      nextProps.images.forEach(image=>this.editor.insertEmbed(image.index_location, 'image', image.imageUrl))
       this.editor.setSelection(this.state.selection);
       this.setState(
         Object.assign({},fetchedNote,{
