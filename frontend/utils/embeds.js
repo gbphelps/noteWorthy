@@ -8,11 +8,3 @@ export const createEmbed = (formData) => {
     data: formData
   });
 };
-
-export const updateEmbed = embed => {
-  return $.ajax({
-    method: 'PATCH',
-    url: `api/embeds/${embed.id}`,
-    data: {embed: {index_location: embed.index_location}}
-  })
-}

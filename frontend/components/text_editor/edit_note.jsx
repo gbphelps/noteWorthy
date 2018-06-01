@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { updateNote, fetchNote } from '../../actions/notes';
 import { deleteTagging, createTagging } from '../../utils/taggings';
 
-import { createEmbed } from '../../actions/embeds'
 
 
 
@@ -22,7 +21,6 @@ const mapDispatch = (dispatch,ownProps) => {
   return {
     fetchNote: id => dispatch(fetchNote(id)),
     action: note => dispatch(updateNote(note)),
-    createEmbed: embed => dispatch(createEmbed(embed)),
     deleteTagging,
     createTagging,
   };

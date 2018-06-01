@@ -15,12 +15,11 @@ export default class TextEditor extends React.Component{
     super(props);
     this.state={
       title:'',
-      body:"{\"richText\":{\"ops\":[{\"insert\":\"\\n\"}]},\"plainText\":\"\\n\"}",
+      body:'',
       notebook_id: null,
       taggings: {},
       change: new Delta(),
       selection: null,
-      refresh: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,15 +34,6 @@ export default class TextEditor extends React.Component{
   }
 
 
-  setupDeltaListener(){
-    this.editor.on('text-change', delta => {
-      this.setState({
-        change: this.state.change.compose(delta)
-      });
-    });
-  }
-
-
   setupAutosave(){
     setInterval(()=> {
       if (this.state.change.length() > 0){
@@ -54,26 +44,23 @@ export default class TextEditor extends React.Component{
 
   setupControlledState(){
     this.editor.on('editor-change',()=>{
-      const richText=this.editor.getContents();
-      const plainText=this.editor.getText();
       this.setState({
-        body: JSON.stringify({richText,plainText}),
+        body: this.editor.getContents(),
         selection:this.editor.getSelection()
       });
     });
-    //TODO is this performant? When you fetch can you just parse the JSON and
-    //only deal with parsed rich text body in the state?
   }
 
-
-
+  setupDeltaListener(){
+    this.editor.on('text-change', delta => {
+      this.setState({
+        change: this.state.change.compose(delta)
+      });
+    });
+  }
 
   postToDatabase(content){
-    //TODO clean this up
-    //TODO differentiate between existing images and new images
-    //TODO how will you delete images?
-    //can we somehow move these supporting resource posters to the child components...?
-
+    //TODO: add taggings to state
     const textObject = {
       plainText: this.editor.getText(),
       richText: this.editor.getContents()
