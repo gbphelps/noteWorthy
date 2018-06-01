@@ -20,7 +20,6 @@ export default class TextEditor extends React.Component{
       taggings: {},
       change: new Delta(),
       selection: null,
-      images:[],
       refresh: false
     }
 
@@ -28,7 +27,6 @@ export default class TextEditor extends React.Component{
     this.handleTaggings = this.handleTaggings.bind(this);
     this.setNotebook = this.setNotebook.bind(this);
     this.toggleTag = this.toggleTag.bind(this);
-    this.addImageToState = this.addImageToState.bind(this);
     this.embed = this.embed.bind(this)
   }
 
@@ -45,14 +43,6 @@ export default class TextEditor extends React.Component{
     });
   }
 
-
-  addImageToState(image){
-    const images = this.state.images.slice();
-    image = Object.assign(image,{index_location: this.state.selection.index})
-    images.push(image);
-    this.setState({ images, refresh:true });
-    this.editor.insertEmbed(image.index_location, 'image', image.imageUrl);
-  }
 
   setupAutosave(){
     setInterval(()=> {
@@ -76,23 +66,9 @@ export default class TextEditor extends React.Component{
   }
 
 
-  saveImage(image){
-    const formData = new FormData();
-    formData.append('embed[index_location]', image.index_location);
-    formData.append('embed[note_id]', image.note_id);
-    formData.append('embed[image]', image.imageFile);
-    return this.props.createEmbed(formData)
-  }
 
 
-
-
-
-
-
-
-
-  postToDatabase(imageFreeContent){
+  postToDatabase(content){
     //TODO clean this up
     //TODO differentiate between existing images and new images
     //TODO how will you delete images?
@@ -100,7 +76,7 @@ export default class TextEditor extends React.Component{
 
     const textObject = {
       plainText: this.editor.getText(),
-      richText: imageFreeContent
+      richText: this.editor.getContents()
     }
 
     return this.props.action({
@@ -110,15 +86,6 @@ export default class TextEditor extends React.Component{
       id: this.state.id
     })
   }
-
-
-  postImages(imagesToUpload, noteId){
-    imagesToUpload.forEach(image=>{
-      image.note_id = noteId;
-      this.saveImage(image)
-    });
-  }
-
 
   handleSubmit(e){
 
@@ -133,14 +100,8 @@ export default class TextEditor extends React.Component{
 
     if (e) e.preventDefault();
 
-
-    [imageFreeContent, imagesToUpload] = this.handleImages();
-    this.postToDatabase(imageFreeContent)
+    this.postToDatabase()
     .then(id => {noteId = id; this.handleTaggings(prev, next, noteId)})
-    .then(() => {
-
-      this.postImages(imagesToUpload, noteId)
-    })
     .then(() => {
 
       if (!this.props.match.params.noteId){
@@ -164,79 +125,20 @@ export default class TextEditor extends React.Component{
     return noteId;
   }
 
-  handleImages(){
-    const imagesToUpload = [];
-    let index = 0;
-
-    let imageFreeContent = new Delta(this.editor.getContents()).filter(op => {
-      if (op.insert.image){
-        const image = this.state.images.find(
-          image => image.imageUrl === op.insert.image);
-          console.log(image);
-        if (image.id){
-          image.index_location = index;
-          updateEmbed(image);
-          return false;
-        }else{
-          imagesToUpload.push({
-            imageFile: image.imageFile,
-            index_location: index,
-          });
-          return false;
-        }
-        index++;
-      }
-      index += op.insert.length;
-      return true;
-    });
-
-    return [imageFreeContent, imagesToUpload];
-  }
-
-
-
-
-
   embed(url, location){
     this.editor.insertEmbed(location, 'image', url)
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   unsavedWarning(){
     if (this.state.change.length() > 0) return (
       'Wait! Your latest changes have not been saved. Leave site?'
     );
   }
+
+
+
+
+
 
 
   componentDidMount(){
