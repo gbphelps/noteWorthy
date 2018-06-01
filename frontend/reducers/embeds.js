@@ -9,7 +9,9 @@ const embedsReducer = (state = [], action) => {
     case RECEIVE_EMBEDS:
       return action.embeds;
     case RECEIVE_EMBED:
-      return merge({},state,{[action.embed.id]: action.embed});
+      const next = state.slice();
+      next.push(action.embed);
+      return next;
     default:
       return state;
   }

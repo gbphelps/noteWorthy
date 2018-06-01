@@ -18,10 +18,10 @@ export default class TextEditor extends React.Component{
       body:"{\"richText\":{\"ops\":[{\"insert\":\"\\n\"}]},\"plainText\":\"\\n\"}",
       notebook_id: null,
       taggings: {},
-      altered: false,
       change: new Delta(),
       selection: null,
       images:[]
+      newImages:[]
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,7 +32,6 @@ export default class TextEditor extends React.Component{
   }
 
   redirect(){
-    console.log('redirecting');
     this.props.history.push(`/home/${this.props.match.params.notebookId}`);
   }
 
@@ -47,17 +46,17 @@ export default class TextEditor extends React.Component{
 
 
   addImageToState(image){
-    const images = this.state.images.slice();
+    const images = this.state.newImages.slice();
     image = Object.assign(image,{index_location: this.state.selection.index})
     images.push(image);
-    this.setState({ images });
+    this.setState({ newImages: image });
     this.editor.insertEmbed(image.index_location, 'image', image.imageUrl);
   }
 
   setupAutosave(){
     setInterval(()=> {
       if (this.state.change.length() > 0){
-        this.postToDatabase();
+        this.handleSubmit();
       }
     }, 5000)
   }
@@ -81,7 +80,7 @@ export default class TextEditor extends React.Component{
     formData.append('embed[index_location]', image.index_location);
     formData.append('embed[note_id]', image.note_id);
     formData.append('embed[image]', image.imageFile);
-    createEmbed(formData)
+    return this.props.createEmbed(formData)
   }
 
 
@@ -90,28 +89,96 @@ export default class TextEditor extends React.Component{
 
 
 
-  postToDatabase(){
+
+
+  postToDatabase(imageFreeContent){
     //TODO clean this up
     //TODO differentiate between existing images and new images
     //TODO how will you delete images?
     //can we somehow move these supporting resource posters to the child components...?
-    this.setState({
-      change: new Delta(),
+
+    const textObject = {
+      plainText: this.editor.getText(),
+      richText: imageFreeContent
+    }
+
+    return this.props.action({
+      title: this.state.title,
+      body: JSON.stringify(textObject),
+      notebook_id: this.state.notebook_id,
+      id: this.state.id
+    })
+  }
+
+
+  postImages(imagesToUpload, noteId){
+    imagesToUpload.forEach(image=>{
+      image.note_id = noteId;
+      this.saveImage(image)
+    });
+  }
+
+
+  handleSubmit(e){
+
+    //TODO: You're now adding embeds and taggings by themselves, not just with a note.
+    //need to update the reducers to reflect this.
+
+    let imageFreeContent;
+    let imagesToUpload;
+    const prev = this.props.taggings;
+    const next = this.state.taggings;
+    let noteId;
+
+    if (e) e.preventDefault();
+
+
+    [imageFreeContent, imagesToUpload] = this.handleImages();
+    this.postToDatabase(imageFreeContent)
+    .then(id => {noteId = id; this.handleTaggings(prev, next, noteId)})
+    .then(() => {
+
+      this.postImages(imagesToUpload, noteId)
+    })
+    .then(() => {
+
+      if (!this.props.match.params.noteId){
+           this.props.history.push(`/home/${this.state.notebook_id}/${noteId}`)
+         }})
+  }
+
+  handleTaggings(prev, next, noteId){
+
+    const prevTags = Object.keys(prev);
+    const newTags = Object.keys(next);
+
+    prevTags.forEach(tagId => {
+      if (!next[tagId]) this.props.deleteTagging(prev[tagId].id);
     });
 
-    const imagesToUpload = [];
+    newTags.forEach(tagId => {
+      if (!prev[tagId]) this.props.createTagging(+noteId, +tagId);
+    });
 
+    return noteId;
+  }
+
+  handleImages(){
+    const imagesToUpload = [];
     let index = 0;
+
     let imageFreeContent = this.editor.getContents().filter(op => {
+
       if (op.insert.image){
-        const image = this.props.images.find(image => image.imageUrl === op.insert.image);
+        const image = this.state.images.find(
+          image => image.imageUrl === op.insert.image);
         if (image.id){
           image.index_location = index;
           updateEmbed(image);
         }else{
           imagesToUpload.push({
             imageFile: image.imageFile,
-            index_location: index
+            index_location: index,
           });
         }
         index++;
@@ -121,26 +188,45 @@ export default class TextEditor extends React.Component{
       return true;
     });
 
-
-    console.log('content', imageFreeContent, 'images', imagesToUpload);
-    const textObject = {
-      plainText: this.editor.getText(),
-      richText: imageFreeContent
-    }
-    this.props.action({
-      title: this.state.title,
-      body: JSON.stringify(textObject),
-      notebook_id: this.state.notebook_id,
-      id: this.state.id
-    }).then(action => {
-      const note_id = action.payload.note.id;
-      imagesToUpload.forEach(image=>{
-        image.note_id = note_id;
-        this.saveImage(image)
-      });
-      return action;
-    })
+    return [imageFreeContent, imagesToUpload];
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   unsavedWarning(){
     if (this.state.change.length() > 0) return (
@@ -163,16 +249,16 @@ export default class TextEditor extends React.Component{
 
 
   componentWillReceiveProps(nextProps){
+    debugger
     const fetchedNote = nextProps.note;
     const prevId = +this.props.match.params.noteId;
 
     if (!fetchedNote) return this.redirect();
-    if (fetchedNote.id !== prevId || this.state.altered === true){
+    if (fetchedNote.id !== prevId){
       this.props.fetchNote(fetchedNote.id);
-      this.setState({altered:false})
     } else {
       this.editor.setContents(JSON.parse(fetchedNote.body).richText);
-      console.log(nextProps);
+
       nextProps.images.forEach(image=>{
         this.editor.insertEmbed(image.index_location, 'image', image.imageUrl)
       })
@@ -181,54 +267,18 @@ export default class TextEditor extends React.Component{
       this.setState(
         Object.assign({},fetchedNote,{
           taggings: nextProps.taggings,
-          change: new Delta()
+          change: new Delta(),
+          images: nextProps.images,
         }))
     }
   }
 
 
-  handleSubmit(e){
-    const prev = this.props.taggings;
-    const next = this.state.taggings;
-    const notebookId = this.state.notebook_id;
 
-    e.preventDefault();
-
-    this.postToDatabase()
-      .then(action =>
-        this.handleTaggings(prev, next, action.payload.note.id))
-      .then(noteId => {
-        if (!this.props.match.params.noteId){
-          this.props.history.push(`/home/${notebookId}/${noteId}`)
-        }})
-  }
-
-  handleTaggings(prev, next, noteId){
-
-    const prevTags = Object.keys(prev);
-    const newTags = Object.keys(next);
-    let altered = false;
-
-    prevTags.forEach(tagId => {
-      if (!next[tagId]){
-        altered = true;
-        this.props.deleteTagging(prev[tagId].id);
-      }
-    });
-
-    newTags.forEach(tagId => {
-      if (!prev[tagId]){
-        altered = true;
-        this.props.createTagging(+noteId, +tagId);
-      }
-    });
-
-    this.setState({taggings: next, altered: altered})
-    return noteId;
-  }
 
   setNotebook(id){
     this.setState({notebook_id: id});
+    this.handleSubmit();
   }
 
   toggleTag(id){
@@ -242,6 +292,22 @@ export default class TextEditor extends React.Component{
       this.setState({[field]: e.target.value});
     };
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   /////////////////////////////////////////////////
 
@@ -268,7 +334,8 @@ export default class TextEditor extends React.Component{
                   addImageToState = {this.addImageToState}/>
                 <NotebookSelector
                   setNotebook={this.setNotebook}
-                  notebookId={this.state.notebook_id}/>
+                  notebookId={this.state.notebook_id}
+                  submit={this.handleSubmit}/>
 
                 <TagSelector
                   toggleTag={this.toggleTag}

@@ -32,7 +32,9 @@ class NotebookSelector extends React.Component {
         <li
           className={`note-li ${this.selected(notebook.id)}`}
           key={notebook.id}
-          onClick={() => this.props.setNotebook(notebook.id)}>
+          onClick={() => {
+            this.props.setNotebook(notebook.id)
+          }}>
           {notebook.name}
         </li>
     ));
@@ -50,6 +52,7 @@ class NotebookSelector extends React.Component {
     e.preventDefault();
     this.props.createNotebook(this.state)
     .then(action=>this.props.setNotebook(action.payload.notebook.id))
+    .then(this.props.submit);
 
     this.setState({name: ''})
   }

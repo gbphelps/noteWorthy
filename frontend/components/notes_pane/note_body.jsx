@@ -12,7 +12,7 @@ class NoteBody extends React.Component {
 
   render(){
     return(
-      <div className={`note-hover-event`} onClick={()=> console.log(this.props)}>
+      <div className={`note-hover-event`}>
       <Link to={`/home/${this.props.match.params.notebookId}/${this.props.note.id}`}>
         <div className="note-wrapper">
           <div className='note-body'>

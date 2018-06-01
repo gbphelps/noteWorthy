@@ -14,7 +14,6 @@ class Test extends React.Component {
       note_id: 20
     }
     this.updateFile = this.updateFile.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 
@@ -34,24 +33,9 @@ class Test extends React.Component {
   }
 
 
-
-  handleSubmit(e){
-    e.preventDefault();
-    // const formData = new FormData();
-    // formData.append('embed[index_location]', this.state.index_location);
-    // formData.append('embed[note_id]', this.state.note_id);
-    // formData.append('embed[image]', this.state.imageFile);
-    // console.log(formData);
-    // createEmbed(formData)
-    //This will go to the parent: editor!
-  }
-
-
-
   render(){
     return (
       <div>
-        <div className='button' onClick={this.handleSubmit}/>
         <input type='file' onChange={this.updateFile}/>
         <img src={this.state.imageUrl}/>
       </div>

@@ -4,11 +4,11 @@
 
     #TODO this is super not performant and you don't need it right now
     #come back to this later?
-    # json.images note.embeds do |embed|
-    #   json.id embed.id
-    #   json.imageUrl embed.image
-    #   json.index_location embed.index_location
-    # end
+    json.images note.embeds do |embed|
+      json.id embed.id
+      json.imageUrl embed.image
+      json.index_location embed.index_location
+    end
 
   end
 end

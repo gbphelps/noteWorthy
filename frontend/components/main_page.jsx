@@ -30,3 +30,13 @@ export const Main = () => {
     </div>
   );
 }
+
+
+// const mapDispatch = dispatch => {
+//   return {
+//     fetchTags: () => dispatch(fetchTags()),
+//     fetchNotebooks: () => dispatch(fetchNotebooks()),
+//     fetchNotes: () => dispatch(fetchNotes()),
+//     fetchShortcuts: () => dispatch(fetchShortcuts())
+//   }
+// }

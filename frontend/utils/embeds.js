@@ -10,7 +10,6 @@ export const createEmbed = (formData) => {
 };
 
 export const updateEmbed = embed => {
-  console.log(embed.index_location);
   return $.ajax({
     method: 'PATCH',
     url: `api/embeds/${embed.id}`,

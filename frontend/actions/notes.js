@@ -25,6 +25,11 @@ export const receiveNote = note => {
   };
 };
 
+
+
+
+
+
 export const REMOVE_NOTE = 'REMOVE_NOTE';
 export const removeNote = id => {
   return {
@@ -65,12 +70,18 @@ export const fetchShortcuts = () => dispatch => {
 
 export const updateNote = note => dispatch => {
   return Api.updateNote(note)
-    .then(note => dispatch(receiveNote(note)))
+    .then(note => {
+      dispatch(receiveNote(note));
+      return note.note.id;
+    })
 };
 
 export const createNote = note => dispatch => {
   return Api.createNote(note)
-    .then(note => dispatch(receiveNote(note)))
+    .then(note =>{
+      dispatch(receiveNote(note));
+      return note.note.id
+    })
 };
 
 export const deleteNote = id => dispatch => {
