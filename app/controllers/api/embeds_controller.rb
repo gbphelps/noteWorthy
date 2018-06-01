@@ -5,8 +5,11 @@ class Api::EmbedsController < ApplicationController
 
   def create
     @embed = Embed.new(embed_params)
-    @embed.save
-    render :show
+    if @embed.save
+      render :show
+    else
+      render json: @embed.errors.full_messages
+    end
   end
 
 

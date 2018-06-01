@@ -21,6 +21,7 @@ export default class TextEditor extends React.Component{
       change: new Delta(),
       selection: null,
       images:[],
+      refresh: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,6 +29,7 @@ export default class TextEditor extends React.Component{
     this.setNotebook = this.setNotebook.bind(this);
     this.toggleTag = this.toggleTag.bind(this);
     this.addImageToState = this.addImageToState.bind(this);
+    this.embed = this.embed.bind(this)
   }
 
   redirect(){
@@ -48,7 +50,7 @@ export default class TextEditor extends React.Component{
     const images = this.state.images.slice();
     image = Object.assign(image,{index_location: this.state.selection.index})
     images.push(image);
-    this.setState({ images });
+    this.setState({ images, refresh:true });
     this.editor.insertEmbed(image.index_location, 'image', image.imageUrl);
   }
 
@@ -195,7 +197,9 @@ export default class TextEditor extends React.Component{
 
 
 
-
+  embed(url, location){
+    this.editor.insertEmbed(location, 'image', url)
+  }
 
 
 
@@ -249,7 +253,6 @@ export default class TextEditor extends React.Component{
 
 
   componentWillReceiveProps(nextProps){
-    debugger
     const fetchedNote = nextProps.note;
     const prevId = +this.props.match.params.noteId;
 
@@ -257,12 +260,12 @@ export default class TextEditor extends React.Component{
     if (fetchedNote.id !== prevId){
       this.props.fetchNote(fetchedNote.id);
     } else {
+      //debugger
+      ///
+      if (!this.state.refresh){
       const contents = JSON.parse(fetchedNote.body).richText;
-      debugger;
       this.editor.setContents(contents);
       nextProps.images.forEach(image=>this.editor.insertEmbed(image.index_location, 'image', image.imageUrl))
-      ///
-
       this.editor.setSelection(this.state.selection);
       this.setState(
         Object.assign({},fetchedNote,{
@@ -270,6 +273,7 @@ export default class TextEditor extends React.Component{
           change: new Delta(),
           images: nextProps.images,
         }))
+      }else{this.setState({refresh: false})}
     }
   }
 
@@ -331,7 +335,8 @@ export default class TextEditor extends React.Component{
 
             <div className='note-menu-bar'>
                 <ImgUpload
-                  addImageToState = {this.addImageToState}/>
+                  embed = {this.embed}
+                  index = {!this.state.selection || this.state.selection.index}/>
                 <NotebookSelector
                   setNotebook={this.setNotebook}
                   notebookId={this.state.notebook_id}

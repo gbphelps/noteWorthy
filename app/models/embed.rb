@@ -4,5 +4,6 @@ class Embed < ApplicationRecord
 
   belongs_to :note,
     foreign_key: :note_id,
-    class_name: 'Note'
+    class_name: 'Note',
+    optional: true
 end

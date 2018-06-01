@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180520211051) do
+ActiveRecord::Schema.define(version: 20180601201353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20180520211051) do
   end
 
   create_table "embeds", force: :cascade do |t|
-    t.integer "note_id", null: false
-    t.integer "index_location", null: false
+    t.integer "note_id"
+    t.integer "index_location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"

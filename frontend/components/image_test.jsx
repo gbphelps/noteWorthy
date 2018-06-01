@@ -14,6 +14,7 @@ class Test extends React.Component {
       note_id: 20
     }
     this.updateFile = this.updateFile.bind(this);
+    this.uploadFile = this.uploadFile.bind(this);
   }
 
 
@@ -33,11 +34,18 @@ class Test extends React.Component {
   }
 
 
+  uploadFile(e){
+    e.preventDefault();
+    const file = e.currentTarget.files[0];
+    const formData = new FormData();
+    formData.append('embed[image]', file);
+    createEmbed(formData).then(image => this.props.embed(image.imageUrl, this.props.index));
+  }
+
   render(){
     return (
       <div>
-        <input type='file' onChange={this.updateFile}/>
-        <img src={this.state.imageUrl}/>
+        <input type='file' onChange={this.uploadFile}/>
       </div>
     );
   }
