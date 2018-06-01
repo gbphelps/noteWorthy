@@ -20,8 +20,7 @@ export default class TextEditor extends React.Component{
       taggings: {},
       change: new Delta(),
       selection: null,
-      images:[]
-      newImages:[]
+      images:[],
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,10 +45,10 @@ export default class TextEditor extends React.Component{
 
 
   addImageToState(image){
-    const images = this.state.newImages.slice();
+    const images = this.state.images.slice();
     image = Object.assign(image,{index_location: this.state.selection.index})
     images.push(image);
-    this.setState({ newImages: image });
+    this.setState({ images });
     this.editor.insertEmbed(image.index_location, 'image', image.imageUrl);
   }
 
@@ -167,22 +166,23 @@ export default class TextEditor extends React.Component{
     const imagesToUpload = [];
     let index = 0;
 
-    let imageFreeContent = this.editor.getContents().filter(op => {
-
+    let imageFreeContent = new Delta(this.editor.getContents()).filter(op => {
       if (op.insert.image){
         const image = this.state.images.find(
           image => image.imageUrl === op.insert.image);
+          console.log(image);
         if (image.id){
           image.index_location = index;
           updateEmbed(image);
+          return false;
         }else{
           imagesToUpload.push({
             imageFile: image.imageFile,
             index_location: index,
           });
+          return false;
         }
         index++;
-        return false;
       }
       index += op.insert.length;
       return true;
@@ -257,11 +257,11 @@ export default class TextEditor extends React.Component{
     if (fetchedNote.id !== prevId){
       this.props.fetchNote(fetchedNote.id);
     } else {
-      this.editor.setContents(JSON.parse(fetchedNote.body).richText);
-
-      nextProps.images.forEach(image=>{
-        this.editor.insertEmbed(image.index_location, 'image', image.imageUrl)
-      })
+      const contents = JSON.parse(fetchedNote.body).richText;
+      debugger;
+      this.editor.setContents(contents);
+      nextProps.images.forEach(image=>this.editor.insertEmbed(image.index_location, 'image', image.imageUrl))
+      ///
 
       this.editor.setSelection(this.state.selection);
       this.setState(

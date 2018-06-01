@@ -1,2 +1,2 @@
-json.extract! @embed, :note_id, :index_location
-json.image_url image_url(@embed.image.url)
+json.extract! @embed, :id, :index_location
+json.imageUrl image_url(@embed.image.url)
