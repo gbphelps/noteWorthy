@@ -5,7 +5,6 @@ import Quill from 'quill';
 import { quillStartup } from './quill_startup';
 import { Toolbar } from './toolbar';
 import ImgUpload from '../image_test';
-import { createEmbed, updateEmbed } from '../../utils/embeds';
 
 
 const Delta = Quill.import('delta')
@@ -76,8 +75,7 @@ export default class TextEditor extends React.Component{
 
   handleSubmit(e){
 
-    //TODO: You're now adding embeds and taggings by themselves, not just with a note.
-    //need to update the reducers to reflect this.
+    //TODO: update taggings reducer to receive single tag
 
     let imageFreeContent;
     let imagesToUpload;
@@ -90,7 +88,6 @@ export default class TextEditor extends React.Component{
     this.postToDatabase()
     .then(id => {noteId = id; this.handleTaggings(prev, next, noteId)})
     .then(() => {
-
       if (!this.props.match.params.noteId){
            this.props.history.push(`/home/${this.state.notebook_id}/${noteId}`)
          }})
@@ -106,7 +103,7 @@ export default class TextEditor extends React.Component{
     });
 
     newTags.forEach(tagId => {
-      if (!prev[tagId]) this.props.createTagging(+noteId, +tagId);
+      if (!prev[tagId]) this.props.createTagging({note_id: +noteId, tag_id: +tagId});
     });
 
     return noteId;

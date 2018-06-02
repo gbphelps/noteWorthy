@@ -1,17 +1,14 @@
-export const createTagging = (noteId, tagId) => {
+export const createTagging = tagging => {
   return $.ajax({
     method: 'POST',
     url: 'api/taggings',
-    data: {tagging: {
-      note_id: noteId,
-      tag_id: tagId
-    }}
+    data: { tagging }
   });
 };
 
 export const deleteTagging = id => {
   return $.ajax({
     method: 'DELETE',
-    url: `api/taggings/${id}`
+    url: `api/taggings/${id}`,
   });
 };

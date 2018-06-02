@@ -26,6 +26,7 @@ class Api::TaggingsController < ApplicationController
   def destroy
     @tagging = Tagging.find(params[:id])
     @tagging.destroy
+    render :show
   end
 
   def show
