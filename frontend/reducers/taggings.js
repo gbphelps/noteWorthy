@@ -6,7 +6,7 @@ const taggingsReducer = (state = {}, action) => {
   switch(action.type){
     //TODO
     case RECEIVE_TAGGING:
-      return merge({}, state, {[action.tagging.tag_id]: action.tagging.id})
+      return merge({}, state, {[action.tagging.tag_id]: {id: action.tagging.id}})
     case REMOVE_TAGGING:
       const id = action.tagging.tag_id;
       const next = merge({}, state);

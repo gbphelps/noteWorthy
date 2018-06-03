@@ -99,6 +99,7 @@ export default class TextEditor extends React.Component{
     const newTags = Object.keys(next);
 
     prevTags.forEach(tagId => {
+      console.log(prev[tagId]);
       if (!next[tagId]) this.props.deleteTagging(prev[tagId].id);
     });
 
