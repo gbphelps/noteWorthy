@@ -98,9 +98,9 @@ export default class TextEditor extends React.Component{
     const prevTags = Object.keys(prev);
     const newTags = Object.keys(next);
 
+    console.log(prev,next);
     prevTags.forEach(tagId => {
-      console.log(prev[tagId]);
-      if (!next[tagId]) this.props.deleteTagging(prev[tagId].id);
+      if (!next[tagId]){console.log(this.props.deleteTagging);this.props.deleteTagging(prev[tagId].id);}
     });
 
     newTags.forEach(tagId => {
@@ -170,7 +170,6 @@ export default class TextEditor extends React.Component{
 
   setNotebook(id){
     this.setState({notebook_id: id});
-    this.handleSubmit();
   }
 
   toggleTag(id){
@@ -224,8 +223,7 @@ export default class TextEditor extends React.Component{
             <div className='note-menu-bar'>
               <NotebookSelector
                 setNotebook={this.setNotebook}
-                notebookId={this.state.notebook_id}
-                submit={this.handleSubmit}/>
+                notebookId={this.state.notebook_id}/>
 
               <TagSelector
                 toggleTag={this.toggleTag}

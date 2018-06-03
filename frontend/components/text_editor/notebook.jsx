@@ -52,7 +52,6 @@ class NotebookSelector extends React.Component {
     e.preventDefault();
     this.props.createNotebook(this.state)
     .then(action=>this.props.setNotebook(action.payload.notebook.id))
-    .then(this.props.submit);
 
     this.setState({name: ''})
   }

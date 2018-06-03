@@ -16,7 +16,8 @@ const mapDispatch = (dispatch,ownProps) => {
   return {
     action: note => dispatch(createNote(note)),
     fetchNote: ()=>{},
-    createTagging: tagging => dispatch(createTagging(tagging))
+    createTagging: tagging => dispatch(createTagging(tagging)),
+    deleteTagging: ()=>{}
   };
 };
 

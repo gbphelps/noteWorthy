@@ -19,11 +19,10 @@ class Test extends React.Component {
   }
 
   render(){
-    console.log(this.props.index);
     return (
       <div>
         <input id='file' type='file' onChange={this.uploadFile} style={{display:'none'}}/>
-        <label for='file'><i class="far fa-image" style={{fontSize:'20px',color:'#444'}}></i></label>
+        <label htmlFor='file'><i className="far fa-image" style={{fontSize:'20px',color:'#444'}}></i></label>
       </div>
     );
   }
