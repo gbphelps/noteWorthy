@@ -222,19 +222,23 @@ export default class TextEditor extends React.Component{
             </div>
 
             <div className='note-menu-bar'>
-                <ImgUpload
-                  embed = {this.embed}
-                  index = {!this.state.selection || this.state.selection.index}/>
-                <NotebookSelector
-                  setNotebook={this.setNotebook}
-                  notebookId={this.state.notebook_id}
-                  submit={this.handleSubmit}/>
+              <NotebookSelector
+                setNotebook={this.setNotebook}
+                notebookId={this.state.notebook_id}
+                submit={this.handleSubmit}/>
 
-                <TagSelector
-                  toggleTag={this.toggleTag}
-                  taggings={this.state.taggings}/>
+              <TagSelector
+                toggleTag={this.toggleTag}
+                taggings={this.state.taggings}/>
 
                 <Toolbar />
+
+                <div onClick={()=>this.editor.focus()}>
+                  <ImgUpload
+                    embed = {this.embed}
+                    index = {!this.state.selection || this.state.selection.index}/>
+                </div>
+
             </div>
           </div>
           <div className='text-editor-content'>

@@ -7,32 +7,8 @@ import { createEmbed } from '../utils/embeds';
 class Test extends React.Component {
   constructor(props){
     super(props)
-    this.state={
-      imageFile: null,
-      imageUrl: null,
-      index_location: 20,
-      note_id: 20
-    }
-    this.updateFile = this.updateFile.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
   }
-
-
-  updateFile(e){
-    const file = e.currentTarget.files[0];
-    const fileReader = new FileReader();
-    fileReader.onloadend = () => {
-      this.props.addImageToState({
-        imageFile: file,
-        imageUrl: fileReader.result
-      });
-    };
-
-    if (file){
-      fileReader.readAsDataURL(file);
-    }
-  }
-
 
   uploadFile(e){
     e.preventDefault();
@@ -43,9 +19,11 @@ class Test extends React.Component {
   }
 
   render(){
+    console.log(this.props.index);
     return (
       <div>
-        <input type='file' onChange={this.uploadFile}/>
+        <input id='file' type='file' onChange={this.uploadFile} style={{display:'none'}}/>
+        <label for='file'><i class="far fa-image" style={{fontSize:'20px',color:'#444'}}></i></label>
       </div>
     );
   }
