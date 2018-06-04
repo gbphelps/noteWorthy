@@ -50,7 +50,7 @@ class SlidingPane extends React.Component {
         <div
           className='search-entry'
           onClick={()=>this.onClick(note)}>
-          <div className='notebook-search-entry-title'>{note.title}</div>
+          <div className='notebook-search-entry-title'>{note.title || 'Untitled'}</div>
         </div>
       </li>);
   }

@@ -225,10 +225,6 @@ export default class TextEditor extends React.Component{
                 setNotebook={this.setNotebook}
                 notebookId={this.state.notebook_id}/>
 
-              <TagSelector
-                toggleTag={this.toggleTag}
-                taggings={this.state.taggings}/>
-
                 <Toolbar />
 
                 <div onClick={()=>this.editor.focus()}>
@@ -237,7 +233,14 @@ export default class TextEditor extends React.Component{
                     index = {!this.state.selection || this.state.selection.index}/>
                 </div>
 
+
             </div>
+
+            <TagSelector
+              toggleTag={this.toggleTag}
+              taggings={this.state.taggings}/>
+
+
           </div>
           <div className='text-editor-content'>
             <input

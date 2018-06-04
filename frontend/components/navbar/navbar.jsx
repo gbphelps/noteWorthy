@@ -34,12 +34,16 @@ class NavBar extends React.Component {
     return(
       <div className='left-nav'>
         <img className='icon-elephant' src={elephantSmall}/>
+          <nav className='upper-nav'>
 
-        <nav className='upper-nav'>
-          <LinkedIcon
-            text='New Note'
-            icon='plus'
-            path={this.props.match.url}/>
+
+          <div className={'plus icon'} onClick={()=>this.props.toggle('notes')}>
+            <div className='popup'>
+              <img className='popup-arrow' src={popupTail}/>
+              <div className='popup-body'>New Note</div>
+            </div>
+          </div>
+
           <LinkedIcon
             text='New Meeting Note'
             icon='mtgnote'

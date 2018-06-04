@@ -60,27 +60,27 @@ class NotesPane extends React.Component {
           deleteNote={this.props.deleteNote}
           updateNote={this.props.updateNote}/>
       )}});
-    return (
-      <CSSTransitionGroup
-        transitionName='note'
-        transitionEnterTimeout={1500}
-        transitionLeaveTimeout={1000}>
-        {list}
-      </CSSTransitionGroup>
-    );
-  }
 
-  numNotes(){
-    return this.props.notes.length;
+    return [ list.length,
+
+        (<CSSTransitionGroup
+          transitionName='note'
+          transitionEnterTimeout={1500}
+          transitionLeaveTimeout={1000}>
+          {list}
+        </CSSTransitionGroup>)
+      ];
   }
 
   render(){
+    let [length, list] = this.notesList();
+    console.log(this.props.notebook);
     return(
       <div className='pane-notes'>
           <nav className="pane-header">
             <div>Notes</div>
             <div className='pane-subhead'>
-              <div>{this.numNotes()} notes</div>
+              <div>{length} notes</div>
             </div>
           </nav>
           <div className="pane-content">
@@ -92,16 +92,17 @@ class NotesPane extends React.Component {
                   </div>
                 </div>
               </div>
-                {this.props.notes.length ? this.notesList() : null}
+                {this.props.notes.length ? list : null}
           </div>
       </div>
     );
   }
 }
 
-const mapState = state => {
+const mapState = (state, ownProps) => {
   return {
     notes: values(state.entities.notes),
+    notebook: state.entities.notebooks[ownProps.match.params.notebookId],
     active: state.ui.notes
   };
 };
@@ -119,9 +120,3 @@ const mapDispatch = dispatch => {
 
 
 export default withRouter(connect(mapState,mapDispatch)(NotesPane))
-
-
-
-// <div className='options'>Options<img className='tiny pointer' src={downSmall}></img>
-//   <div className="options-popup"></div>
-// </div>

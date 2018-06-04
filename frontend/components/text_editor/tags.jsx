@@ -26,10 +26,20 @@ class TagSelector extends React.Component {
     'selected' : '';
   }
 
+  taggings(){
+    const list = [];
+    values(this.props.tags).forEach(tag => {
+      if (this.props.taggings[tag.id]) list.unshift(
+        <li className='tag-li'>{ tag.name }</li>
+      )
+    })
+    return list
+  }
 
   tagsList(){
     const list = [];
-    values(this.props.tags).forEach(tag =>
+    values(this.props.tags).forEach(tag => {
+      if (tag.name.indexOf(this.state.name)===0){
       list.unshift(
         <li
           onClick={()=>this.props.toggleTag(tag.id)}
@@ -37,21 +47,24 @@ class TagSelector extends React.Component {
           key={tag.id}>
           {tag.name}
         </li>
-      ));
-    return (
-      <CSSTransitionGroup
-        transitionName='noteListItem'
-        transitionEnterTimeout={1000}
-        transitionLeaveTimeout={1000}>
-        {list}
-      </CSSTransitionGroup>
-    );
+      )}
+    });
+    return list;
+  }
+
+  tagNames(){
+    return values(this.props.tags).map(tag => tag.name);
   }
 
   handleSubmit(e){
     e.preventDefault();
-    this.props.createTag(this.state)
-    .then(action=>this.props.toggleTag(action.tag.id))
+    const index = this.tagNames().indexOf(this.state.name);
+    if (index === -1){
+      this.props.createTag(this.state)
+      .then(action=>this.props.toggleTag(action.tag.id))
+    }else{
+      this.props.toggleTag(values(this.props.tags)[index].id)
+    }
   }
 
   updateName(e){
@@ -60,21 +73,17 @@ class TagSelector extends React.Component {
 
   render(){
     return(
-      <div className='tag-selector'>Select Tags
-        <div className='tags-popup'>
-          <form
-            className='note-form'
+      <div className='tag-holder'>
+      <ul>{this.taggings()}</ul>
+        <form
+            className='tag-form'
             onSubmit={this.handleSubmit}>
-            <input
-              className='note-input'
+            <input className='tag-entry'
               onChange={this.updateName}
-              placeholder='New tag'
+              placeholder='+'
               value={this.state.name}/>
           </form>
-          <ul>
-            {values(this.props.tags).length ? this.tagsList() : null}
-          </ul>
-        </div>
+          <ul>{this.tagsList()}</ul>
       </div>
     );
   }
@@ -94,3 +103,23 @@ const mapDispatch = dispatch => {
 };
 
 export default connect(mapState,mapDispatch)(TagSelector);
+
+
+
+
+// <div className='tag-selector'>Select Tags
+// <div className='tags-popup'>
+//   <form
+//     className='note-form'
+//     onSubmit={this.handleSubmit}>
+//     <input
+//       className='note-input'
+//       onChange={this.updateName}
+//       placeholder='New tag'
+//       value={this.state.name}/>
+//   </form>
+//   <ul>
+//     {values(this.props.tags).length ? this.tagsList() : null}
+//   </ul>
+// </div>
+// </div>
