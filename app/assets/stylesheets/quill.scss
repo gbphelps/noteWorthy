@@ -1,7 +1,8 @@
 #editor{
   color:black;
   overflow-y:scroll;
-  heigth: 100%;
+  overflow-x:visible;
+  height: 100%;
 }
 
 //////////////////////////////////////////////////////
@@ -1038,6 +1039,19 @@
   color: #2dbe60;
 }
 
+.ql-tooltip{
+  position:absolute;
+  left:0px !important;
+}
+
 :focus{
   outline:none
+}
+
+
+.ql-size, .ql-font{
+  border:1px solid black;
+  margin: 0 2px;
+  border-radius:3px;
+  border-color:#ececec
 }

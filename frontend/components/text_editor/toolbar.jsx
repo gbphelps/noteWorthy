@@ -22,6 +22,7 @@ export const Toolbar = () => (
     <option value='times'>Times</option>
   </select>
 
+  <button className="ql-link"></button>
   <button className="ql-bold"></button>
   <button className="ql-italic"></button>
   <select className="ql-color"></select>

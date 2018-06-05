@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { createEmbed } from '../utils/embeds';
+import { createEmbed } from '../../utils/embeds';
 
 
 
@@ -22,7 +22,17 @@ class Test extends React.Component {
     return (
       <div>
         <input id='file' type='file' onChange={this.uploadFile} style={{display:'none'}}/>
-        <label htmlFor='file'><i className="far fa-image" style={{fontSize:'20px',color:'#444'}}></i></label>
+        <label htmlFor='file'>
+          <i
+            className="far fa-image"
+            style={{
+              fontSize:'20px',
+              color:'#444',
+              cursor:'pointer',
+              position:'relative',
+              top:'2px'
+            }}/>
+        </label>
       </div>
     );
   }

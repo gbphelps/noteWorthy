@@ -60,6 +60,7 @@ h1{
   box-sizing:border-box;
   margin-top:10px;
   transition: .2s;
+  font-family:'Lato'
 }
 
 input:focus{

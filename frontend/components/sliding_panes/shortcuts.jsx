@@ -39,7 +39,7 @@ class SlidingPane extends React.Component {
     //current notebook, notebook containing note, or null (inbox)??
     //shortcuts currently pretty broken - imports the shortcutted note to the current notes list (not good)
     //also doesn't even pull up the body.
-    this.props.history.push(`/home/${note.notebook_id}/${note.id}`);
+    this.props.history.push(`/home/${note.notebook_id || 'inbox'}/${note.id}`);
     this.props.toggle();
     this.animateExit();
   }

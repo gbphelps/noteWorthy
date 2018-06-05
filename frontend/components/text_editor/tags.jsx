@@ -34,10 +34,10 @@ class TagSelector extends React.Component {
         <li
           key={ tag.id }
           className='tag-li'>
-          <span>{ tag.name }</span>
+          <span className='tag-name'>{ tag.name }</span>
           <span
             onClick={()=>this.props.toggleTag(tag.id)}
-            style={{cursor:'pointer'}}> &#215;</span>
+            style={{cursor:'pointer',margin:'0 5px 0 0'}}> &#215;</span>
         </li>
       )
     })
@@ -96,8 +96,11 @@ class TagSelector extends React.Component {
 
   render(){
     return(
-      <div className='tag-holder'>
-      <ul>{this.taggings()}</ul>
+      <div style={{flexShrink:'0'}}>
+        <div className='tag-holder' style={{float:'left'}}>
+          <div style={{position:'relative',top:'1px',marginLeft:'5px'}}><img src={window.tagSmall}/></div>
+          <ul className='current-taggings'>{this.taggings()}</ul>
+        </div>
         <form
             className='tag-form'
             onSubmit={this.handleSubmit}>
@@ -106,8 +109,8 @@ class TagSelector extends React.Component {
               placeholder='+'
               value={this.state.name}
               size={this.state.name.length || 1}/>
-          </form>
-          {this.tagsList().length ? (<ul className='tag-options'>{this.tagsList()}</ul>) : ''}
+            {this.tagsList().length ? (<ul className='tag-options'>{this.tagsList()}</ul>) : ''}
+        </form>
       </div>
     );
   }
@@ -127,23 +130,3 @@ const mapDispatch = dispatch => {
 };
 
 export default connect(mapState,mapDispatch)(TagSelector);
-
-
-
-
-// <div className='tag-selector'>Select Tags
-// <div className='tags-popup'>
-//   <form
-//     className='note-form'
-//     onSubmit={this.handleSubmit}>
-//     <input
-//       className='note-input'
-//       onChange={this.updateName}
-//       placeholder='New tag'
-//       value={this.state.name}/>
-//   </form>
-//   <ul>
-//     {values(this.props.tags).length ? this.tagsList() : null}
-//   </ul>
-// </div>
-// </div>

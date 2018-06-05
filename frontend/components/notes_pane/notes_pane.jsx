@@ -50,7 +50,7 @@ class NotesPane extends React.Component {
     const notebookId = this.props.match.params.notebookId;
 
     this.props.notes.forEach(note => {
-      if (notebookId==='null' || note.notebook_id === +notebookId){
+      if (notebookId==='inbox' || note.notebook_id === +notebookId){
       list.unshift(
         <NoteBody
           key={note.id}

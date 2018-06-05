@@ -4,7 +4,7 @@ import TagSelector from './tags';
 import Quill from 'quill';
 import { quillStartup } from './quill_startup';
 import { Toolbar } from './toolbar';
-import ImgUpload from '../image_test';
+import ImgUpload from './image_upload';
 
 
 const Delta = Quill.import('delta')
@@ -29,7 +29,7 @@ export default class TextEditor extends React.Component{
   }
 
   redirect(){
-    this.props.history.push(`/home/${this.props.match.params.notebookId}`);
+    this.props.history.push(`/home/${this.props.match.params.notebookId || 'inbox'}`);
   }
 
 
@@ -38,7 +38,7 @@ export default class TextEditor extends React.Component{
       if (this.state.change.length() > 0){
         this.handleSubmit();
       }
-    }, 5000)
+    }, 1000)
   }
 
   setupControlledState(){
@@ -89,7 +89,7 @@ export default class TextEditor extends React.Component{
     .then(id => {noteId = id; this.handleTaggings(prev, next, noteId)})
     .then(() => {
       if (!this.props.match.params.noteId){
-           this.props.history.push(`/home/${this.state.notebook_id}/${noteId}`)
+           this.props.history.push(`/home/${this.state.notebook_id || 'inbox'}/${noteId}`)
          }})
   }
 
@@ -224,10 +224,26 @@ export default class TextEditor extends React.Component{
               {this.props.formType}
             </div>
 
+
+
             <div className='note-menu-bar'>
+
+              <div style={{position:'relative',top:'2px',marginLeft:'5px'}}>
+                <img src={window.notebookSmall}/>
+              </div>
+
               <NotebookSelector
                 setNotebook={this.setNotebook}
                 notebookId={this.state.notebook_id}/>
+
+
+
+
+              <TagSelector
+                toggleTag={this.toggleTag}
+                taggings={this.state.taggings}/>
+
+
 
                 <Toolbar />
 
@@ -240,9 +256,7 @@ export default class TextEditor extends React.Component{
 
             </div>
 
-            <TagSelector
-              toggleTag={this.toggleTag}
-              taggings={this.state.taggings}/>
+
 
 
           </div>
@@ -253,7 +267,7 @@ export default class TextEditor extends React.Component{
               placeholder='Title your note'
               onChange={this.update('title')}/>
             <div id='editor'/>
-            </div>
+          </div>
         </div>
     );
   }

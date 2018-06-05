@@ -31,7 +31,7 @@ export default class SessionForm extends React.Component {
 
 
   listErrors(){
-    return this.props.errors.map((error,i) => <li key={i}>{error}</li>);
+    return this.props.errors.map((error,i) => <li style={{textAlign:'center'}} key={i}>{error}</li>);
   }
 
   demoLogin(e){
@@ -41,11 +41,12 @@ export default class SessionForm extends React.Component {
 
   lookup(e){
     e.preventDefault();
-    this.props.lookup(this.state.identifier).then(this.growPassword);
+    this.props.lookup(this.state.identifier).then(this.growPassword).fail(()=>this.setState({identifier:''}));
   }
 
   growPassword(){
     this.setState({passwordField: true});
+    document.getElementById('password').focus();
   }
 
   componentWillUnmount(){
@@ -62,7 +63,7 @@ export default class SessionForm extends React.Component {
         <form
           className='sign-in'>
 
-          <div className='button' onClick={this.demoLogin}>Demo User</div>
+          <div className='button accent' style={{width:'150px',paddingLeft:'0',margin:'auto'}} onClick={this.demoLogin}>Demo User</div>
 
           <div className='divider'>
             <div className='line'></div>
@@ -79,6 +80,7 @@ export default class SessionForm extends React.Component {
           <div className={this.state.passwordField ? 'grown' : 'grow'}>
             <div className=''>
               <input
+                id='password'
                 className='input'
                 type='password'
                 placeholder='Password'

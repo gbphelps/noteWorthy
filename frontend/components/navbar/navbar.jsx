@@ -37,7 +37,10 @@ class NavBar extends React.Component {
           <nav className='upper-nav'>
 
 
-          <div className={'plus icon'} onClick={()=>this.props.toggle('notes')}>
+          <div className={'plus icon'} onClick={()=>{
+              this.props.toggle('notes');
+              this.props.history.push(`/home/${this.props.notebookId || 'inbox'}/`);
+            }}>
             <div className='popup'>
               <img className='popup-arrow' src={popupTail}/>
               <div className='popup-body'>New Note</div>

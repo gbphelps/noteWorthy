@@ -176,8 +176,11 @@ height:20px;
 }
 
 .body-of-note{
-  width: 200px;
+  width: 306px;
   margin:0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .note-icon{
