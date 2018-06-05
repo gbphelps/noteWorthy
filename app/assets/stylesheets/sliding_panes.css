@@ -122,28 +122,6 @@
 
 
 
-.tag-holder{
-  display: flex;
-  flex-direction: row;
-}
-
-
-.tag-li{
-  background: #2dbe60;
-  color:white;
-  border-radius: 4px;
-  padding: 0px 10px;
-  float:left;
-  margin: 2px;
-}
-
-.tag-entry{
-  display: block;
-}
-
-.tag-form{
-
-}
 
 
 @keyframes panelSlider {

@@ -30,7 +30,11 @@ class TagSelector extends React.Component {
     const list = [];
     values(this.props.tags).forEach(tag => {
       if (this.props.taggings[tag.id]) list.unshift(
-        <li className='tag-li'>{ tag.name }</li>
+        <li className='tag-li'>{ tag.name }
+          <span
+            onClick={()=>this.props.toggleTag(tag.id)}
+            style={{cursor:'pointer'}}> &#215;</span>
+        </li>
       )
     })
     return list
@@ -39,7 +43,9 @@ class TagSelector extends React.Component {
   tagsList(){
     const list = [];
     values(this.props.tags).forEach(tag => {
-      if (tag.name.indexOf(this.state.name)===0){
+      if (this.state.name &&
+          !this.props.taggings[tag.id] &&
+          tag.name.indexOf(this.state.name)===0){
       list.unshift(
         <li
           onClick={()=>this.props.toggleTag(tag.id)}
@@ -81,7 +87,8 @@ class TagSelector extends React.Component {
             <input className='tag-entry'
               onChange={this.updateName}
               placeholder='+'
-              value={this.state.name}/>
+              value={this.state.name}
+              size={this.state.name.length || 1}/>
           </form>
           <ul>{this.tagsList()}</ul>
       </div>
