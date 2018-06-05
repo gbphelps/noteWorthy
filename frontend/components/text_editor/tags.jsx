@@ -15,6 +15,7 @@ class TagSelector extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateName = this.updateName.bind(this);
+    this.clear = this.clear.bind(this);
   }
 
   componentDidMount(){
@@ -30,14 +31,24 @@ class TagSelector extends React.Component {
     const list = [];
     values(this.props.tags).forEach(tag => {
       if (this.props.taggings[tag.id]) list.unshift(
-        <li className='tag-li'>{ tag.name }
+        <li
+          key={ tag.id }
+          className='tag-li'>
+          <span>{ tag.name }</span>
           <span
             onClick={()=>this.props.toggleTag(tag.id)}
             style={{cursor:'pointer'}}> &#215;</span>
         </li>
       )
     })
-    return list
+    return (
+      <CSSTransitionGroup
+      transitionName='taggings'
+      transitionEnterTimeout={400}
+      transitionLeaveTimeout={400}>
+        {list}
+      </CSSTransitionGroup>
+    )
   }
 
   tagsList(){
@@ -48,7 +59,7 @@ class TagSelector extends React.Component {
           tag.name.indexOf(this.state.name)===0){
       list.unshift(
         <li
-          onClick={()=>this.props.toggleTag(tag.id)}
+          onClick={()=>{this.props.toggleTag(tag.id);this.clear()}}
           className={`note-li ${this.selected(tag.id)}`}
           key={tag.id}>
           {tag.name}
@@ -62,6 +73,11 @@ class TagSelector extends React.Component {
     return values(this.props.tags).map(tag => tag.name);
   }
 
+
+  clear(){
+    this.setState({name: ''})
+  }
+
   handleSubmit(e){
     e.preventDefault();
     const index = this.tagNames().indexOf(this.state.name);
@@ -71,6 +87,7 @@ class TagSelector extends React.Component {
     }else{
       this.props.toggleTag(values(this.props.tags)[index].id)
     }
+    this.clear();
   }
 
   updateName(e){
@@ -90,7 +107,7 @@ class TagSelector extends React.Component {
               value={this.state.name}
               size={this.state.name.length || 1}/>
           </form>
-          <ul>{this.tagsList()}</ul>
+          {this.tagsList().length ? (<ul className='tag-options'>{this.tagsList()}</ul>) : ''}
       </div>
     );
   }

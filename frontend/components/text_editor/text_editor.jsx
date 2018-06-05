@@ -175,6 +175,10 @@ export default class TextEditor extends React.Component{
   toggleTag(id){
     const taggings = Object.assign({},this.state.taggings);
     taggings[id] ? delete taggings[id] : taggings[id] = true;
+    if (this.props.formType === 'Edit'){
+      if (taggings[id]) this.props.createTagging({note_id: +this.props.match.params.noteId, tag_id: id});
+      if (!taggings[id]) this.props.deleteTagging(this.props.taggings[id].id)
+    }
     this.setState({ taggings });
   }
 

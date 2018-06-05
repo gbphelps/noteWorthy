@@ -19,8 +19,6 @@ class NotesPane extends React.Component {
   }
 
   componentDidMount(){
-    //TODO: change this to fetchFromNotebook and use withRouter. Add logic to handle null/inbox
-    //oof, other components need all of the notes though. need to implement with logic in the noteslist.
     this.props.fetchNotes()
   }
 

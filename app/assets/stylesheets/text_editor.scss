@@ -76,11 +76,11 @@
 
 
 .notebook-selector{
-    width: 150px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin-left: 10px;
+    color: #444;
 }
 
 .notebook-popup{
@@ -114,6 +114,7 @@
   animation-duration: 1s;
   overflow:hidden;
   background:white;
+  cursor: pointer;
 }
 
 .note-li:hover{
@@ -145,28 +146,7 @@
 }
 
 ///////////////////////////////////////
-.tag-selector{
-  width: 100px;
 
-}
-
-
-.tags-popup {
-  width: 150px;
-  border: 1px solid #ececec;
-  border-bottom: none;
-  position: absolute;
-  top: 37px;
-  overflow-y: scroll;
-  z-index: 5;
-  background:white;
-}
-
-.tag-selector:hover > .tags-popup{
-  height: 300px;
-  box-shadow: 5px 5px 5px #ececec;
-  border-bottom: 1px solid #ececec;
-}
 
 .noteListItem-enter{
   animation-name: expandListItem;
@@ -184,38 +164,80 @@
 
 
 
+
+
+
 .tag-holder{
   display: flex;
   flex-direction: row;
 }
 
+.tag-options{
+  border:1px solid #ececec;
+  margin:2px;
+  z-index: 5;
+  border-radius:3px;
+}
 
 .tag-li{
   background: #2dbe60;
   color:white;
-  border-radius: 4px;
-  padding: 1px 10px;
+  border-radius: 3px;
   float:left;
   margin: 3px 2px;
+  transition:.5s;
+  white-space: nowrap;
+  height:21px;
+  flex-shrink:none;
+}
+
+span{
+  margin: 0 5px;
 }
 
 .tag-entry{
   display: block;
-  margin: 2px;
-  border-radius: 4px;
+  margin: 3px 0 0 2px;
+  border-radius: 3px;
   border: 1px solid #bbb;
   font-size: 16px;
   padding: 0 1px 0 0 ;
 }
 
+
 .tag-form{
-  margin: 1px
 }
+
 #new-tag{
   background:transparent;
   border: 1px solid #ccc;
   color: #bbb;
 }
+
+.taggings-enter{
+  animation-name: grow-width;
+  animation-duration: .5s;
+  animation-timing-function: linear
+}
+
+.taggings-leave{
+  animation-name: shrink-width;
+  animation-duration: .5s;
+}
+
+
+@keyframes grow-width{
+  0%{max-width: 0}
+  100%{max-width: 100px}
+}
+
+@keyframes shrink-width{
+  0%{max-width: 100px}
+  100%{max-width: 0}
+}
+
+
+
 
 input::placeholder{
   text-align: center;
