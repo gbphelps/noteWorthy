@@ -81,9 +81,10 @@ export default class TextEditor extends React.Component{
   }
 
   handleTaggings(taggings, noteId){
-    taggings.forEach(tagId =>
-      createTagging({note_id: +noteId, tag_id: +tagId}));
-
+    if (this.props.formType === 'Create'){
+      taggings.forEach(tagId =>
+        createTagging({note_id: +noteId, tag_id: +tagId}));
+    }
     return noteId;
   }
 
