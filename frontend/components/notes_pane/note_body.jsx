@@ -20,14 +20,14 @@ class NoteBody extends React.Component {
   }
 
 
-  thumbnail(){
-    const image = this.firstImage();
+  thumbnail(image){
     if (!image) return null;
     return (
       <div style={{
           backgroundImage: `url(${image})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
+          marginLeft:'14px',
           height:'100px',
           width:'100px',
           flexShrink:'0'
@@ -37,6 +37,8 @@ class NoteBody extends React.Component {
 
   render(){
     const body = JSON.parse(this.props.note.body);
+    const image = this.firstImage();
+    console.log(image);
 
     return(
       <div className={`note-hover-event`}>
@@ -44,13 +46,12 @@ class NoteBody extends React.Component {
         <div className="note-wrapper">
           <div className='note-body'>
             <div className='body-of-note'>
-              <div
-                className='body-left'>
+              <div className='body-left'>
                 <p className='title'>{this.props.note.title || 'Untitled'}</p>
                 <p className='date'>{formatTime(this.props.note.updated_at)}</p>
                 <p>{body.plainText}</p>
               </div>
-                {this.thumbnail()}
+                {this.thumbnail(image)}
             </div>
           </div>
         </div>
