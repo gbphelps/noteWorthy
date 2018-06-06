@@ -47,10 +47,7 @@ class NavBar extends React.Component {
             </div>
           </div>
 
-          <LinkedIcon
-            text='New Meeting Note'
-            icon='mtgnote'
-            path='/'/>
+
 
           <div className={'search icon'} onClick={()=>this.props.toggle('search')}>
             <div className='popup'>
@@ -112,3 +109,10 @@ const mapDispatch = dispatch => {
 
 
 export default withRouter(connect(mapState,mapDispatch)(NavBar))
+
+
+
+// <LinkedIcon
+//   text='New Meeting Note'
+//   icon='mtgnote'
+//   path='/'/>

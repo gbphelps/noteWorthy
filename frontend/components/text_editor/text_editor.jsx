@@ -191,7 +191,23 @@ export default class TextEditor extends React.Component{
 
 
 
-
+  create(){
+    return(
+      <div
+        className='button accent'
+        onClick={this.handleSubmit}
+        style={{
+          width:'auto',
+          padding: '0 10px',
+          position:'fixed',
+          right:'10px',
+          top: '0',
+          height:'30px',
+          lineHeight:'30px'}}>
+          Create Note
+        </div>
+    )
+  }
 
 
 
@@ -211,20 +227,10 @@ export default class TextEditor extends React.Component{
       <div className='text-editor-pane'>
         <div className='text-editor-header'>
 
-          <div
-            className='button accent'
-            onClick={this.handleSubmit}
-            style={{
-              width:'120px',
-              marginLeft:'10px',
-              position:'fixed',
-              right:'20px',
-              top: '5px',
-              padding:'0px'}}>
-              {this.props.formType}
-            </div>
-
-
+          {this.props.formType==='Create' ? this.create() : null}
+          <TagSelector
+            toggleTag={this.toggleTag}
+            taggings={this.state.taggings}/>
 
             <div className='note-menu-bar'>
 
@@ -235,15 +241,6 @@ export default class TextEditor extends React.Component{
               <NotebookSelector
                 setNotebook={this.setNotebook}
                 notebookId={this.state.notebook_id}/>
-
-
-
-
-              <TagSelector
-                toggleTag={this.toggleTag}
-                taggings={this.state.taggings}/>
-
-
 
                 <Toolbar />
 

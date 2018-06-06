@@ -13,6 +13,9 @@
   position:relative;
   box-sizing:border-box;
   border-bottom: 1px solid #ececec;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
 }
 
 .text-editor-content{
@@ -54,12 +57,11 @@
 
 
 .note-menu-bar{
-  position:absolute;
-  bottom: -3px;
   display:flex;
   line-height: 30px;
   min-width:750px;
   font-size:14px;
+  height:30px;
 }
 
 #toolbar{
@@ -82,6 +84,7 @@
     margin-left: 4px;
     color: #444;
     text-transform:capitalize;
+    flex-shrink:0;
 }
 
 .notebook-popup{
@@ -90,7 +93,7 @@
   overflow-y:hidden;
   width:250px;
   position:absolute;
-  top:37px;
+  top:99px;
   left:-1px;
   background:white;
   transition:.5s;
@@ -169,7 +172,7 @@
 
 .current-taggings{
   height:40px;
-  max-width:400px;
+  max-width:510px;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
@@ -213,7 +216,7 @@
 
 .tag-entry{
   display: block;
-  margin: 2px 0 0 2px;
+  margin: 1px 0 0 2px;
   border-radius: 3px;
   border: none;
   font-size: 16px;
@@ -234,16 +237,19 @@
   color: #bbb;
 }
 
-.taggings-enter{
-  animation-name: grow-width;
-  animation-duration: .5s;
-  animation-timing-function: linear
-}
 
-.taggings-leave{
-  animation-name: shrink-width;
-  animation-duration: .5s;
-}
+//TODO
+// .taggings-enter{
+//   animation-name: grow-width;
+//   animation-duration: .5s;
+//   animation-timing-function: linear
+// }
+
+// .taggings-leave{
+//   animation-name: shrink-width;
+//   animation-duration: .5s;
+//   animation-timing-function: linear;
+// }
 
 
 @keyframes grow-width{
@@ -261,9 +267,19 @@
 
 .tag-entry::placeholder{
   text-align: center;
+  color: #444
 }
+
 
 input{
   color:#bbb;
   font-family: 'Lato';
+}
+
+
+.far{
+  color:#444
+}
+.far:hover{
+  color: #2dbe60
 }

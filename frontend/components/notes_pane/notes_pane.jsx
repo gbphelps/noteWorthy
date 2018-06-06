@@ -82,15 +82,7 @@ class NotesPane extends React.Component {
             </div>
           </nav>
           <div className="pane-content">
-              <div className="reminders">
-                <div className='reminders-header'>
-                  <div><img className='right-pointer' src={rightArrow}></img>Reminders</div>
-                  <div className="reminders-counter">1<img className='reminder-icon' src={reminder}></img>
-                    <div className='reminders-popup'></div>
-                  </div>
-                </div>
-              </div>
-                {this.props.notes.length ? list : null}
+            {this.props.notes.length ? list : null}
           </div>
       </div>
     );
@@ -118,3 +110,14 @@ const mapDispatch = dispatch => {
 
 
 export default withRouter(connect(mapState,mapDispatch)(NotesPane))
+
+
+
+// <div className="reminders">
+//   <div className='reminders-header'>
+//     <div><img className='right-pointer' src={rightArrow}></img>Reminders</div>
+//     <div className="reminders-counter">1<img className='reminder-icon' src={reminder}></img>
+//       <div className='reminders-popup'></div>
+//     </div>
+//   </div>
+// </div>

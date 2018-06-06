@@ -232,15 +232,17 @@ height:20px;
   100% {color: inherit;}
 }
 
-.note-enter {
-  animation-name: expand;
-  animation-duration: 1.5s
-}
 
-.note-enter div {
-  animation-name: colorize;
-  animation-duration:1.5s
-}
+//TODO
+// .note-enter {
+//   animation-name: expand;
+//   animation-duration: 1.5s
+// }
+
+// .note-enter div {
+//   animation-name: colorize;
+//   animation-duration:1.5s
+// }
 
 .note-leave{
   height: 0px;

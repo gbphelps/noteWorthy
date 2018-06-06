@@ -18,7 +18,7 @@
   position:absolute;
   left:70px;
   z-index:4;
-  border-right: 1px solid #ececec;
+  border-right: 3px solid #ececec;
   animation-name: panelSlider;
   animation-duration: 1s;
   overflow-y: scroll;

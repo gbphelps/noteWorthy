@@ -15,8 +15,6 @@ const NoteOptions = (props) => {
 
  return(
    <div className='note-options'>
-     <div className='note-icon note-share'></div>
-     <div className='note-icon note-reminder'></div>
      <div className={`note-icon note-star ${shortcutted}`}
           onClick={toggleShortcut}></div>
      <div className='note-icon note-trash'
@@ -30,4 +28,5 @@ const NoteOptions = (props) => {
 export default withRouter(NoteOptions)
 
 
-//setTimeout(() => props.deleteNote(props.note.id),1000)
+// <div className='note-icon note-share'></div>
+// <div className='note-icon note-reminder'></div>

@@ -11,7 +11,7 @@ class TagSelector extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      name: ''
+      name: '',
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateName = this.updateName.bind(this);
@@ -21,6 +21,9 @@ class TagSelector extends React.Component {
   componentDidMount(){
     this.props.fetchTags();
   }
+
+
+
 
   selected(id){
     return this.props.taggings[id] ?
@@ -41,14 +44,7 @@ class TagSelector extends React.Component {
         </li>
       )
     })
-    return (
-      <CSSTransitionGroup
-      transitionName='taggings'
-      transitionEnterTimeout={400}
-      transitionLeaveTimeout={400}>
-        {list}
-      </CSSTransitionGroup>
-    )
+    return list
   }
 
   tagsList(){
@@ -98,7 +94,7 @@ class TagSelector extends React.Component {
     return(
       <div style={{flexShrink:'0'}}>
         <div className='tag-holder' style={{float:'left'}}>
-          <div style={{position:'relative',top:'1px',marginLeft:'5px'}}><img src={window.tagSmall}/></div>
+          <div style={{position:'relative',top:'4px',marginLeft:'5px'}}><img src={window.tagSmall}/></div>
           <ul className='current-taggings'>{this.taggings()}</ul>
         </div>
         <form

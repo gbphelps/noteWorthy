@@ -27,7 +27,6 @@ class Test extends React.Component {
             className="far fa-image"
             style={{
               fontSize:'20px',
-              color:'#444',
               cursor:'pointer',
               position:'relative',
               top:'2px'

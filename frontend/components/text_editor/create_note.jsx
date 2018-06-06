@@ -7,7 +7,7 @@ import { createTagging } from '../../actions/taggings'
 const mapState = state => {
   return {
     note: {title:'', body:''},
-    formType: 'Create Note',
+    formType: 'Create',
     taggings: {},
   };
 };
