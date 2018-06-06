@@ -38,7 +38,6 @@ class NoteBody extends React.Component {
   render(){
     const body = JSON.parse(this.props.note.body);
     const image = this.firstImage();
-    console.log(image);
 
     return(
       <div className={`note-hover-event`}>
