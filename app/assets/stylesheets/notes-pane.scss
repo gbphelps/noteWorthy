@@ -25,25 +25,13 @@
 
 
 .note-wrapper{
-  padding: 0 22px;
+  padding: 14px 14px 0 14px;
   box-sizing:border-box;
   position:absolute;
   height:100%;
   width:100%;
 }
 
-.reminders{
-  font-family: 'Lato';
-  text-transform: uppercase;
-  letter-spacing:1.5px;
-  font-weight:400;
-  color: #878787;
-  font-size:14px;
-  padding:14px 22px 10px 28px;
-  border-bottom:1px solid #ececec;
-  box-sizing:border-box;
-  background:white;
-}
 
 .title{
   font-family: 'Scope One';
@@ -57,10 +45,11 @@
 }
 
 .note-body{
-  padding: 14px 0;
+  padding: 0;
   margin: auto;
   border-bottom:1px solid #ececec;
   height: 100%;
+  width: 100%;
   box-sizing:border-box;
 }
 
@@ -176,10 +165,12 @@ height:20px;
 }
 
 .body-of-note{
-  width: 306px;
   margin:0px;
+  padding: 0;
+  height:100px;
   overflow:hidden;
   display:flex;
+  justify-content: space-between;
   // // white-space: nowrap;
   // overflow: hidden;
   // text-overflow: ellipsis;
@@ -204,12 +195,9 @@ height:20px;
   top:10px;
 }
 
-.note-hover-event:hover .note-options{
-  display: block;
-}
 
 .note-hover-event{
-  height:120px;
+  height:130px;
   overflow:hidden;
   width:100%;
   background:white;
@@ -217,8 +205,19 @@ height:20px;
   transition: height 1s, background .3s;
 }
 
+.image-screen{
+    width: 100%;
+    height: 100%;
+}
+
 .note-hover-event:hover {
   background: #2dbe60;
+}
+
+.note-hover-event:hover .image-screen{
+  background: #2dbe60;
+  opacity: .6;
+  transition: 1s;
 }
 
 .note-hover-event:hover p {
