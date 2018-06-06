@@ -16,7 +16,7 @@ class Test extends React.Component {
     const formData = new FormData();
     formData.append('embed[image]', file);
     createEmbed(formData).then(image => this.props.embed(image.imageUrl, this.props.index));
-    e.currentTarget.files=[];
+    document.getElementById('file').value = "";
   }
 
   render(){

@@ -5,7 +5,7 @@ export const Toolbar = () => (
 
   <select className="ql-size">
     <option value="small">Small</option>
-    <option selected></option>
+    <option defaultValue></option>
     <option value="large"></option>
     <option value="huge"></option>
   </select>

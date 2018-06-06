@@ -5,6 +5,7 @@ import Quill from 'quill';
 import { quillStartup } from './quill_startup';
 import { Toolbar } from './toolbar';
 import ImgUpload from './image_upload';
+import { createTagging } from '../../utils/taggings'
 
 
 const Delta = Quill.import('delta')
@@ -18,7 +19,7 @@ export default class TextEditor extends React.Component{
       notebook_id: null,
       taggings: {},
       change: new Delta(),
-      selection: null,
+      pending: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,24 +43,15 @@ export default class TextEditor extends React.Component{
   }
 
   setupControlledState(){
-    this.editor.on('editor-change',()=>{
-      this.setState({
-        body: this.editor.getContents(),
-        selection:this.editor.getSelection()
-      });
-    });
-  }
-
-  setupDeltaListener(){
     this.editor.on('text-change', delta => {
       this.setState({
-        change: this.state.change.compose(delta)
+        body: this.editor.getContents(),
+        change: this.state.change.compose(delta),
       });
     });
   }
 
   postToDatabase(content){
-    //TODO: add taggings to state
     const textObject = {
       plainText: this.editor.getText(),
       richText: this.editor.getContents()
@@ -74,45 +66,30 @@ export default class TextEditor extends React.Component{
   }
 
   handleSubmit(e){
-
-    //TODO: update taggings reducer to receive single tag
-
     let imageFreeContent;
     let imagesToUpload;
-    const prev = this.props.taggings;
-    const next = this.state.taggings;
-    let noteId;
+    const taggings = Object.keys(this.state.taggings);
 
     if (e) e.preventDefault();
 
     this.postToDatabase()
-    .then(id => {noteId = id; this.handleTaggings(prev, next, noteId)})
-    .then(() => {
+    .then(id => this.handleTaggings(taggings, id))
+    .then(id => {
       if (!this.props.match.params.noteId){
-           this.props.history.push(`/home/${this.state.notebook_id || 'inbox'}/${noteId}`)
+           this.props.history.push(`/home/${this.state.notebook_id || 'inbox'}/${id}`)
          }})
   }
 
-  handleTaggings(prev, next, noteId){
-
-    const prevTags = Object.keys(prev);
-    const newTags = Object.keys(next);
-
-    console.log(prev,next);
-    prevTags.forEach(tagId => {
-      if (!next[tagId]){console.log(this.props.deleteTagging);this.props.deleteTagging(prev[tagId].id);}
-    });
-
-    newTags.forEach(tagId => {
-      if (!prev[tagId]) this.props.createTagging({note_id: +noteId, tag_id: +tagId});
-    });
+  handleTaggings(taggings, noteId){
+    taggings.forEach(tagId =>
+      createTagging({note_id: +noteId, tag_id: +tagId}));
 
     return noteId;
   }
 
   embed(url, location){
-    const index = this.state.selection.index;
-    this.editor.insertEmbed(location, 'image', url);
+    const index = this.editor.getSelection().index;
+    this.editor.insertEmbed(index, 'image', url);
     this.editor.setSelection(index + 1);
   }
 
@@ -130,43 +107,45 @@ export default class TextEditor extends React.Component{
 
   componentDidMount(){
     this.editor = quillStartup();
-    this.setupDeltaListener();
     this.setupControlledState();
     window.onbeforeunload = this.unsavedWarning;
 
     if (this.props.formType==='Edit'){
       this.setupAutosave();
-      this.props.fetchNote(this.props.match.params.noteId).fail(this.redirect);
+      this.setState(Object.assign({}, this.props.note, {pending:true}))
+      this.props.fetchNote(this.props.match.params.noteId)
+      .fail(this.redirect)
     }
   }
-
 
   componentWillReceiveProps(nextProps){
     const fetchedNote = nextProps.note;
     const prevId = +this.props.match.params.noteId;
+    const displayedId = this.props.note ? this.props.note.id : null;
 
-    if (!fetchedNote) return this.redirect();
-    if (fetchedNote.id !== prevId){
+    if (!fetchedNote){
+      this.redirect();
+
+    } else if (displayedId === null || fetchedNote.id !== prevId) {
       this.props.fetchNote(fetchedNote.id);
+      this.setState({pending: true})
+
+    } else if (fetchedNote.id === displayedId && this.state.pending === false) {
+      this.setState({change: new Delta()})
+
     } else {
-      //debugger
-      ///
-      if (!this.state.refresh){
       const contents = JSON.parse(fetchedNote.body).richText;
       this.editor.setContents(contents);
-      this.editor.setSelection(this.state.selection);
       this.setState(
-        Object.assign({},fetchedNote,{
-          taggings: nextProps.taggings,
-          change: new Delta(),
-          images: nextProps.images,
-        }))
-      }else{this.setState({refresh: false})}
+        Object.assign(
+          {},
+          fetchedNote,{
+            taggings: nextProps.taggings,
+            change: new Delta(),
+            pending: false
+          }))
     }
-  }
-
-
-
+}
 
   setNotebook(id){
     this.setState({notebook_id: id});
@@ -245,9 +224,7 @@ export default class TextEditor extends React.Component{
                 <Toolbar />
 
                 <div onClick={()=>this.editor.focus()}>
-                  <ImgUpload
-                    embed = {this.embed}
-                    index = {!this.state.selection || this.state.selection.index}/>
+                  <ImgUpload embed = {this.embed}/>
                 </div>
 
 

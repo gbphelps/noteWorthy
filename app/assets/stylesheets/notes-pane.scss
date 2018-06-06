@@ -61,6 +61,11 @@
   margin-bottom: 2px;
 }
 
+.body-left{
+  max-width:210px;
+  overflow:hidden;
+}
+
 .reminders-header{
   display:flex;
   justify-content:space-between;
@@ -195,6 +200,9 @@ height:20px;
   top:10px;
 }
 
+.note-hover-event:hover .note-options{
+  display: block;
+}
 
 .note-hover-event{
   height:130px;

@@ -4,7 +4,7 @@ import merge from 'lodash/merge'
 
 const taggingsReducer = (state = {}, action) => {
   switch(action.type){
-    //TODO
+
     case RECEIVE_TAGGING:
       return merge({}, state, {[action.tagging.tag_id]: {id: action.tagging.id}})
     case REMOVE_TAGGING:
