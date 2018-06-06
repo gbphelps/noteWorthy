@@ -38,13 +38,6 @@ class NotesPane extends React.Component {
 /////////////
 
 
-
-
-
-
-
-
-
   notesList(){
     const list = [];
     const notebookId = this.props.match.params.notebookId;
@@ -72,7 +65,7 @@ class NotesPane extends React.Component {
 
   render(){
     let [length, list] = this.notesList();
-    console.log(this.props.notebook);
+    // console.log(this.props.notebook);
     return(
       <div className='pane-notes'>
           <nav className="pane-header">

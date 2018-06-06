@@ -10,15 +10,41 @@ class NoteBody extends React.Component {
   }
 
 
+  firstImage(){
+    const ops = JSON.parse(this.props.note.body).richText.ops
+    for (let i = 0; i < ops.length; i++) {
+      const image = ops[i].insert.image;
+      if (image) return image;
+    }
+    return null;
+  }
+
   render(){
+    const body = JSON.parse(this.props.note.body);
+    const image = this.firstImage();
+
     return(
       <div className={`note-hover-event`}>
       <Link to={`/home/${this.props.match.params.notebookId}/${this.props.note.id}`}>
         <div className="note-wrapper">
           <div className='note-body'>
-            <div className='title'>{this.props.note.title || 'Untitled'}</div>
-            <div className='date'>{formatTime(this.props.note.updated_at)}</div>
-            <p className='body-of-note'>{JSON.parse(this.props.note.body).plainText}</p>
+            <div className='body-of-note'>
+              <div
+                className='body-left'
+                style={{width: (image ? '200px' : '350px')}}>
+                <p className='title'>{this.props.note.title || 'Untitled'}</p>
+                <p className='date'>{formatTime(this.props.note.updated_at)}</p>
+                <p>{body.plainText}</p>
+              </div>
+              <div style={{
+                  backgroundImage: `url(${image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  height:'100px',
+                  width:'100px',
+                  flexShrink:'0'
+                }}></div>
+            </div>
           </div>
         </div>
       </Link>
