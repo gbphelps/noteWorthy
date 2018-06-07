@@ -11,6 +11,14 @@ export const animateIn = (id) => {
   };
 };
 
+export const ANIMATE_OUT = 'ANIMATE_OUT';
+export const animateOut = (id) => {
+  return {
+    type: ANIMATE_OUT,
+    id
+  };
+};
+
 export const CLEAR_ANIMATION = 'CLEAR_ANIMATION';
 export const clearAnimation = (id) => {
   return {
@@ -93,11 +101,18 @@ export const createNote = note => dispatch => {
       setTimeout(()=>
         dispatch(clearAnimation(note.note.id)), 1500); //TODO
       dispatch(receiveNote(note));
-      return note.note.id
+      return note.note.id;
     })
 };
 
 export const deleteNote = id => dispatch => {
   return Api.deleteNote(id)
-    .then(() => dispatch(removeNote(id)))
+    .then(() => {
+      dispatch(animateOut(id));
+      setTimeout(()=>{
+        dispatch(removeNote(id));
+        dispatch(clearAnimation(id));
+        }, 1500);
+      return id;
+    })
 };
