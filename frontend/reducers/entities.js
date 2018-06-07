@@ -4,6 +4,7 @@ import notebooks from './notebooks';
 import tags from './tags';
 import taggings from './taggings';
 import shortcuts from './shortcuts';
+import allTaggings from './allTaggings'
 
 
-export default combineReducers({ notes, notebooks, tags, taggings, shortcuts });
+export default combineReducers({ notes, notebooks, tags, taggings, shortcuts, allTaggings });

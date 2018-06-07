@@ -12,3 +12,10 @@ export const deleteTagging = id => {
     url: `api/taggings/${id}`,
   });
 };
+
+export const fetchTaggings = () => {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/taggings'
+  })
+}

@@ -3,7 +3,8 @@ import NavBar from './navbar/navbar';
 import NotesPane from './notes_pane/notes_pane';
 import NotebooksPane from './sliding_panes/notebooks_pane';
 import SearchPane from './sliding_panes/search';
-import ShortcutsPane from './sliding_panes/shortcuts'
+import ShortcutsPane from './sliding_panes/shortcuts';
+import TaggingsPane from './sliding_panes/taggings';
 
 import CreateNote from './text_editor/create_note';
 import EditNote from './text_editor/edit_note';
@@ -27,6 +28,7 @@ export const Main = () => {
         <NotebooksPane />
         <SearchPane />
         <ShortcutsPane />
+        <TaggingsPane />
     </div>
   );
 }

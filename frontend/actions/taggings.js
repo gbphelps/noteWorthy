@@ -26,3 +26,18 @@ export const createTagging = tagging => dispatch => {
   return Api.createTagging(tagging)
     .then(tagging => dispatch(receiveTagging(tagging)))
 }
+
+
+
+////////
+export const RECEIVE_TAGGINGS = 'RECEIVE_TAGGINGS';
+export const receiveTaggings = taggings => {
+  return {
+    type: RECEIVE_TAGGINGS,
+    taggings
+  }
+}
+export const fetchTaggings = () => dispatch => {
+  return Api.fetchTaggings()
+  .then(taggings => dispatch(receiveTaggings(taggings)))
+}

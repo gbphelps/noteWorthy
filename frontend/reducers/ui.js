@@ -4,14 +4,16 @@ const nullState = {
   notebooks: false,
   search: false,
   notes: false,
-  shortcuts: false
+  shortcuts: false,
+  taggings: false
 }
 
 const initialState = {
   notes: true,
   notebooks: false,
   search: false,
-  shortcuts: false
+  shortcuts: false,
+  taggings: false
 }
 
 

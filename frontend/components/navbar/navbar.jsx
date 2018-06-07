@@ -30,10 +30,6 @@ class NavBar extends React.Component {
     this.state = {};
   }
 
-  allNotes(){
-
-  }
-
   render(){
     return(
       <div className='left-nav'>
@@ -84,10 +80,14 @@ class NavBar extends React.Component {
               </div>
             </div>
 
-          <LinkedIcon
-            text='Tags'
-            icon='tag'
-            path='/'/>
+
+          <div className={'tag icon'} onClick={()=>this.props.toggle('taggings')}>
+              <div className='popup'>
+                <img className='popup-arrow' src={popupTail}/>
+                <div className='popup-body'>Tags</div>
+              </div>
+            </div>
+
         </nav>
 
         <UserSquare logout={ this.props.logout }/>

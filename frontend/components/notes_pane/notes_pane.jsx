@@ -39,13 +39,21 @@ class NotesPane extends React.Component {
 
 
   notesList(){
+    const loc = this.props.history.location.pathname.indexOf('/tags/');
+    const tagFilterId = loc === -1 ? null : +this.props.history.location.pathname.slice(loc + 6); //TODO
+
+
+
     const animationID = this.props.animations;
 
     const list = [];
     const notebookId = this.props.match.params.notebookId;
 
     this.props.notes.forEach(note => {
-      if (notebookId==='inbox' || note.notebook_id === +notebookId){
+      if ((notebookId==='inbox' || note.notebook_id === +notebookId) &&
+         (!tagFilterId || this.props.taggings.find(tagging =>
+           tagging.tag_id === tagFilterId && tagging.note_id === note.id
+         ))){ //TODO
       list.unshift(
         <NoteBody
           key={note.id}
@@ -88,7 +96,8 @@ const mapState = (state, ownProps) => {
     notes: values(state.entities.notes),
     notebook: state.entities.notebooks[ownProps.match.params.notebookId],
     active: state.ui.notes,
-    animations: state.animations
+    animations: state.animations,
+    taggings: values(state.entities.allTaggings) //TODO
   };
 };
 
