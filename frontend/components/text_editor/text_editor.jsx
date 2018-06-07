@@ -52,7 +52,7 @@ export default class TextEditor extends React.Component{
     });
   }
 
-  postToDatabase(content){
+  postToDatabase(nb){
     const textObject = {
       plainText: this.editor.getText(),
       richText: this.editor.getContents()
@@ -61,7 +61,7 @@ export default class TextEditor extends React.Component{
     return this.props.action({
       title: this.state.title,
       body: JSON.stringify(textObject),
-      notebook_id: this.state.notebook_id,
+      notebook_id: nb || this.state.notebook_id,
       id: this.state.id
     })
   }
@@ -164,6 +164,7 @@ export default class TextEditor extends React.Component{
 }
 
   setNotebook(id){
+    if (this.props.formType === 'Edit') this.postToDatabase(id);
     this.setState({notebook_id: id});
   }
 
