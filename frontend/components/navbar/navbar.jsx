@@ -30,6 +30,10 @@ class NavBar extends React.Component {
     this.state = {};
   }
 
+  allNotes(){
+
+  }
+
   render(){
     return(
       <div className='left-nav'>
@@ -66,10 +70,10 @@ class NavBar extends React.Component {
               </div>
             </div>
 
-          <div className={'note icon'} onClick={()=>this.props.toggle('notes')}>
+          <div className={'note icon'} onClick={()=>{this.props.history.push('/home/inbox');this.props.toggle('notes')}}>
               <div className='popup'>
                 <img className='popup-arrow' src={popupTail}/>
-                <div className='popup-body'>Notes</div>
+                <div className='popup-body'>All Notes</div>
               </div>
             </div>
 

@@ -8,6 +8,8 @@ import ImgUpload from './image_upload';
 import { createTagging } from '../../utils/taggings'
 
 
+
+
 const Delta = Quill.import('delta')
 
 export default class TextEditor extends React.Component{
@@ -63,6 +65,13 @@ export default class TextEditor extends React.Component{
       notebook_id: this.state.notebook_id,
       id: this.state.id
     })
+  }
+
+
+  //TODO
+  animate(id){
+    if (this.props.formType === 'Create') this.props.animateIn(id);
+    return id;
   }
 
   handleSubmit(e){

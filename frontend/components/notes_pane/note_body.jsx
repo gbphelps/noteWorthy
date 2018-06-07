@@ -39,8 +39,9 @@ class NoteBody extends React.Component {
     const body = JSON.parse(this.props.note.body);
     const image = this.firstImage();
 
+    //TODO
     return(
-      <div className={`note-hover-event`}>
+      <div className={`note-hover-event ${this.props.animate}`}>
       <Link to={`/home/${this.props.match.params.notebookId}/${this.props.note.id}`}>
         <div className="note-wrapper">
           <div className='note-body'>

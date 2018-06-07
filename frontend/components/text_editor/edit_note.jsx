@@ -13,7 +13,7 @@ const mapState = (state, ownProps) => {
     note,
     taggings: state.entities.taggings,
     images: state.entities.embeds,
-    formType: 'Edit'
+    formType: 'Edit',
   };
 };
 

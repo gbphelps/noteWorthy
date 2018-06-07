@@ -39,6 +39,8 @@ class NotesPane extends React.Component {
 
 
   notesList(){
+    const animationID = this.props.animations; //TODO
+
     const list = [];
     const notebookId = this.props.match.params.notebookId;
 
@@ -49,23 +51,15 @@ class NotesPane extends React.Component {
           key={note.id}
           note={note}
           deleteNote={this.props.deleteNote}
-          updateNote={this.props.updateNote}/>
+          updateNote={this.props.updateNote}
+          animate={ animationID[note.id] || '' }/> //TODO
       )}});
 
-    return [ list.length,
-
-        (<CSSTransitionGroup
-          transitionName='note'
-          transitionEnterTimeout={1500}
-          transitionLeaveTimeout={1000}>
-          {list}
-        </CSSTransitionGroup>)
-      ];
+    return [ list.length,list];
   }
 
   render(){
     let [length, list] = this.notesList();
-    // console.log(this.props.notebook);
     return(
       <div className='pane-notes'>
           <nav className="pane-header">
@@ -86,7 +80,8 @@ const mapState = (state, ownProps) => {
   return {
     notes: values(state.entities.notes),
     notebook: state.entities.notebooks[ownProps.match.params.notebookId],
-    active: state.ui.notes
+    active: state.ui.notes,
+    animations: state.animations //TODO
   };
 };
 
@@ -114,3 +109,9 @@ export default withRouter(connect(mapState,mapDispatch)(NotesPane))
 //     </div>
 //   </div>
 // </div>
+
+
+// <CSSTransitionGroup
+//   transitionName='note'
+//   transitionEnterTimeout={1500}
+//   transitionLeaveTimeout={1000}>

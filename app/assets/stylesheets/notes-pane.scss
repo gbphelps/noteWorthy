@@ -239,7 +239,7 @@ height:20px;
 
 @keyframes expand {
   0% {height: 0px; background: #2dbe60;}
-  70% {height: 120px; background: #2dbe60;}
+  70% {height: 130px; background: #2dbe60;}
   100% {background:white}
 }
 
@@ -249,17 +249,16 @@ height:20px;
   100% {color: inherit;}
 }
 
-
 //TODO
-// .note-enter {
-//   animation-name: expand;
-//   animation-duration: 1.5s
-// }
+.note-enter {
+  animation-name: expand;
+  animation-duration: 1.5s
+}
 
-// .note-enter div {
-//   animation-name: colorize;
-//   animation-duration:1.5s
-// }
+.note-enter p {
+  animation-name: colorize;
+  animation-duration:1.5s
+}
 
 .note-leave{
   height: 0px;

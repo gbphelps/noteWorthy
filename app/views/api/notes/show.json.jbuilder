@@ -12,10 +12,3 @@ json.taggings do
     end
   end
 end
-
-
-json.images @note.embeds do |embed|
-  json.id embed.id
-  json.imageUrl embed.image
-  json.index_location embed.index_location
-end

@@ -1,6 +1,27 @@
 import * as Api from '../utils/notes'
 
 
+
+//TODO
+export const ANIMATE_IN = 'ANIMATE_IN';
+export const animateIn = (id) => {
+  return {
+    type: ANIMATE_IN,
+    id
+  };
+};
+
+export const CLEAR_ANIMATION = 'CLEAR_ANIMATION';
+export const clearAnimation = (id) => {
+  return {
+    type: CLEAR_ANIMATION,
+    id
+  };
+}
+
+/*//////////////////////////////////////////////////*/
+
+
 export const RECEIVE_SHORTCUTS = 'RECEIVE_SHORTCUTS';
 export const receiveShortcuts = notes => {
   return {
@@ -26,10 +47,6 @@ export const receiveNote = note => {
 };
 
 
-
-
-
-
 export const REMOVE_NOTE = 'REMOVE_NOTE';
 export const removeNote = id => {
   return {
@@ -38,16 +55,9 @@ export const removeNote = id => {
   };
 };
 
-export const CLEAR_NOTES = 'CLEAR_NOTES'
-export const clearNotes = () => {
-  return {
-    type: CLEAR_NOTES
-  };
-};
 
 
 export const fetchNotes = () => dispatch => {
-  dispatch(clearNotes());
   return Api.fetchNotes()
     .then(notes => dispatch(receiveNotes(notes)))
 };
@@ -79,6 +89,9 @@ export const updateNote = note => dispatch => {
 export const createNote = note => dispatch => {
   return Api.createNote(note)
     .then(note =>{
+      dispatch(animateIn(note.note.id));
+      setTimeout(()=>
+        dispatch(clearAnimation(note.note.id)), 1500); //TODO
       dispatch(receiveNote(note));
       return note.note.id
     })
