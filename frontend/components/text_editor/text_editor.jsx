@@ -129,9 +129,12 @@ export default class TextEditor extends React.Component{
 
 
   nbFromRouter(props){
-    const id = props.match.params.notebookId;
-    if (id === 'inbox') return null;
-    return id;
+    if (this.props.formType === 'Create'){
+      const id = props.match.params.notebookId;
+      if (id === 'inbox') return null;
+      return id;
+    }
+    return this.state.notebook_id
   }
 
   componentWillReceiveProps(nextProps){
