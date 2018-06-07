@@ -4,7 +4,7 @@ import ui from './ui'
 import entities from './entities'
 import errors from './errors';
 
-//TODO
+
 import animations from './animations';
 
 export default combineReducers({ session, errors, entities, ui, animations });

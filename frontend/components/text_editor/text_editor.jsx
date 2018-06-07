@@ -35,7 +35,6 @@ export default class TextEditor extends React.Component{
     this.props.history.push(`/home/${this.props.match.params.notebookId || 'inbox'}`);
   }
 
-
   setupAutosave(){
     setInterval(()=> {
       if (this.state.change.length() > 0){
@@ -68,7 +67,6 @@ export default class TextEditor extends React.Component{
   }
 
 
-  //TODO
   animate(id){
     if (this.props.formType === 'Create') this.props.animateIn(id);
     return id;
@@ -128,6 +126,14 @@ export default class TextEditor extends React.Component{
     }
   }
 
+
+
+  nbFromRouter(props){
+    const id = props.match.params.notebookId;
+    if (id === 'inbox') return null;
+    return id;
+  }
+
   componentWillReceiveProps(nextProps){
     const fetchedNote = nextProps.note;
     const prevId = +this.props.match.params.noteId;
@@ -138,7 +144,7 @@ export default class TextEditor extends React.Component{
 
     } else if (displayedId === null || fetchedNote.id !== prevId) {
       this.props.fetchNote(fetchedNote.id);
-      this.setState({pending: true})
+      this.setState({pending: true, notebook_id: this.nbFromRouter(nextProps)})
 
     } else if (fetchedNote.id === displayedId && this.state.pending === false) {
       this.setState({change: new Delta()})
@@ -152,7 +158,7 @@ export default class TextEditor extends React.Component{
           fetchedNote,{
             taggings: nextProps.taggings,
             change: new Delta(),
-            pending: false
+            pending: false,
           }))
     }
 }

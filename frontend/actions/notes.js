@@ -2,7 +2,6 @@ import * as Api from '../utils/notes'
 
 
 
-//TODO
 export const ANIMATE_IN = 'ANIMATE_IN';
 export const animateIn = (id) => {
   return {
@@ -99,7 +98,7 @@ export const createNote = note => dispatch => {
     .then(note =>{
       dispatch(animateIn(note.note.id));
       setTimeout(()=>
-        dispatch(clearAnimation(note.note.id)), 1500); //TODO
+        dispatch(clearAnimation(note.note.id)), 1500);
       dispatch(receiveNote(note));
       return note.note.id;
     })

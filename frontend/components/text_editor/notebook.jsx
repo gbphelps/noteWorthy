@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchNotebooks, createNotebook } from '../../actions/notebooks';
 import values from 'lodash/values';
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransitionGroup } from 'react-transition-group';
+
 
 
 class NotebookSelector extends React.Component {
@@ -92,7 +93,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     fetchNotebooks: () => dispatch(fetchNotebooks()),
-    createNotebook: name => dispatch(createNotebook(name))
+    createNotebook: name => dispatch(createNotebook(name)),
   };
 };
 

@@ -2,7 +2,8 @@ import React from 'react';
 import TextEditor from './text_editor';
 import { connect } from 'react-redux';
 import { createNote } from '../../actions/notes';
-import { createTagging } from '../../actions/taggings'
+import { createTagging } from '../../actions/taggings';
+import { withRouter } from 'react-router-dom'
 
 
 const mapState = state => {
@@ -22,4 +23,4 @@ const mapDispatch = (dispatch,ownProps) => {
   };
 };
 
-export default connect(mapState,mapDispatch)(TextEditor);
+export default withRouter(connect(mapState,mapDispatch)(TextEditor));

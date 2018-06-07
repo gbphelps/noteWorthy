@@ -1,4 +1,4 @@
-//TODO
+
 import { ANIMATE_IN, ANIMATE_OUT, CLEAR_ANIMATION } from '../actions/notes'
 import merge from 'lodash/merge'
 

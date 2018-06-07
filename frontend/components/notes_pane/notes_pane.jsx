@@ -39,7 +39,7 @@ class NotesPane extends React.Component {
 
 
   notesList(){
-    const animationID = this.props.animations; //TODO
+    const animationID = this.props.animations;
 
     const list = [];
     const notebookId = this.props.match.params.notebookId;
@@ -52,18 +52,25 @@ class NotesPane extends React.Component {
           note={note}
           deleteNote={this.props.deleteNote}
           updateNote={this.props.updateNote}
-          animate={ animationID[note.id] || '' }/> //TODO
+          animate={ animationID[note.id] || '' }/>
       )}});
 
     return [ list.length,list];
   }
 
+  notebookName(){
+    const id = this.props.match.params.notebookId;
+    if (id === 'inbox') return 'INBOX';
+    if (this.props.notebook) return this.props.notebook.name;
+    return null;
+  }
+  ////////////////////////
   render(){
     let [length, list] = this.notesList();
     return(
       <div className='pane-notes'>
           <nav className="pane-header">
-            <div>Notes</div>
+            <div>{this.notebookName()}</div>
             <div className='pane-subhead'>
               <div>{length} notes</div>
             </div>
@@ -81,7 +88,7 @@ const mapState = (state, ownProps) => {
     notes: values(state.entities.notes),
     notebook: state.entities.notebooks[ownProps.match.params.notebookId],
     active: state.ui.notes,
-    animations: state.animations //TODO
+    animations: state.animations
   };
 };
 
