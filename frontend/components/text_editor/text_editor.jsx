@@ -52,16 +52,19 @@ export default class TextEditor extends React.Component{
     });
   }
 
-  postToDatabase(nb){
+  postToDatabase(options){
+
+    if (!options) options = {};
+
     const textObject = {
       plainText: this.editor.getText(),
       richText: this.editor.getContents()
     }
 
     return this.props.action({
-      title: this.state.title,
+      title: options.title || this.state.title,
       body: JSON.stringify(textObject),
-      notebook_id: nb || this.state.notebook_id,
+      notebook_id: options.notebook || this.state.notebook_id,
       id: this.state.id
     })
   }
@@ -72,6 +75,8 @@ export default class TextEditor extends React.Component{
     return id;
   }
 
+
+  //TODO: if it's CREATE NOTE, you need to do an unsaved warning with the react router.
   handleSubmit(e){
     let imageFreeContent;
     let imagesToUpload;
@@ -167,7 +172,7 @@ export default class TextEditor extends React.Component{
 }
 
   setNotebook(id){
-    if (this.props.formType === 'Edit') this.postToDatabase(id);
+    if (this.props.formType === 'Edit') this.postToDatabase({ notebook: id });
     this.setState({notebook_id: id});
   }
 
@@ -181,9 +186,10 @@ export default class TextEditor extends React.Component{
     this.setState({ taggings });
   }
 
-  update(field){
+  updateTitle(){
     return e => {
-      this.setState({[field]: e.target.value});
+      if (this.props.formType === 'Edit'){this.postToDatabase({ title: e.target.value })}
+      this.setState({title: e.target.value});
     };
   }
 
@@ -259,7 +265,7 @@ export default class TextEditor extends React.Component{
               className='title-input'
               value={this.state.title}
               placeholder='Title your note'
-              onChange={this.update('title')}/>
+              onChange={this.updateTitle()}/>
             <div id='editor'/>
           </div>
         </div>
