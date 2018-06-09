@@ -26,8 +26,9 @@ class SlidingPane extends React.Component {
     if (!nextProps.active && this.state.on){
       this.animateExit();
     }else if (!this.state.on && nextProps.active){
-      this.props.fetchTaggings();
-      this.setState({on: true, panelExit: false})
+      this.props.fetchTaggings().then(()=>{
+        this.setState({on: true, panelExit: false})
+      })
     }
   }
 
@@ -63,7 +64,15 @@ class SlidingPane extends React.Component {
         <div
           className='notebook-search-entry-body'
           style={{marginLeft: '10px'}}
-          key={tagging.id}>{this.props.notes[tagging.note_id].title}</div>
+          key={tagging.id}>
+          //TODO TODO TODO This crashes because you need to remove taggings
+          //from the frontend state (allTaggings) whenever you delete a note!
+          //TODO Include reducer action for allTaggings on case REMOVE_NOTE
+          //that looks for that note ID in all taggings and deletes all of those
+          //tags. Alternatively clean up as you go through and hit null cases in
+          //the notes pane?
+          {this.props.notes[tagging.note_id].title}
+        </div>
       )
     });
   }
