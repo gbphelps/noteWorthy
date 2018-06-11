@@ -77,6 +77,8 @@ export default class TextEditor extends React.Component{
 
 
   //TODO: if it's CREATE NOTE, you need to do an unsaved warning with the react router.
+  //TODO: You need to stay on the /tags/${id} page after you've clicked on a note on that page!
+  //Don't navigate back to inbox.
   handleSubmit(e){
     let imageFreeContent;
     let imagesToUpload;
