@@ -26,9 +26,11 @@ class SlidingPane extends React.Component {
     if (!nextProps.active && this.state.on){
       this.animateExit();
     }else if (!this.state.on && nextProps.active){
-      this.props.fetchTaggings().then(()=>{
-        this.setState({on: true, panelExit: false})
-      })
+      this.props.fetchTaggings();
+      this.setState({on: true, panelExit: false});
+      // .then(()=>{
+      //   this.setState({on: true, panelExit: false})
+      // })
     }
   }
 
@@ -65,7 +67,7 @@ class SlidingPane extends React.Component {
           className='notebook-search-entry-body'
           style={{marginLeft: '10px'}}
           key={tagging.id}>
-          {this.props.notes[tagging.note_id].title}
+          { this.props.notes[tagging.note_id].title }
         </div>
       )
     });
