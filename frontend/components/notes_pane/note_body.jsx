@@ -40,7 +40,7 @@ class NoteBody extends React.Component {
     const image = this.firstImage();
 
     return(
-      <div className={`note-hover-event ${this.props.animate}`}>
+      <div className={`note-hover-event ${this.props.animate} ${this.props.active}`}>
       <Link to={`/home/${this.props.match.params.notebookId}/${this.props.note.id}`}>
         <div className="note-wrapper">
           <div className='note-body'>

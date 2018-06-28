@@ -36,7 +36,7 @@ export default class TextEditor extends React.Component{
   }
 
   setupAutosave(){
-    setInterval(()=> {
+    window.debounce = setInterval(()=> {
       if (this.state.change.length() > 0){
         this.handleSubmit();
       }
@@ -84,6 +84,8 @@ export default class TextEditor extends React.Component{
     let imagesToUpload;
     const taggings = Object.keys(this.state.taggings);
 
+    if (this.props.formType === 'Create') clearInterval(debounce);
+
     if (e) e.preventDefault();
 
     this.postToDatabase()
@@ -125,12 +127,15 @@ export default class TextEditor extends React.Component{
     this.setupControlledState();
     window.onbeforeunload = this.unsavedWarning;
 
-    if (this.props.formType==='Edit'){
+    // if (this.props.formType==='Edit'){
       this.setupAutosave();
       this.setState(Object.assign({}, this.props.note, {pending:true}))
-      this.props.fetchNote(this.props.match.params.noteId)
-      .fail(this.redirect)
-    }
+
+      if (this.props.formType==='Edit'){
+        this.props.fetchNote(this.props.match.params.noteId)
+        .fail(this.redirect)
+      }
+    // }
   }
 
 
@@ -190,39 +195,9 @@ export default class TextEditor extends React.Component{
 
   updateTitle(){
     return e => {
-      if (this.props.formType === 'Edit'){this.postToDatabase({ title: e.target.value })}
-      this.setState({title: e.target.value});
+      this.setState({title: e.target.value},()=>this.handleSubmit());
     };
   }
-
-
-
-
-  create(){
-    return(
-      <div
-        className='button accent'
-        onClick={this.handleSubmit}
-        style={{
-          width:'auto',
-          padding: '0 10px',
-          position:'fixed',
-          right:'10px',
-          top: '0',
-          height:'30px',
-          lineHeight:'30px'}}>
-          Create Note
-        </div>
-    )
-  }
-
-
-
-
-
-
-
-
 
 
 
@@ -234,7 +209,6 @@ export default class TextEditor extends React.Component{
       <div className='text-editor-pane'>
         <div className='text-editor-header'>
 
-          {this.props.formType==='Create' ? this.create() : null}
           <TagSelector
             toggleTag={this.toggleTag}
             taggings={this.state.taggings}/>

@@ -48,8 +48,11 @@ class NotesPane extends React.Component {
 
     const list = [];
     const notebookId = this.props.match.params.notebookId;
+    const activeNoteId = this.props.history.location.pathname.split('/')[3];
 
     this.props.notes.forEach(note => {
+
+
       if ((notebookId==='inbox' || note.notebook_id === +notebookId) &&
          (!tagFilterId || this.props.taggings.find(tagging =>
            tagging.tag_id === tagFilterId && tagging.note_id === note.id
@@ -60,7 +63,8 @@ class NotesPane extends React.Component {
           note={note}
           deleteNote={this.props.deleteNote}
           updateNote={this.props.updateNote}
-          animate={ animationID[note.id] || '' }/>
+          animate={ animationID[note.id] || '' }
+          active={+activeNoteId === note.id ? 'green' : ''}/>
       )}});
 
     return [ list.length,list];
